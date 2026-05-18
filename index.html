@@ -423,7 +423,7 @@
       pointer-events: none;
       background:
         /* Accent radial shimmer — centre of frame */
-        radial-gradient(ellipse 60% 50% at 50% 42%, var(--hero-accent-glow) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 50% 42%, var(--hero-accent-glow) 0%, transparent 40%),
         /* Main tone gradient — bottom heavy for legibility */
         linear-gradient(to top,
           var(--hero-grad-bottom) 0%,
@@ -464,7 +464,7 @@
     /* ── SCROLL CHEVRON ── */
     .hero-scroll-chevron {
       position: absolute;
-      bottom: 36px;
+      bottom: 125px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 2;
@@ -771,6 +771,7 @@
       width: 100vw;
       margin-left: calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
+      /* overflow:hidden clips cards for peaking effect but we need x to pass through */
       overflow: hidden;
     }
 
@@ -778,16 +779,23 @@
       display: flex;
       gap: 24px;
       overflow-x: auto;
+      overflow-y: visible;
       scroll-snap-type: x mandatory;
       padding: 16px max(var(--gutter), calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2)) 24px;
       scroll-padding-left: max(var(--gutter), calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2));
       scrollbar-width: thin;
       scrollbar-color: var(--dlc-blue) rgba(255, 255, 255, 0.05);
       scroll-behavior: smooth;
+      /* Enable native touch momentum scrolling on iOS */
+      -webkit-overflow-scrolling: touch;
+      /* Allow horizontal panning / swipe gesture passthrough */
+      touch-action: pan-x;
+      /* Prevent y-scroll interference on touch */
+      overscroll-behavior-x: contain;
     }
 
     .carousel-track::-webkit-scrollbar {
-      height: 8px;
+      height: 6px;
     }
 
     .carousel-track::-webkit-scrollbar-track {
@@ -1829,8 +1837,12 @@
       }
 
       .carousel-track {
-        padding: 16px var(--gutter);
+        padding: 16px var(--gutter) 28px;
         scroll-padding-left: var(--gutter);
+        /* Always show scrollbar on touch devices for discoverability */
+        scrollbar-width: thin;
+        /* Stronger snap on mobile for clear one-card-at-a-time feel */
+        scroll-snap-type: x mandatory;
       }
     }
 
@@ -2193,7 +2205,9 @@
           <div class="gptw-content">
             <h3 class="gptw-headline">9 Years Certified Great Place to Work</h3>
             <p class="gptw-body">
-              85% of our team members proudly rate DLC as a great place to work—outperforming the national average by over 28%. We drive execution through a collaborative, people-first culture that fosters long-term growth and success.
+              85% of our team members proudly rate DLC as a great place to work—outperforming the national average by
+              over 28%. We drive execution through a collaborative, people-first culture that fosters long-term growth
+              and success.
             </p>
             <a href="https://www.dlcmgmt.com/careers/" target="_blank" class="gptw-cta">
               Explore Open Roles &rarr;
@@ -2456,9 +2470,7 @@
 
         </div>
 
-        <p class="stats-caption anim-fade-up">
-          * Counter stats animate up dynamically using an easeOutQuart curve when visible in viewport
-        </p>
+
       </div>
     </section>
 
@@ -2796,6 +2808,61 @@
     // Specifically observe stats grid to trigger counters at threshold
     const statsGrid = document.getElementById('statsGrid');
     if (statsGrid) scrollObserver.observe(statsGrid);
+
+    /* ── CAROUSEL DRAG-TO-SCROLL + SWIPE ENGINE ── */
+    (function () {
+      const track = document.querySelector('.carousel-track');
+      if (!track) return;
+
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
+      let isDragging = false;
+
+      // Pointer events (covers mouse + pen + touch on modern browsers)
+      track.addEventListener('pointerdown', (e) => {
+        // Only activate for touch/pen, or primary mouse button
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        isDown = true;
+        isDragging = false;
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+        track.setPointerCapture(e.pointerId);
+        track.style.cursor = 'grabbing';
+        track.style.scrollSnapType = 'none'; // Disable snap while dragging
+        track.style.scrollBehavior = 'auto';
+      });
+
+      track.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.5; // Multiplier for swipe sensitivity
+        if (Math.abs(walk) > 4) isDragging = true;
+        track.scrollLeft = scrollLeft - walk;
+      });
+
+      const endDrag = (e) => {
+        if (!isDown) return;
+        isDown = false;
+        track.style.cursor = '';
+        // Re-enable scroll snap after release so it snaps to nearest card
+        track.style.scrollSnapType = '';
+        track.style.scrollBehavior = '';
+      };
+
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+      track.addEventListener('pointerleave', endDrag);
+
+      // Prevent click-through to video modal if user was actually dragging
+      track.addEventListener('click', (e) => {
+        if (isDragging) {
+          e.stopPropagation();
+          e.preventDefault();
+          isDragging = false;
+        }
+      }, true);
+    })();
 
     /* ── COUNT-UP ANIMATION ENGINE (easeOutQuart Easing) ── */
     function easeOutQuart(t) {
