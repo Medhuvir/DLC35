@@ -1,0 +1,2402 @@
+<!--
+  DLC 35TH ANNIVERSARY LANDING PAGE — WIREFRAME MOCK
+  Built in DLC design system (matches WP Gutenberg reference)
+  For client presentation / scope alignment
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap"
+  rel="stylesheet">
+
+<style>
+  /* ============================================================
+   DESIGN TOKENS — exact match to DLC reference
+   ============================================================ */
+  :root {
+    --dlc-navy: #213B4E;
+    --dlc-blue: #168FBE;
+    --dlc-green: #5CA547;
+    --dlc-gold: #C9A84C;
+    --dlc-navy-dark: #162736;
+    --dlc-navy-mid: #2E4F65;
+    --text-muted: rgba(255, 255, 255, 0.60);
+    --text-body: rgba(255, 255, 255, 0.85);
+    --font-primary: 'Lato', Arial, sans-serif;
+    --size-hero: clamp(40px, 5.5vw, 76px);
+    --size-h2: clamp(26px, 3.5vw, 48px);
+    --size-lead: clamp(15px, 1.4vw, 19px);
+    --size-body: clamp(14px, 1.1vw, 16px);
+    --size-kicker: 11px;
+    --section-pad: clamp(72px, 9vw, 120px);
+    --col-max: 1140px;
+    --gutter: clamp(24px, 5vw, 80px);
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --duration: 0.7s;
+  }
+
+  /* ============================================================
+   ANNOTATION SYSTEM
+   ============================================================ */
+  .anno-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+  }
+
+  .anno-custom {
+    background: rgba(22, 143, 190, 0.25);
+    color: #5ec8f0;
+    border: 1px solid rgba(22, 143, 190, 0.3);
+  }
+
+  .anno-js {
+    background: rgba(92, 165, 71, 0.2);
+    color: #8cd87a;
+    border: 1px solid rgba(92, 165, 71, 0.3);
+  }
+
+  .anno-embed {
+    background: rgba(201, 168, 76, 0.2);
+    color: #e8c97a;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+  }
+
+  .anno-static {
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .anno-wp {
+    background: rgba(33, 59, 78, 0.8);
+    color: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .anno-strip {
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .anno-strip-note {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.3);
+    font-style: italic;
+    font-family: var(--font-primary);
+  }
+
+  /* ============================================================
+   WIREFRAME LEGEND BAR
+   ============================================================ */
+  .wf-legend {
+    background: #0d1921;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: var(--font-primary);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+  }
+
+  .wf-legend-title {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-right: 8px;
+  }
+
+  .wf-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: var(--font-primary);
+  }
+
+  .wf-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+   PLACEHOLDER BLOCKS
+   ============================================================ */
+  .ph {
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 3px;
+    display: block;
+  }
+
+  .ph-text {
+    height: 10px;
+    margin-bottom: 8px;
+  }
+
+  .ph-img {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px dashed rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ph-img-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.2);
+    font-family: var(--font-primary);
+  }
+
+  .ph-video {
+    background: linear-gradient(135deg, rgba(22, 143, 190, 0.08) 0%, rgba(22, 39, 54, 0.6) 100%);
+    border: 1px dashed rgba(22, 143, 190, 0.25);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .ph-video-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(22, 143, 190, 0.15);
+    border: 1px solid rgba(22, 143, 190, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ph-video-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(22, 143, 190, 0.5);
+    font-family: var(--font-primary);
+  }
+
+  /* ============================================================
+   SCOPED RESET
+   ============================================================ */
+  .dlc-lp *,
+  .dlc-lp *::before,
+  .dlc-lp *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* ============================================================
+   PAGE WRAPPER
+   ============================================================ */
+  .dlc-lp {
+    font-family: var(--font-primary);
+    color: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: var(--dlc-navy-dark);
+  }
+
+  /* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+  .dlc-progress-bar {
+    position: fixed;
+    top: 48px;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--dlc-blue);
+    z-index: 9998;
+    transition: width 0.08s linear;
+    box-shadow: 0 0 8px rgba(22, 143, 190, 0.6);
+    pointer-events: none;
+  }
+
+  /* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity var(--duration) var(--ease-out), transform var(--duration) var(--ease-out);
+  }
+
+  .animate-on-scroll.delay-1 {
+    transition-delay: 0.10s;
+  }
+
+  .animate-on-scroll.delay-2 {
+    transition-delay: 0.22s;
+  }
+
+  .animate-on-scroll.delay-3 {
+    transition-delay: 0.35s;
+  }
+
+  .animate-on-scroll.delay-4 {
+    transition-delay: 0.50s;
+  }
+
+  .animate-on-scroll.delay-5 {
+    transition-delay: 0.65s;
+  }
+
+  .animate-on-scroll.from-left {
+    transform: translateX(-24px);
+  }
+
+  .animate-on-scroll.from-right {
+    transform: translateX(24px);
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Layout */
+  .dlc-lp .container {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .dlc-lp .section {
+    padding: var(--section-pad) var(--gutter);
+  }
+
+  .dlc-lp .kicker {
+    font-size: var(--size-kicker);
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dlc-blue);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .dlc-lp .section-label {
+    font-size: var(--size-kicker);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dlc-blue);
+    margin-bottom: 12px;
+  }
+
+  .dlc-lp .section-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--dlc-blue);
+    margin: 24px 0;
+  }
+
+  .dlc-lp .section-transition {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dlc-blue), transparent);
+    opacity: 0.2;
+  }
+
+  .dlc-lp .section-number {
+    font-size: 96px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.03);
+    line-height: 1;
+    position: absolute;
+    top: var(--section-pad);
+    right: var(--gutter);
+    pointer-events: none;
+    letter-spacing: -4px;
+  }
+
+  /* Buttons */
+  .dlc-lp .btn-large {
+    background: var(--dlc-blue);
+    color: white;
+    padding: 18px 48px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 10px 28px rgba(22, 143, 190, 0.3);
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-primary);
+  }
+
+  .dlc-lp .btn-large:hover {
+    background: #1aa8e0;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px rgba(22, 143, 190, 0.4);
+  }
+
+  .dlc-lp .btn-outline {
+    background: transparent;
+    color: white;
+    padding: 16px 40px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .dlc-lp .btn-outline:hover {
+    border-color: white;
+    color: white;
+    text-decoration: none;
+  }
+
+  .dlc-lp .btn-ghost {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 14px 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .dlc-lp .btn-ghost:hover {
+    color: white;
+    border-color: white;
+    text-decoration: none;
+  }
+
+  /* ============================================================
+   WP HEADER MOCK
+   ============================================================ */
+  .wf-wp-header {
+    background: white;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 48px;
+    z-index: 100;
+  }
+
+  .wf-wp-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .wf-wp-logo-box {
+    width: 80px;
+    height: 28px;
+    background: #213B4E;
+    border-radius: 2px;
+  }
+
+  .wf-wp-nav {
+    display: flex;
+    gap: 28px;
+  }
+
+  .wf-wp-nav span {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 2px;
+  }
+
+  .wf-wp-nav-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #9BA8B5;
+    font-family: var(--font-primary);
+  }
+
+  /* ============================================================
+   SECTION 01 — HERO (video bg)
+   ============================================================ */
+  .dlc-lp .hero {
+    height: calc(100vh - 120px);
+    background: linear-gradient(150deg, var(--dlc-navy-dark) 0%, #1b3346 50%, #1a3a52 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--gutter);
+    /* Removed vertical padding to ensure centering works with fixed height */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dlc-lp .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 65% 55% at 75% 35%, rgba(22, 143, 190, 0.09) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 55% at 20% 75%, rgba(92, 165, 71, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .dlc-lp .hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, transparent 0%, var(--dlc-blue) 30%, var(--dlc-green) 70%, transparent 100%);
+    opacity: 0.5;
+  }
+
+  .hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hero-video-container iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140vw;
+    height: 78.75vw;
+    /* 16:9 aspect ratio + aggressive cropping */
+    min-height: 140vh;
+    min-width: 248.88vh;
+    /* 16:9 aspect ratio + aggressive cropping */
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+    filter: grayscale(20%) contrast(110%);
+    pointer-events: none;
+  }
+
+  .hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: repeating-linear-gradient(0deg,
+        transparent,
+        transparent 3px,
+        rgba(255, 255, 255, 0.012) 3px,
+        rgba(255, 255, 255, 0.012) 4px);
+    pointer-events: none;
+  }
+
+  .hero-video-badge {
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(22, 143, 190, 0.3);
+    border-radius: 4px;
+    padding: 6px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(22, 143, 190, 0.8);
+    font-family: var(--font-primary);
+    z-index: 2;
+  }
+
+  .hero-video-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--dlc-blue);
+    animation: blink 1.4s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .dlc-lp .hero-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .dlc-lp .hero-eyebrow {
+    font-size: var(--size-kicker);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dlc-blue);
+    margin-bottom: 28px;
+  }
+
+  .dlc-lp .hero h1 {
+    font-size: var(--size-hero);
+    font-weight: 900;
+    line-height: 1.02;
+    color: white;
+    max-width: 820px;
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .dlc-lp .hero h1 em {
+    font-style: normal;
+    color: var(--dlc-blue);
+  }
+
+  .dlc-lp .hero-lead {
+    font-size: var(--size-lead);
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .dlc-lp .hero-actions {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.3;
+    animation: dlc-bounce 2.4s ease-in-out infinite;
+  }
+
+  .hero-scroll-hint span {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: white;
+    font-family: var(--font-primary);
+  }
+
+  @keyframes dlc-bounce {
+
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+      transform: translateX(-50%) translateY(8px);
+    }
+  }
+
+  /* ============================================================
+   SECTION 02 — FULL VIDEO (Adam intro)
+   ============================================================ */
+  .dlc-lp .section-video {
+    background: var(--dlc-navy-dark);
+  }
+
+  .section-video-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+  }
+
+  .section-video-intro {
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+
+  .section-video-intro h2 {
+    font-size: var(--size-h2);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .section-video-intro p {
+    font-size: var(--size-body);
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* ============================================================
+   SECTION 03 — EMPLOYEE CAROUSEL
+   ============================================================ */
+  .dlc-lp .section-carousel {
+    background: linear-gradient(160deg, #1a3245 0%, var(--dlc-navy) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carousel-header {
+    max-width: var(--col-max);
+    margin: 0 auto 48px;
+  }
+
+  .carousel-header h2 {
+    font-size: var(--size-h2);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .carousel-header p {
+    font-size: var(--size-body);
+    color: var(--text-muted);
+    max-width: 560px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .carousel-stat-callout {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(22, 143, 190, 0.08);
+    border: 1px solid rgba(22, 143, 190, 0.15);
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-top: 20px;
+  }
+
+  .carousel-stat-callout .stat-num {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--dlc-blue);
+  }
+
+  .carousel-stat-callout .stat-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.4;
+  }
+
+  .carousel-track-wrap {
+    position: relative;
+    max-width: var(--col-max);
+    margin: 0 auto;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(22, 143, 190, 0.3) transparent;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .carousel-track::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .carousel-track::-webkit-scrollbar-thumb {
+    background: rgba(22, 143, 190, 0.3);
+    border-radius: 2px;
+  }
+
+  .carousel-card {
+    flex: 0 0 220px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .carousel-card:hover {
+    border-color: rgba(22, 143, 190, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .carousel-thumb {
+    height: 160px;
+    background: linear-gradient(135deg, rgba(22, 143, 190, 0.12) 0%, rgba(22, 39, 54, 0.7) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .carousel-play-hint {
+    position: absolute;
+    inset: 0;
+    background: rgba(22, 143, 190, 0.0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s, background 0.2s;
+  }
+
+  .carousel-card:hover .carousel-play-hint {
+    opacity: 1;
+    background: rgba(22, 143, 190, 0.12);
+  }
+
+  .carousel-play-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(22, 143, 190, 0.5);
+    border: 1px solid rgba(22, 143, 190, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-person-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-card-body {
+    padding: 16px;
+  }
+
+  .carousel-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 3px;
+  }
+
+  .carousel-role {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+
+  .carousel-hover-reveal {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--dlc-blue);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 10px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-weight: 300;
+  }
+
+  .carousel-card:hover .carousel-hover-reveal {
+    opacity: 1;
+  }
+
+  .carousel-hover-note {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.2);
+    font-style: italic;
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+    font-family: var(--font-primary);
+  }
+
+  .carousel-careers-link {
+    margin-top: 32px;
+    max-width: var(--col-max);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .careers-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .careers-badge a {
+    color: var(--dlc-blue);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .careers-badge a:hover {
+    text-decoration: underline;
+  }
+
+  /* ============================================================
+   SECTION 04 — INTERACTIVE TIMELINE
+   ============================================================ */
+  .dlc-lp .section-timeline {
+    background: var(--dlc-navy-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timeline-header {
+    max-width: var(--col-max);
+    margin: 0 auto 56px;
+  }
+
+  .timeline-header h2 {
+    font-size: var(--size-h2);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .timeline-header p {
+    font-size: var(--size-body);
+    color: var(--text-muted);
+    max-width: 500px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .timeline-outer {
+    max-width: var(--col-max);
+    margin: 0 auto;
+  }
+
+  .timeline-nav {
+    display: flex;
+    gap: 0;
+    margin-bottom: 40px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .timeline-era-btn {
+    flex: 1;
+    padding: 16px 20px;
+    background: none;
+    border: none;
+    font-family: var(--font-primary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: border-color 0.3s, color 0.3s;
+    text-align: left;
+  }
+
+  .timeline-era-btn.active {
+    border-bottom-color: var(--dlc-blue);
+  }
+
+  .timeline-era-date {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dlc-blue);
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .timeline-era-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    display: block;
+  }
+
+  .timeline-era-btn:not(.active) .timeline-era-name {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .timeline-era-btn:not(.active) .timeline-era-date {
+    color: rgba(22, 143, 190, 0.4);
+  }
+
+  .timeline-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .timeline-milestones {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .timeline-milestone {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .timeline-milestone:hover {
+    background: rgba(22, 143, 190, 0.06);
+    border-color: rgba(22, 143, 190, 0.15);
+  }
+
+  .milestone-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--dlc-blue);
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .milestone-text {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .milestone-text strong {
+    color: white;
+    font-weight: 700;
+  }
+
+  .timeline-visual {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 32px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .timeline-visual-era {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dlc-blue);
+  }
+
+  .timeline-visual-stat {
+    font-size: clamp(48px, 5vw, 72px);
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+
+  .timeline-visual-stat span {
+    font-size: 0.45em;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 0;
+    vertical-align: middle;
+  }
+
+  .timeline-visual-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .timeline-mobile-note {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.2);
+    font-style: italic;
+    margin-top: 20px;
+    font-family: var(--font-primary);
+  }
+
+  /* ============================================================
+   SECTION 05 — DLC TODAY (3-col platform)
+   ============================================================ */
+  .dlc-lp .section-platform {
+    background: linear-gradient(135deg, #1a3245 0%, var(--dlc-navy) 100%);
+    position: relative;
+  }
+
+  .platform-header {
+    max-width: var(--col-max);
+    margin: 0 auto 56px;
+    text-align: center;
+  }
+
+  .platform-header h2 {
+    font-size: var(--size-h2);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .platform-header p {
+    font-size: var(--size-lead);
+    color: var(--text-muted);
+    max-width: 520px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  .platform-grid {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .platform-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 8px;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  }
+
+  .platform-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--dlc-blue);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .platform-card:hover {
+    background: rgba(22, 143, 190, 0.07);
+    border-color: rgba(22, 143, 190, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .platform-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .platform-card:nth-child(2)::before {
+    background: var(--dlc-green);
+  }
+
+  .platform-card:nth-child(3)::before {
+    background: var(--dlc-gold);
+  }
+
+  .platform-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(22, 143, 190, 0.12);
+    border: 1px solid rgba(22, 143, 190, 0.2);
+  }
+
+  .platform-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .platform-card:nth-child(2) .platform-icon {
+    background: rgba(92, 165, 71, 0.12);
+    border-color: rgba(92, 165, 71, 0.2);
+  }
+
+  .platform-card:nth-child(3) .platform-icon {
+    background: rgba(201, 168, 76, 0.12);
+    border-color: rgba(201, 168, 76, 0.2);
+  }
+
+  .platform-company {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--dlc-blue);
+    margin-bottom: 8px;
+  }
+
+  .platform-card:nth-child(2) .platform-company {
+    color: var(--dlc-green);
+  }
+
+  .platform-card:nth-child(3) .platform-company {
+    color: var(--dlc-gold);
+  }
+
+  .platform-name {
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .platform-tagline {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .platform-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+
+  .platform-proofs {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .platform-proofs li {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .platform-proofs li::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--dlc-blue);
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .platform-card:nth-child(2) .platform-proofs li::before {
+    background: var(--dlc-green);
+  }
+
+  .platform-card:nth-child(3) .platform-proofs li::before {
+    background: var(--dlc-gold);
+  }
+
+  /* ============================================================
+   SECTION 06 — WHY NOW (whitepaper bridge)
+   ============================================================ */
+  .dlc-lp .section-why {
+    background: var(--dlc-navy-dark);
+    position: relative;
+  }
+
+  .why-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .why-left h2 {
+    font-size: var(--size-h2);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 24px;
+    line-height: 1.05;
+  }
+
+  .why-left h2 em {
+    font-style: normal;
+    color: var(--dlc-blue);
+  }
+
+  .why-left p {
+    font-size: var(--size-body);
+    color: var(--text-muted);
+    margin-bottom: 36px;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .why-cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .why-statements {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .why-statement {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: background 0.2s;
+  }
+
+  .why-statement:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .why-statement:hover {
+    background: rgba(22, 143, 190, 0.05);
+  }
+
+  .why-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--dlc-blue);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .why-text {
+    font-size: clamp(15px, 1.3vw, 17px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.35;
+  }
+
+  /* ============================================================
+   SECTION 07 — BY THE NUMBERS
+   ============================================================ */
+  .dlc-lp .section-numbers {
+    background: var(--dlc-navy);
+    position: relative;
+  }
+
+  .numbers-header {
+    max-width: var(--col-max);
+    margin: 0 auto 56px;
+    text-align: center;
+  }
+
+  .numbers-header h2 {
+    font-size: var(--size-h2);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  .numbers-header p {
+    font-size: var(--size-body);
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .stats-grid {
+    max-width: var(--col-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    background: rgba(22, 143, 190, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(22, 143, 190, 0.12);
+  }
+
+  .stat-block-item {
+    background: rgba(22, 39, 54, 0.9);
+    padding: 48px 24px;
+    text-align: center;
+    transition: background 0.3s;
+  }
+
+  .stat-block-item:hover {
+    background: rgba(22, 143, 190, 0.08);
+  }
+
+  .stat-value {
+    font-size: clamp(42px, 5vw, 64px);
+    font-weight: 900;
+    color: var(--dlc-blue);
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-plus {
+    font-size: 0.5em;
+    vertical-align: super;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .stat-sublabel {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.2);
+    margin-top: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .stats-note {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.2);
+    margin-top: 16px;
+    font-style: italic;
+    font-family: var(--font-primary);
+  }
+
+  /* ============================================================
+   SECTION 08 — WHAT'S NEXT
+   ============================================================ */
+  .dlc-lp .section-next {
+    background: linear-gradient(150deg, var(--dlc-navy-dark) 0%, #1b3346 100%);
+    position: relative;
+  }
+
+  .next-inner {
+    max-width: var(--col-max);
+    margin: 0 auto;
+  }
+
+  .next-inner h2 {
+    font-size: var(--size-hero);
+    font-weight: 900;
+    color: white;
+    max-width: 720px;
+    margin-bottom: 32px;
+    line-height: 1.02;
+    letter-spacing: -0.5px;
+  }
+
+  .next-inner h2 em {
+    font-style: normal;
+    color: var(--dlc-blue);
+  }
+
+  .next-body {
+    max-width: 560px;
+    font-size: var(--size-lead);
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.75;
+  }
+
+  .next-themes {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 40px;
+    max-width: 600px;
+  }
+
+  .next-theme {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .next-theme:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .next-theme-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--dlc-blue);
+    flex-shrink: 0;
+  }
+
+  .next-theme-text {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+  }
+
+  /* ============================================================
+   SECTION 09 — FINAL CTA
+   ============================================================ */
+  .dlc-lp .section-cta {
+    background: var(--dlc-navy-dark);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(22, 143, 190, 0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-inner h2 {
+    font-size: var(--size-h2);
+    font-weight: 900;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .cta-inner p {
+    font-size: var(--size-lead);
+    color: var(--text-muted);
+    margin-bottom: 48px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    margin: 56px auto;
+    max-width: 480px;
+  }
+
+  .cta-linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .cta-linkedin:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  .linkedin-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ============================================================
+   WP FOOTER MOCK
+   ============================================================ */
+  .wf-wp-footer {
+    background: #0f1f2d;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .wf-wp-footer-logo {
+    width: 72px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+  }
+
+  .wf-wp-footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .wf-wp-footer-link {
+    width: 50px;
+    height: 7px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+  }
+
+  .wf-wp-footer-copy {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.2);
+    font-family: var(--font-primary);
+  }
+
+  /* ============================================================
+   RESPONSIVE
+   ============================================================ */
+  @media (max-width: 900px) {
+
+    .why-inner,
+    .timeline-content {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .platform-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .carousel-card {
+      flex: 0 0 180px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .dlc-lp .hero h1 {
+      font-size: 36px;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-nav {
+      flex-wrap: wrap;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+
+<!-- ============================================================
+     LEGEND BAR
+     ============================================================ -->
+<div class="wf-legend">
+  <span class="wf-legend-title">Build Legend</span>
+  <div class="wf-legend-item">
+    <div class="wf-dot" style="background:rgba(22,143,190,0.6)"></div>Custom HTML/CSS
+  </div>
+  <div class="wf-legend-item">
+    <div class="wf-dot" style="background:rgba(92,165,71,0.7)"></div>Custom JS component
+  </div>
+  <div class="wf-legend-item">
+    <div class="wf-dot" style="background:rgba(201,168,76,0.7)"></div>YouTube embed
+  </div>
+  <div class="wf-legend-item">
+    <div class="wf-dot" style="background:rgba(255,255,255,0.2)"></div>WP retained (header/footer)
+  </div>
+  <div class="wf-legend-item" style="margin-left:auto; font-size:9px; color:rgba(255,255,255,0.2);">DLC 35th Anniversary
+    — Wireframe Concept · DN Creative LLC</div>
+</div>
+
+<!-- ============================================================
+     WP HEADER (retained as-is)
+     ============================================================ -->
+<div class="wf-wp-header">
+  <div class="wf-wp-logo">
+    <div class="wf-wp-logo-box"></div>
+    <span class="wf-wp-nav-label"
+      style="font-size:9px;color:#9BA8B5;font-family:var(--font-primary);letter-spacing:1px;">dlcmgmt.com</span>
+  </div>
+  <div class="wf-wp-nav">
+    <span style="width:60px"></span>
+    <span style="width:50px"></span>
+    <span style="width:70px"></span>
+    <span style="width:55px"></span>
+    <span style="width:65px"></span>
+  </div>
+  <span class="wf-wp-nav-label">↑ Existing WP header — retained</span>
+</div>
+
+<!-- ============================================================
+     PAGE CONTENT
+     ============================================================ -->
+<div class="dlc-lp">
+
+  <div class="dlc-progress-bar" id="dlcProgressBar"></div>
+
+  <!-- ── 01 HERO ──────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <div class="hero-video-container">
+      <div id="heroPlayer"></div>
+    </div>
+    <div class="hero-video-overlay"></div>
+    <div class="hero-video-badge">
+      <div class="hero-video-dot"></div>
+      YouTube · Muted · Loop
+    </div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow animate-on-scroll">DLC Management Corp. &nbsp;·&nbsp; 35th Anniversary</p>
+      <h1 class="animate-on-scroll delay-1">
+        Built on 35 Years<br>of <em>Execution.</em>
+      </h1>
+      <p class="hero-lead animate-on-scroll delay-2">
+        Positioned for what the market demands next.
+      </p>
+      <div class="hero-actions animate-on-scroll delay-3">
+        <a href="#video" class="btn-large">Watch Our Story</a>
+        <a href="#platform" class="btn-ghost">Secondary CTA Link &rarr;</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+        <path d="M12 5v14M5 12l7 7 7-7" />
+      </svg>
+    </div>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-embed">YouTube Embed #1</span>
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">Hero video: looping, muted, autoplay · headline overlay · scroll indicator</span>
+  </div>
+  <div class="section-transition"></div>
+
+  <!-- ── 02 FULL VIDEO ────────────────────────────────────── -->
+  <section class="section section-video" id="video">
+    <div class="section-video-inner">
+      <div class="section-video-intro">
+        <span class="kicker animate-on-scroll">The Full Story</span>
+        <h2 class="animate-on-scroll delay-1">Our Experience Is Our Advantage</h2>
+        <p class="animate-on-scroll delay-2">From founding to platform — how 35 years of execution built one of the most
+          capable owner-operator organizations in open-air retail.</p>
+      </div>
+      <div class="ph-video animate-on-scroll delay-3" style="width:100%;height:360px;">
+        <div class="ph-video-icon">
+          <svg viewBox="0 0 24 24" fill="rgba(22,143,190,0.6)" width="20" height="20">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+        <div class="ph-video-label">YouTube Embed · Full Anniversary Video</div>
+      </div>
+    </div>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-embed">YouTube Embed #2</span>
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">Full-width player · intro paragraph above · standard YouTube embed, no custom player
+      needed</span>
+  </div>
+  <div class="section-transition"></div>
+
+  <!-- ── 03 EMPLOYEE CAROUSEL ─────────────────────────────── -->
+  <section class="section section-carousel" id="carousel">
+    <div class="carousel-header">
+      <span class="kicker animate-on-scroll">Culture &amp; People</span>
+      <h2 class="animate-on-scroll delay-1">Voices of DLC</h2>
+      <p class="animate-on-scroll delay-2">Built by people who are rooted in the DLC culture, rising to lead.</p>
+      <div class="carousel-stat-callout animate-on-scroll delay-3">
+        <div class="stat-num">85%</div>
+        <div class="stat-desc">say it's a great place<br>to work</div>
+        <a href="#" class="btn-ghost" style="margin-left:24px;font-size:12px;">View open roles &rarr;</a>
+      </div>
+    </div>
+
+    <div class="carousel-track-wrap animate-on-scroll delay-2">
+      <div class="carousel-track">
+        <!-- 8 cards -->
+        <div class="carousel-card">
+          <div class="carousel-thumb">
+            <div class="carousel-person-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="1.5" width="24" height="24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg></div>
+            <div class="carousel-play-hint">
+              <div class="carousel-play-btn"><svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                  <path d="M8 5v14l11-7z" />
+                </svg></div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-name">Adam Ifshin</div>
+            <div class="carousel-role">CEO · Anchor</div>
+            <div class="carousel-hover-reveal">"Execution has always been our edge."</div>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-thumb">
+            <div class="carousel-person-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="1.5" width="24" height="24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg></div>
+            <div class="carousel-play-hint">
+              <div class="carousel-play-btn"><svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                  <path d="M8 5v14l11-7z" />
+                </svg></div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-name">Anya Wolf</div>
+            <div class="carousel-role">Leadership Evolution</div>
+            <div class="carousel-hover-reveal">"We grew by knowing when to adapt."</div>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-thumb">
+            <div class="carousel-person-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="1.5" width="24" height="24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg></div>
+            <div class="carousel-play-hint">
+              <div class="carousel-play-btn"><svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                  <path d="M8 5v14l11-7z" />
+                </svg></div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-name">Vinay Kaushik</div>
+            <div class="carousel-role">Capital Markets</div>
+            <div class="carousel-hover-reveal">"The capital follows the conviction."</div>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-thumb">
+            <div class="carousel-person-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="1.5" width="24" height="24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg></div>
+            <div class="carousel-play-hint">
+              <div class="carousel-play-btn"><svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                  <path d="M8 5v14l11-7z" />
+                </svg></div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-name">Blay Bradley</div>
+            <div class="carousel-role">Execution &amp; Platform</div>
+            <div class="carousel-hover-reveal">"Platform means everything runs right."</div>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-thumb">
+            <div class="carousel-person-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="1.5" width="24" height="24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg></div>
+            <div class="carousel-play-hint">
+              <div class="carousel-play-btn"><svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                  <path d="M8 5v14l11-7z" />
+                </svg></div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-name">Julia Grismore</div>
+            <div class="carousel-role">Innovation</div>
+            <div class="carousel-hover-reveal">"Innovation is just solving faster."</div>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-thumb">
+            <div class="carousel-person-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="1.5" width="24" height="24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg></div>
+            <div class="carousel-play-hint">
+              <div class="carousel-play-btn"><svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                  <path d="M8 5v14l11-7z" />
+                </svg></div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-name">Jillian Klein</div>
+            <div class="carousel-role">People &amp; Culture</div>
+            <div class="carousel-hover-reveal">"Culture is the competitive advantage."</div>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-thumb">
+            <div class="carousel-person-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="1.5" width="24" height="24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg></div>
+            <div class="carousel-play-hint">
+              <div class="carousel-play-btn"><svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                  <path d="M8 5v14l11-7z" />
+                </svg></div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-name">Mark Bradshaw</div>
+            <div class="carousel-role">Properties &amp; Platform</div>
+            <div class="carousel-hover-reveal">"Scale only works when details work."</div>
+          </div>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-thumb">
+            <div class="carousel-person-icon"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="1.5" width="24" height="24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg></div>
+            <div class="carousel-play-hint">
+              <div class="carousel-play-btn"><svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                  <path d="M8 5v14l11-7z" />
+                </svg></div>
+            </div>
+          </div>
+          <div class="carousel-card-body">
+            <div class="carousel-name">Basil Donnelly</div>
+            <div class="carousel-role">History &amp; Business</div>
+            <div class="carousel-hover-reveal">"You build for the long game."</div>
+          </div>
+        </div>
+      </div>
+      <p class="carousel-hover-note">Hover to reveal takeaway · 8 cards · horizontal scroll · mobile: swipe</p>
+    </div>
+    <div class="carousel-careers-link">
+      <div class="careers-badge animate-on-scroll">
+        <svg viewBox="0 0 24 24" fill="none" stroke="rgba(22,143,190,0.5)" stroke-width="1.5" width="18" height="18">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+        Great Place to Work — 9 consecutive years &nbsp;·&nbsp; <a href="#">Explore open roles at DLC &rarr;</a>
+      </div>
+    </div>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-js">Custom JS</span>
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">8 cards · hover reveals one-line takeaway · horizontal scroll · person icons replaced
+      with actual photos at build time · mobile: native swipe</span>
+  </div>
+  <div class="section-transition"></div>
+
+  <!-- ── 04 INTERACTIVE TIMELINE ───────────────────────────── -->
+  <section class="section section-timeline" id="timeline">
+    <div class="timeline-header">
+      <span class="kicker animate-on-scroll">35 Years of Growth</span>
+      <h2 class="animate-on-scroll delay-1">From Foundation to Platform</h2>
+      <p class="animate-on-scroll delay-2">Not just a history. A progression — from first acquisitions to a fully
+        integrated, national operator.</p>
+    </div>
+    <div class="timeline-outer">
+      <div class="timeline-nav animate-on-scroll">
+        <button class="timeline-era-btn active" onclick="setEra(0,this)">
+          <span class="timeline-era-date">1991–2005</span>
+          <span class="timeline-era-name">Foundation</span>
+        </button>
+        <button class="timeline-era-btn" onclick="setEra(1,this)">
+          <span class="timeline-era-date">2006–2015</span>
+          <span class="timeline-era-name">Scaling</span>
+        </button>
+        <button class="timeline-era-btn" onclick="setEra(2,this)">
+          <span class="timeline-era-date">2016–2020</span>
+          <span class="timeline-era-name">Institutional Growth</span>
+        </button>
+        <button class="timeline-era-btn" onclick="setEra(3,this)">
+          <span class="timeline-era-date">2021–2026</span>
+          <span class="timeline-era-name">Acceleration</span>
+        </button>
+      </div>
+      <div class="timeline-content animate-on-scroll delay-2" id="timelineContent">
+        <div class="timeline-milestones" id="timelineMilestones">
+          <div class="timeline-milestone">
+            <div class="milestone-dot"></div>
+            <div class="milestone-text"><strong>1991</strong> — Company founded</div>
+          </div>
+          <div class="timeline-milestone">
+            <div class="milestone-dot"></div>
+            <div class="milestone-text"><strong>First acquisitions</strong> — Northeast suburban portfolio</div>
+          </div>
+          <div class="timeline-milestone">
+            <div class="milestone-dot"></div>
+            <div class="milestone-text"><strong>Operational model</strong> established — vertically integrated from day
+              one</div>
+          </div>
+          <div class="timeline-milestone">
+            <div class="milestone-dot"></div>
+            <div class="milestone-text"><strong>Necessity-based thesis</strong> — grocery-anchored, suburban focus</div>
+          </div>
+        </div>
+        <div class="timeline-visual" id="timelineVisual">
+          <div class="timeline-visual-era">1991–2005 · Foundation</div>
+          <div class="timeline-visual-stat">14 <span>properties</span></div>
+          <div class="timeline-visual-desc">The early years. Building the operational foundation and establishing the
+            thesis that suburban, necessity-based retail was the right bet.</div>
+        </div>
+      </div>
+      <p class="timeline-mobile-note">Click era tabs to navigate · mobile: tap</p>
+    </div>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-js">Custom JS</span>
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">4 era tabs · click to advance · milestone list updates · right panel shows era stat +
+      description · mobile: tap tabs</span>
+  </div>
+  <div class="section-transition"></div>
+
+  <!-- ── 05 DLC TODAY ──────────────────────────────────────── -->
+  <section class="section section-platform" id="platform">
+    <div class="platform-header">
+      <span class="kicker animate-on-scroll">DLC Today</span>
+      <h2 class="animate-on-scroll delay-1">More Than an Owner. An Integrated Engine.</h2>
+      <p class="animate-on-scroll delay-2">Three companies. One platform. Built to move faster than the market.</p>
+    </div>
+    <div class="platform-grid">
+      <div class="platform-card animate-on-scroll delay-1">
+        <div class="platform-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(22,143,190,0.7)" stroke-width="1.5" width="22" height="22">
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+          </svg>
+        </div>
+        <div class="platform-company">DLC Management</div>
+        <div class="platform-name">Owner-Operator Platform</div>
+        <div class="platform-tagline">Owned. Operated. Outperforming.</div>
+        <div class="platform-body">The core platform. Vertically integrated acquisition, management, leasing, and
+          development across 80+ open-air properties.</div>
+        <ul class="platform-proofs">
+          <li>80+ properties nationwide</li>
+          <li>National tenants: Walmart, Target, Costco, TJ Maxx</li>
+          <li>$429M portfolio acquisition, Dec 2025</li>
+        </ul>
+      </div>
+      <div class="platform-card animate-on-scroll delay-2">
+        <div class="platform-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(92,165,71,0.7)" stroke-width="1.5" width="22" height="22">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+        </div>
+        <div class="platform-company">Renovo Construction</div>
+        <div class="platform-name">Built to Open. Anywhere.</div>
+        <div class="platform-tagline">General contracting built for retail speed.</div>
+        <div class="platform-body">In-house general contracting that eliminates the delays between deal close and tenant
+          open. Speed as a competitive advantage.</div>
+        <ul class="platform-proofs">
+          <li>Integrated with DLC's acquisition process</li>
+          <li>Specialty in open-air retail construction</li>
+          <li>Reduces time-to-open for national tenants</li>
+        </ul>
+      </div>
+      <div class="platform-card animate-on-scroll delay-3">
+        <div class="platform-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="1.5" width="22" height="22">
+            <path
+              d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+          </svg>
+        </div>
+        <div class="platform-company">NWS Architects</div>
+        <div class="platform-name">Designed to Move Faster.</div>
+        <div class="platform-tagline">Architecture aligned with deal velocity.</div>
+        <div class="platform-body">In-house architecture that keeps design, permitting, and execution on the same clock
+          as the acquisition pipeline.</div>
+        <ul class="platform-proofs">
+          <li>Integrated design-to-permit workflow</li>
+          <li>Aligned to retail tenant standards and requirements</li>
+          <li>Reduces third-party coordination friction</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">3-column cards · hover lifts + colored top border reveals · proof points per company ·
+      icons replaced with actual logos at build</span>
+  </div>
+  <div class="section-transition"></div>
+
+  <!-- ── 06 WHY NOW ────────────────────────────────────────── -->
+  <section class="section section-why" id="why">
+    <div class="why-inner container">
+      <div class="why-left">
+        <span class="kicker animate-on-scroll">Why Now</span>
+        <h2 class="animate-on-scroll delay-1">Why <em>retail.</em><br>Why <em>now.</em></h2>
+        <div class="section-divider animate-on-scroll delay-2"></div>
+        <p class="animate-on-scroll delay-2">The market has shifted. The data confirms it. DLC has been positioned for
+          this moment for years.</p>
+        <div class="why-cta-group animate-on-scroll delay-3">
+          <a href="#" class="btn-large">The Rent is Next &rarr;</a>
+          <span
+            style="font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:1px;font-family:var(--font-primary);">Links
+            to Thought Leadership Campaign landing page</span>
+        </div>
+      </div>
+      <div class="why-statements animate-on-scroll delay-2">
+        <div class="why-statement">
+          <div class="why-num">01</div>
+          <div class="why-text">Supply has been constrained for 20+ years</div>
+        </div>
+        <div class="why-statement">
+          <div class="why-num">02</div>
+          <div class="why-text">Demand is accelerating across key tenant categories</div>
+        </div>
+        <div class="why-statement">
+          <div class="why-num">03</div>
+          <div class="why-text">Net effective rent is rising to reflect fundamentals</div>
+        </div>
+        <div class="why-statement">
+          <div class="why-num">04</div>
+          <div class="why-text">Execution is the edge — not just ownership</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">2-col: left = headline + CTA · right = 4 numbered statements · CTA links to whitepaper
+      campaign page (editorial landing page)</span>
+  </div>
+  <div class="section-transition"></div>
+
+  <!-- ── 07 BY THE NUMBERS ─────────────────────────────────── -->
+  <section class="section section-numbers" id="numbers">
+    <div class="numbers-header">
+      <span class="kicker animate-on-scroll">By the Numbers</span>
+      <h2 class="animate-on-scroll delay-1">35 Years. One Platform.</h2>
+      <p class="animate-on-scroll delay-2">The scale of what's been built — and what it means for what comes next.</p>
+    </div>
+    <div class="stats-grid animate-on-scroll delay-2">
+      <div class="stat-block-item">
+        <div class="stat-value" data-target="429" data-prefix="$" data-suffix="M">$429M</div>
+        <div class="stat-label">Most recent portfolio acquisition</div>
+        <div class="stat-sublabel">Dec 2025</div>
+      </div>
+      <div class="stat-block-item">
+        <div class="stat-value" data-target="80" data-suffix="+">80<span class="stat-plus">+</span></div>
+        <div class="stat-label">Properties nationwide</div>
+        <div class="stat-sublabel">And growing</div>
+      </div>
+      <div class="stat-block-item">
+        <div class="stat-value">XM</div>
+        <div class="stat-label">Square feet managed</div>
+        <div class="stat-sublabel">Placeholder — TBD from DLC</div>
+      </div>
+      <div class="stat-block-item">
+        <div class="stat-value">XX</div>
+        <div class="stat-label">States with active portfolio</div>
+        <div class="stat-sublabel">Placeholder — TBD from DLC</div>
+      </div>
+      <div class="stat-block-item">
+        <div class="stat-value" style="font-size:clamp(22px,2.5vw,32px);letter-spacing:0;color:var(--dlc-green);">9
+          Years</div>
+        <div class="stat-label">Great Place to Work — consecutive</div>
+        <div class="stat-sublabel">Certified</div>
+      </div>
+    </div>
+    <p class="stats-note">Animated counters trigger on scroll-enter · XM and XX placeholders to be filled with confirmed
+      DLC data before build</p>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-js">Custom JS</span>
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">5-cell grid · numbers animate up on scroll-enter · 2 stats need confirmed values from
+      DLC before build begins</span>
+  </div>
+  <div class="section-transition"></div>
+
+  <!-- ── 08 WHAT'S NEXT ────────────────────────────────────── -->
+  <section class="section section-next" id="next">
+    <div class="next-inner">
+      <span class="kicker animate-on-scroll">What's Next</span>
+      <h2 class="animate-on-scroll delay-1">This Is Just<br><em>The Beginning.</em></h2>
+      <p class="next-body animate-on-scroll delay-2">The platform is built. The market is turning. The next chapter is
+        about what happens when execution meets opportunity at scale.</p>
+      <div class="next-themes animate-on-scroll delay-3">
+        <div class="next-theme">
+          <div class="next-theme-dot"></div>
+          <div class="next-theme-text">A new pricing cycle — structural, not cyclical</div>
+        </div>
+        <div class="next-theme">
+          <div class="next-theme-dot"></div>
+          <div class="next-theme-text">Continued acquisitions in high-barrier suburban markets</div>
+        </div>
+        <div class="next-theme">
+          <div class="next-theme-dot"></div>
+          <div class="next-theme-text">Expansion of Renovo and NWS alongside portfolio growth</div>
+        </div>
+        <div class="next-theme">
+          <div class="next-theme-dot"></div>
+          <div class="next-theme-text">Data-driven platform — Enterprise Intelligence</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">Editorial typography section · 4 forward-looking themes · links forward to whitepaper
+      campaign CTA</span>
+  </div>
+  <div class="section-transition"></div>
+
+  <!-- ── 09 FINAL CTA ──────────────────────────────────────── -->
+  <section class="section section-cta" id="cta">
+    <div class="cta-inner">
+      <span class="kicker animate-on-scroll">Connect</span>
+      <h2 class="animate-on-scroll delay-1">Ready to talk?</h2>
+      <p class="animate-on-scroll delay-2">Whether you're a tenant, an investor, or a potential partner — DLC is built
+        for what the market demands next.</p>
+      <div class="cta-buttons animate-on-scroll delay-3">
+        <a href="#" class="btn-large">Explore Our Portfolio</a>
+        <a href="#" class="btn-outline">Connect with Our Team</a>
+      </div>
+      <div class="cta-divider"></div>
+      <a href="#" class="cta-linkedin animate-on-scroll">
+        <div class="linkedin-icon">
+          <svg viewBox="0 0 24 24" fill="rgba(255,255,255,0.4)" width="14" height="14">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
+            <circle cx="4" cy="4" r="2" />
+          </svg>
+        </div>
+        Follow DLC on LinkedIn
+      </a>
+    </div>
+  </section>
+  <div class="anno-strip">
+    <span class="anno-label anno-custom">Custom HTML/CSS</span>
+    <span class="anno-strip-note">3 CTAs: portfolio · contact · LinkedIn · radial gradient bg effect</span>
+  </div>
+
+</div><!-- end .dlc-lp -->
+
+<!-- ============================================================
+     WP FOOTER (retained as-is)
+     ============================================================ -->
+<div class="wf-wp-footer">
+  <div class="wf-wp-footer-logo"></div>
+  <div class="wf-wp-footer-links">
+    <div class="wf-wp-footer-link"></div>
+    <div class="wf-wp-footer-link"></div>
+    <div class="wf-wp-footer-link"></div>
+  </div>
+  <div class="wf-wp-footer-copy">↑ Existing WP footer — retained as-is · background override applied via CSS</div>
+</div>
+
+<!-- ============================================================
+     JS — scroll animations + progress bar + timeline
+     ============================================================ -->
+<script>
+  // Scroll progress bar
+  const bar = document.getElementById('dlcProgressBar');
+
+  // YouTube IFrame API for seamless, control-free loop
+  let player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('heroPlayer', {
+      videoId: 'KPlSCRVw3yc',
+      playerVars: {
+        'autoplay': 1,
+        'controls': 0,
+        'modestbranding': 1,
+        'loop': 1,
+        'rel': 0,
+        'showinfo': 0,
+        'mute': 1,
+        'iv_load_policy': 3,
+        'disablekb': 1,
+        'playsinline': 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    event.target.playVideo();
+    event.target.mute();
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+      player.seekTo(0);
+      player.playVideo();
+    }
+  }
+
+  // Load YouTube API Script
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    if (bar) bar.style.width = (scrolled / total * 100) + '%';
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+  // Also trigger headshot
+  const headshot = document.getElementById('headshotWrap');
+  if (headshot) {
+    const hs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) { headshot.classList.add('is-visible'); hs.disconnect(); }
+    }, { threshold: 0.2 });
+    hs.observe(headshot);
+  }
+
+  // Timeline era switcher
+  const eras = [
+    {
+      milestones: [
+        '<strong>1991</strong> — Company founded in Elmsford, NY',
+        '<strong>First acquisitions</strong> — Northeast suburban portfolio',
+        '<strong>Operational model</strong> established — vertically integrated from day one',
+        '<strong>Necessity-based thesis</strong> — grocery-anchored, suburban focus'
+      ],
+      stat: '14', statLabel: 'properties', desc: 'The early years. Building the operational foundation and establishing the thesis that suburban, necessity-based retail was the right bet.'
+    },
+    {
+      milestones: [
+        '<strong>Portfolio expansion</strong> — Mid-Atlantic and Southeast growth',
+        '<strong>Tenant mix evolution</strong> — off-price, fitness, services added',
+        '<strong>Operational systems</strong> — internal processes scaled',
+        '<strong>Growing the leasing team</strong> — national retailer relationships deepened'
+      ],
+      stat: '40+', statLabel: 'properties', desc: 'Scaling the platform. Growing the portfolio and deepening relationships with the national tenants who define necessity retail.'
+    },
+    {
+      milestones: [
+        '<strong>Capital partnerships</strong> — institutional investor relationships formed',
+        '<strong>Market positioning</strong> — DLC recognized as top-tier operator',
+        '<strong>Technology investment</strong> — data and analytics platform seeded',
+        '<strong>New markets entered</strong> — Midwest and Southeast expansion'
+      ],
+      stat: '60+', statLabel: 'properties', desc: 'Institutional growth. Capital partnerships, national market positioning, and the beginning of the data-driven platform that powers decisions today.'
+    },
+    {
+      milestones: [
+        '<strong>$1B+ acquisitions</strong> — including $429M DRA portfolio (Dec 2025)',
+        '<strong>Renovo Construction</strong> launched — in-house general contracting',
+        '<strong>NWS Architects</strong> integrated — in-house architecture',
+        '<strong>Enterprise Intelligence</strong> — data platform created',
+        '<strong>New markets</strong> — California, Washington, Colorado, Phoenix, Oklahoma'
+      ],
+      stat: '80+', statLabel: 'properties', desc: 'Acceleration. The platform reaches full integration — construction, architecture, data, and acquisition all working as one engine.'
+    }
+  ];
+
+  function setEra(idx, btn) {
+    document.querySelectorAll('.timeline-era-btn').forEach((b, i) => {
+      b.classList.toggle('active', i === idx);
+    });
+    const era = eras[idx];
+    document.getElementById('timelineMilestones').innerHTML =
+      era.milestones.map(m => `<div class="timeline-milestone"><div class="milestone-dot"></div><div class="milestone-text">${m}</div></div>`).join('');
+    document.getElementById('timelineVisual').innerHTML = `
+    <div class="timeline-visual-era">${btn.querySelector('.timeline-era-date').textContent} &nbsp;·&nbsp; ${btn.querySelector('.timeline-era-name').textContent}</div>
+    <div class="timeline-visual-stat">${era.stat} <span>${era.statLabel}</span></div>
+    <div class="timeline-visual-desc">${era.desc}</div>
+  `;
+  }
+</script>

@@ -1,0 +1,2680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DLC Management Corp. — 35th Anniversary</title>
+
+  <!-- Typography & Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ============================================================
+     WP CHROME STYLING (MOCK GLOBAL HEADER & FOOTER — GREYED OUT)
+     ============================================================ */
+    .mock-chrome-header {
+      background: #111a24;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      opacity: 0.45;
+      filter: grayscale(100%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .mock-chrome-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mock-chrome-logo-icon {
+      width: 24px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.2);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    .mock-chrome-logo-text {
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 2px;
+    }
+
+    .mock-chrome-nav {
+      display: flex;
+      gap: 32px;
+    }
+
+    .mock-chrome-nav-item {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .mock-chrome-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .mock-chrome-footer {
+      background: #0b1118;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 48px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0.45;
+      filter: grayscale(100%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .mock-chrome-footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mock-chrome-footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .mock-chrome-footer-link {
+      width: 48px;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    /* ============================================================
+     DESIGN TOKENS — SCALED & OPTIMIZED FOR THE LANDING PAGE (.dlc-lp)
+     ============================================================ */
+    .dlc-lp {
+      /* Palette Tokens */
+      --dlc-navy: #213B4E;
+      --dlc-blue: #168FBE;
+      --dlc-green: #5CA547;
+      --dlc-gold: #C9A84C;
+      --bg: #162736;
+      --bg-alt: #1a303f;
+      --surface: #213B4E;
+      --surface-raised: #2a4a60;
+      --surface-deep: #122030;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.75);
+      --text-muted: rgba(255, 255, 255, 0.45);
+      --text-faint: rgba(255, 255, 255, 0.22);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(22, 143, 190, 0.35);
+      --shadow: 0 12px 48px rgba(0, 0, 0, 0.55);
+      --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --shadow-blue: 0 8px 32px rgba(22, 143, 190, 0.18);
+      --grid-dot: rgba(255, 255, 255, 0.035);
+
+      /* Typography Tokens */
+      --font-primary: 'Lato', Arial, sans-serif;
+      --size-hero: clamp(42px, 6.2vw, 80px);
+      --size-h2: clamp(28px, 3.8vw, 48px);
+      --size-lead: clamp(16px, 1.4vw, 20px);
+      --size-body: clamp(14px, 1.1vw, 16px);
+      --size-kicker: 11px;
+
+      /* Spacing Tokens */
+      --section-pad: clamp(80px, 9vw, 120px);
+      --gutter: clamp(24px, 5vw, 80px);
+      --col-max: 1160px;
+    }
+
+    /* Scoped Reset and Core Layout */
+    .dlc-lp,
+    .dlc-lp *,
+    .dlc-lp *::before,
+    .dlc-lp *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dlc-lp {
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+      background-size: 28px 28px;
+      font-family: var(--font-primary);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Fixed Top Scroll Progress Bar */
+    .dlc-scroll-progress {
+      position: fixed;
+      top: 80px;
+      /* Aligned with mock header */
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--dlc-blue);
+      box-shadow: 0 0 10px rgba(22, 143, 190, 0.7);
+      z-index: 10000;
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
+    /* Grid Container */
+    .dlc-lp .container {
+      max-width: var(--col-max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      width: 100%;
+    }
+
+    .dlc-lp .section {
+      padding: var(--section-pad) 0;
+      position: relative;
+    }
+
+    .dlc-lp .section-transition-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--dlc-blue), transparent);
+      opacity: 0.15;
+    }
+
+    /* ============================================================
+     DESIGN SYSTEM ANIMATION ELEMENTS (STRICT DESIGN.MD SPECS)
+     ============================================================ */
+    .anim-fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .anim-fade-left {
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .anim-fade-right {
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .anim-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    /* Active Animation States */
+    .is-visible.anim-fade-up,
+    .is-visible.anim-fade-left,
+    .is-visible.anim-fade-right,
+    .is-visible.anim-scale {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* Stagger Delays */
+    .delay-1 {
+      transition-delay: 0.10s !important;
+    }
+
+    .delay-2 {
+      transition-delay: 0.22s !important;
+    }
+
+    .delay-3 {
+      transition-delay: 0.34s !important;
+    }
+
+    .delay-4 {
+      transition-delay: 0.46s !important;
+    }
+
+    .delay-5 {
+      transition-delay: 0.58s !important;
+    }
+
+    /* ============================================================
+     COMPONENT LIBRARY (BUTTONS, CARDS, TYPOGRAPHY)
+     ============================================================ */
+    .dlc-lp .btn-primary {
+      background: var(--dlc-blue);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 18px 46px;
+      border-radius: 4px;
+      border: none;
+      box-shadow: var(--shadow-blue);
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+
+    .dlc-lp .btn-primary:hover {
+      background: #1aa8e0;
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(22, 143, 190, 0.35);
+    }
+
+    .dlc-lp .btn-outline {
+      background: transparent;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+
+    .dlc-lp .btn-outline:hover {
+      border-color: white;
+      transform: translateY(-2px);
+    }
+
+    .dlc-lp .btn-ghost {
+      color: rgba(255, 255, 255, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 12px 0;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .dlc-lp .btn-ghost:hover {
+      color: white;
+      border-color: white;
+    }
+
+    .dlc-lp .eyebrow {
+      font-size: var(--size-kicker);
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dlc-blue);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .dlc-lp h2 {
+      font-size: var(--size-h2);
+      font-weight: 900;
+      color: var(--text-primary);
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .dlc-lp h2 em {
+      font-style: normal;
+      color: var(--dlc-blue);
+    }
+
+    /* ============================================================
+     SECTION 01 — HERO
+     ============================================================ */
+    .dlc-lp .hero {
+      height: calc(100vh - 80px);
+      /* adjusted for mock header */
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--dlc-navy-dark);
+    }
+
+    .hero-video-container {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-video-container iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      /* 16:9 ratio and crop excess */
+      min-height: 100vh;
+      min-width: 177.77vh;
+      transform: translate(-50%, -50%);
+      opacity: 0.35;
+      filter: grayscale(15%) contrast(105%) brightness(95%);
+    }
+
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 55% 55% at 50% 40%, rgba(22, 143, 190, 0.08) 0%, transparent 80%),
+        linear-gradient(to top, var(--bg) 0%, rgba(22, 39, 54, 0.8) 50%, var(--bg) 100%);
+      pointer-events: none;
+    }
+
+    .hero-video-badge {
+      position: absolute;
+      top: 24px;
+      right: var(--gutter);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(22, 143, 190, 0.25);
+      border-radius: 4px;
+      padding: 6px 14px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+      z-index: 2;
+    }
+
+    .hero-video-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--dlc-blue);
+      animation: dlcBlink 1.5s ease-in-out infinite;
+    }
+
+    @keyframes dlcBlink {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.3;
+        transform: scale(0.85);
+      }
+    }
+
+    .dlc-lp .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+
+    .dlc-lp .hero h1 {
+      font-size: var(--size-hero);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      letter-spacing: -1.5px;
+    }
+
+    .dlc-lp .hero h1 em {
+      font-style: normal;
+      color: var(--dlc-blue);
+    }
+
+    .dlc-lp .hero-lead {
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .dlc-lp .hero-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.35;
+      z-index: 2;
+      animation: dlcBounce 2.4s ease-in-out infinite;
+    }
+
+    .hero-scroll-hint span {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .hero-scroll-hint svg {
+      color: var(--dlc-blue);
+    }
+
+    @keyframes dlcBounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    /* ============================================================
+     SECTION 02 — STORY VIDEO
+     ============================================================ */
+    .dlc-lp .section-video {
+      background: var(--bg);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .video-intro {
+      max-width: 680px;
+    }
+
+    .video-intro p {
+      font-size: var(--size-body);
+      color: var(--text-secondary);
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    .video-player-frame {
+      width: 100%;
+      background: rgba(22, 39, 54, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .video-player-frame:hover {
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow), var(--shadow-blue);
+    }
+
+    .video-aspect-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      /* 16:9 ratio */
+      height: 0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .video-aspect-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ============================================================
+     SECTION 03 — EMPLOYEE CAROUSEL (PEAKING CARDS CAROUSEL)
+     ============================================================ */
+    .dlc-lp .section-carousel {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+      overflow: hidden;
+    }
+
+    .carousel-intro {
+      max-width: 680px;
+      margin-bottom: 48px;
+    }
+
+    .carousel-stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(22, 143, 190, 0.08);
+      border: 1px solid rgba(22, 143, 190, 0.18);
+      border-radius: 6px;
+      padding: 12px 24px;
+      margin-top: 24px;
+    }
+
+    .carousel-stat-num {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--dlc-blue);
+      line-height: 1;
+    }
+
+    .carousel-stat-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      font-weight: 300;
+    }
+
+    /* Full-Bleed Peaking Carousel Track System */
+    .carousel-track-wrapper {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 16px calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2) 24px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--dlc-blue) rgba(255, 255, 255, 0.05);
+      scroll-behavior: smooth;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .carousel-track::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+    }
+
+    .carousel-track::-webkit-scrollbar-thumb {
+      background: var(--dlc-blue);
+      border-radius: 4px;
+    }
+
+    .carousel-card {
+      flex: 0 0 290px;
+      /* Fixed card width so cards peak visually */
+      scroll-snap-align: start;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, border-color, background;
+    }
+
+    .carousel-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--dlc-blue);
+      transform: scaleY(0.4);
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+      z-index: 5;
+    }
+
+    .carousel-card:hover::before {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+
+    .carousel-card:hover {
+      border-color: var(--border-accent);
+      background: rgba(22, 143, 190, 0.06);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-sm), var(--shadow-blue);
+    }
+
+    /* Looping GIF / Video Thumbnail Block */
+    .carousel-thumb-container {
+      position: relative;
+      height: 180px;
+      width: 100%;
+      background: var(--surface-deep);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .carousel-thumb-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: grayscale(10%) contrast(105%) brightness(90%);
+    }
+
+    .carousel-card:hover .carousel-thumb-container img {
+      transform: scale(1.05);
+      filter: grayscale(0%) contrast(100%) brightness(100%);
+    }
+
+    .carousel-play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(22, 39, 54, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .carousel-card:hover .carousel-play-overlay {
+      background: rgba(22, 143, 190, 0.15);
+    }
+
+    .carousel-play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(22, 143, 190, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: var(--shadow-sm);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s, box-shadow 0.3s;
+    }
+
+    .carousel-play-btn svg {
+      fill: currentColor;
+      margin-left: 3px;
+    }
+
+    .carousel-card:hover .carousel-play-btn {
+      transform: scale(1);
+      background: var(--dlc-blue);
+      box-shadow: 0 0 15px rgba(22, 143, 190, 0.5);
+    }
+
+    .carousel-card-body {
+      padding: 20px;
+      position: relative;
+    }
+
+    .carousel-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .carousel-role {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .carousel-takeaway-drawer {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--dlc-blue);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 12px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .carousel-card:hover .carousel-takeaway-drawer {
+      opacity: 1;
+      transform: none;
+    }
+
+    .carousel-footer-note {
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .carousel-careers-bar {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px 24px;
+    }
+
+    .carousel-careers-bar svg {
+      color: rgba(22, 143, 190, 0.5);
+      flex-shrink: 0;
+    }
+
+    .carousel-careers-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    .carousel-careers-text a {
+      color: var(--dlc-blue);
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 8px;
+    }
+
+    .carousel-careers-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* ============================================================
+     SECTION 04 — INTERACTIVE TIMELINE
+     ============================================================ */
+    .dlc-lp .section-timeline {
+      background: var(--bg);
+    }
+
+    .timeline-intro {
+      max-width: 680px;
+      margin-bottom: 56px;
+    }
+
+    .timeline-container {
+      width: 100%;
+    }
+
+    /* Era Selection Tabs */
+    .timeline-tabs-nav {
+      display: flex;
+      width: 100%;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: 40px;
+    }
+
+    .timeline-tab-btn {
+      flex: 1;
+      padding: 20px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-primary);
+      transition: border-color 0.3s, color 0.3s;
+    }
+
+    .timeline-tab-btn.is-active {
+      border-bottom-color: var(--dlc-blue);
+    }
+
+    .timeline-tab-btn .tab-era {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dlc-blue);
+      margin-bottom: 6px;
+      display: block;
+      transition: color 0.3s;
+    }
+
+    .timeline-tab-btn .tab-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: block;
+      transition: color 0.3s;
+    }
+
+    .timeline-tab-btn:not(.is-active) .tab-era {
+      color: rgba(22, 143, 190, 0.4);
+    }
+
+    .timeline-tab-btn:not(.is-active) .tab-title {
+      color: var(--text-muted);
+    }
+
+    .timeline-tab-btn:hover:not(.is-active) .tab-title {
+      color: var(--text-secondary);
+    }
+
+    /* Timeline Body Grid */
+    .timeline-body {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .timeline-milestones {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-milestone-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: background 0.3s, border-color 0.3s, transform 0.25s;
+      animation: dlcMilestoneFade 0.4s var(--ease-out) forwards;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    @keyframes dlcMilestoneFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .timeline-milestone-item:hover {
+      background: rgba(22, 143, 190, 0.04);
+      border-color: rgba(22, 143, 190, 0.15);
+      transform: translateX(4px);
+    }
+
+    .timeline-milestone-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dlc-blue);
+      flex-shrink: 0;
+      margin-top: 7px;
+      box-shadow: 0 0 8px rgba(22, 143, 190, 0.6);
+    }
+
+    .timeline-milestone-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .timeline-milestone-text strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    /* Era Visual Detail Card */
+    .timeline-visual-panel {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timeline-visual-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 100% 100%, rgba(22, 143, 190, 0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .timeline-visual-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dlc-blue);
+    }
+
+    .timeline-visual-stat {
+      font-size: clamp(48px, 4.5vw, 68px);
+      font-weight: 900;
+      color: var(--text-primary);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .timeline-visual-stat span {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .timeline-visual-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+     SECTION 05 — PLATFORM (3-COL PILLAR CARDS)
+     ============================================================ */
+    .dlc-lp .section-platform {
+      background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    }
+
+    .platform-intro {
+      max-width: 680px;
+      margin-bottom: 56px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .platform-intro p {
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* Pillar Card Custom Implementation */
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 44px 36px;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Accent Rule (scaleX drawing) */
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Custom Theme Accent Border Colors */
+    .pillar-card.brand-blue::before {
+      background: var(--dlc-blue);
+    }
+
+    .pillar-card.brand-green::before {
+      background: var(--dlc-green);
+    }
+
+    .pillar-card.brand-gold::before {
+      background: var(--dlc-gold);
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .pillar-card.brand-blue:hover {
+      background: rgba(22, 143, 190, 0.05);
+      border-color: rgba(22, 143, 190, 0.2);
+    }
+
+    .pillar-card.brand-green:hover {
+      background: rgba(92, 165, 71, 0.05);
+      border-color: rgba(92, 165, 71, 0.2);
+    }
+
+    .pillar-card.brand-gold:hover {
+      background: rgba(201, 168, 76, 0.05);
+      border-color: rgba(201, 168, 76, 0.2);
+    }
+
+    .pillar-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .platform-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .pillar-card.brand-blue .platform-icon-box {
+      color: var(--dlc-blue);
+    }
+
+    .pillar-card.brand-green .platform-icon-box {
+      color: var(--dlc-green);
+    }
+
+    .pillar-card.brand-gold .platform-icon-box {
+      color: var(--dlc-gold);
+    }
+
+    .pillar-card.brand-blue:hover .platform-icon-box {
+      background: rgba(22, 143, 190, 0.12);
+      border-color: rgba(22, 143, 190, 0.25);
+    }
+
+    .pillar-card.brand-green:hover .platform-icon-box {
+      background: rgba(92, 165, 71, 0.12);
+      border-color: rgba(92, 165, 71, 0.25);
+    }
+
+    .pillar-card.brand-gold:hover .platform-icon-box {
+      background: rgba(201, 168, 76, 0.12);
+      border-color: rgba(201, 168, 76, 0.25);
+    }
+
+    .platform-card-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .pillar-card.brand-blue .platform-card-kicker {
+      color: var(--dlc-blue);
+    }
+
+    .pillar-card.brand-green .platform-card-kicker {
+      color: var(--dlc-green);
+    }
+
+    .pillar-card.brand-gold .platform-card-kicker {
+      color: var(--dlc-gold);
+    }
+
+    .platform-card-title {
+      font-size: clamp(18px, 1.6vw, 22px);
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .platform-card-tagline {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .platform-card-body {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-weight: 300;
+      flex-grow: 1;
+    }
+
+    .platform-card-proofs {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 20px;
+    }
+
+    .platform-card-proofs li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.4;
+      font-weight: 300;
+    }
+
+    .platform-card-proofs li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .pillar-card.brand-blue .platform-card-proofs li::before {
+      background: var(--dlc-blue);
+    }
+
+    .pillar-card.brand-green .platform-card-proofs li::before {
+      background: var(--dlc-green);
+    }
+
+    .pillar-card.brand-gold .platform-card-proofs li::before {
+      background: var(--dlc-gold);
+    }
+
+    /* ============================================================
+     SECTION 06 — WHY NOW (WHY RETAIL. WHY NOW.)
+     ============================================================ */
+    .dlc-lp .section-why {
+      background: var(--bg);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-editorial h2 {
+      margin-bottom: 24px;
+    }
+
+    .why-editorial p {
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .why-editorial-badge {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      font-weight: 700;
+      margin-top: 12px;
+      display: block;
+    }
+
+    .why-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .why-list-item {
+      padding: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      transition: background 0.3s, border-color 0.3s;
+      border-radius: 6px;
+    }
+
+    .why-list-item:first-child {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .why-list-item:hover {
+      background: rgba(22, 143, 190, 0.04);
+      border-color: rgba(22, 143, 190, 0.15);
+    }
+
+    .why-list-num {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: var(--dlc-blue);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .why-list-text {
+      font-size: clamp(15px, 1.3vw, 17px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    /* ============================================================
+     SECTION 07 — BY THE NUMBERS (COUNT-UP STATS GRID)
+     ============================================================ */
+    .dlc-lp .section-numbers {
+      background: var(--bg-alt);
+    }
+
+    .numbers-intro {
+      max-width: 680px;
+      margin-bottom: 56px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .numbers-intro p {
+      font-size: var(--size-body);
+      color: var(--text-secondary);
+      margin-top: 12px;
+      font-weight: 300;
+    }
+
+    /* Custom high-fidelity stats-grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      background: rgba(22, 143, 190, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(22, 143, 190, 0.15);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Stat Block Token alignment */
+    .stat-block {
+      background: rgba(22, 39, 54, 0.85);
+      padding: 48px 24px;
+      text-align: center;
+      transition: background 0.3s;
+    }
+
+    .stat-block:hover {
+      background: rgba(22, 143, 190, 0.06);
+    }
+
+    .stat-block-value {
+      font-size: clamp(40px, 4.5vw, 60px);
+      font-weight: 900;
+      color: var(--dlc-blue);
+      line-height: 1.1;
+      margin-bottom: 12px;
+      letter-spacing: -2px;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 0 40px rgba(22, 143, 190, 0.2);
+    }
+
+    .stat-block-value span.small-suffix {
+      font-size: 0.55em;
+      font-weight: 900;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+
+    .stat-block-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .stat-block-sublabel {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .stats-caption {
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    /* ============================================================
+     SECTION 08 — WHAT'S NEXT
+     ============================================================ */
+    .dlc-lp .section-next {
+      background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    }
+
+    .next-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .next-content h2 {
+      font-size: var(--size-hero);
+      line-height: 1.05;
+      margin-bottom: 32px;
+    }
+
+    .next-lead {
+      max-width: 600px;
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .next-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 900px;
+    }
+
+    .next-item {
+      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .next-item:hover {
+      background: rgba(22, 143, 190, 0.03);
+      border-color: rgba(22, 143, 190, 0.12);
+    }
+
+    .next-item-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--dlc-blue);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(22, 143, 190, 0.6);
+    }
+
+    .next-item-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* ============================================================
+     SECTION 09 — FINAL CTA
+     ============================================================ */
+    .dlc-lp .section-cta {
+      background: var(--bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dlc-lp .section-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(22, 143, 190, 0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-content p {
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      margin-bottom: 44px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-divider-line {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.06);
+      margin: 56px auto;
+      max-width: 480px;
+    }
+
+    .cta-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .cta-social-link:hover {
+      color: var(--text-primary);
+    }
+
+    .social-icon-wrapper {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .cta-social-link:hover .social-icon-wrapper {
+      background: rgba(22, 143, 190, 0.1);
+      border-color: rgba(22, 143, 190, 0.3);
+      color: var(--dlc-blue);
+    }
+
+    /* ============================================================
+     INTERACTIVE YT LIGHTBOX MODAL (BUILT IN PLATFORM READY)
+     ============================================================ */
+    .dlc-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .dlc-modal.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dlc-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 20, 28, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .dlc-modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      background: #122030;
+      border: 1px solid rgba(22, 143, 190, 0.25);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 32px rgba(22, 143, 190, 0.2);
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 10;
+    }
+
+    .dlc-modal.is-active .dlc-modal-content {
+      transform: scale(1);
+    }
+
+    .dlc-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: white;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 300;
+      cursor: pointer;
+      z-index: 15;
+      line-height: 1;
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+    }
+
+    .dlc-modal-close:hover {
+      background: var(--dlc-blue);
+      border-color: var(--dlc-blue);
+      transform: scale(1.05);
+    }
+
+    .dlc-modal-video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      /* 16:9 aspect ratio */
+      height: 0;
+      width: 100%;
+    }
+
+    .dlc-modal-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ============================================================
+     RESPONSIVE RULES (DESIGN.MD AND WIREFRAME MATCHES)
+     ============================================================ */
+    @media (max-width: 900px) {
+      .mock-chrome-nav {
+        display: none;
+      }
+
+      .mock-chrome-header {
+        height: 64px;
+      }
+
+      .dlc-scroll-progress {
+        top: 64px;
+      }
+
+      .why-grid,
+      .timeline-body {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .platform-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .next-list {
+        grid-template-columns: 1fr;
+      }
+
+      .carousel-track {
+        padding: 16px var(--gutter);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .dlc-lp .hero {
+        height: calc(100vh - 64px);
+      }
+
+      .dlc-lp .hero h1 {
+        font-size: 36px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-tabs-nav {
+        flex-direction: column;
+        border-bottom: none;
+      }
+
+      .timeline-tab-btn {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-left: 2px solid transparent;
+        padding: 14px 16px;
+      }
+
+      .timeline-tab-btn.is-active {
+        border-bottom-color: rgba(255, 255, 255, 0.05);
+        border-left-color: var(--dlc-blue);
+      }
+
+      .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cta-actions .btn-primary,
+      .cta-actions .btn-outline {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       WORDPRESS THEME HEADER MOCK (GREYED OUT)
+       ============================================================ -->
+  <header class="mock-chrome-header">
+    <div class="mock-chrome-logo">
+      <div class="mock-chrome-logo-icon"></div>
+      <div class="mock-chrome-logo-text">DLC</div>
+      <span class="mock-chrome-label">dlcmgmt.com</span>
+    </div>
+
+    <div class="mock-chrome-nav">
+      <div class="mock-chrome-nav-item" style="width: 50px;"></div>
+      <div class="mock-chrome-nav-item" style="width: 65px;"></div>
+      <div class="mock-chrome-nav-item" style="width: 55px;"></div>
+      <div class="mock-chrome-nav-item" style="width: 70px;"></div>
+      <div class="mock-chrome-nav-item" style="width: 60px;"></div>
+    </div>
+
+    <span class="mock-chrome-label">DLC Theme Header </span>
+  </header>
+
+  <!-- ============================================================
+       ELEMENTOR LANDING PAGE CONTENT (COPY THIS ONLY TO WP)
+       ============================================================ -->
+  <div class="dlc-lp">
+
+    <!-- Scoped top scroll progress bar -->
+    <div class="dlc-scroll-progress" id="dlcProgressBar"></div>
+
+    <!-- ── SECTION 01 — HERO (CINEMATIC BACKDROP) ── -->
+    <section class="hero" id="hero">
+      <div class="hero-video-container">
+        <!-- YouTube loop via Iframe Player API -->
+        <div id="heroPlayer"></div>
+      </div>
+      <div class="hero-video-overlay"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <p class="eyebrow anim-fade-up">DLC Management Corp. &nbsp;·&nbsp; 35th Anniversary</p>
+          <h1 class="anim-fade-up delay-1">
+            Built on 35 Years<br>of <em>Execution.</em>
+          </h1>
+          <p class="hero-lead anim-fade-up delay-2">
+            Positioned for what the market demands next. In-house contracting, architecture, and necessity-based
+            property operation aligned for ultimate deal velocity.
+          </p>
+          <div class="hero-actions anim-fade-up delay-3">
+            <a href="#video" class="btn-primary">Watch Our Story</a>
+            <a href="#platform" class="btn-ghost">Our Platform &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll-hint">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+          <path d="M12 5v14M5 12l7 7 7-7" />
+        </svg>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 02 — THE STORY (PLAYABLE EMBED) ── -->
+    <section class="section section-video" id="video">
+      <div class="container">
+        <div class="video-grid">
+          <div class="video-intro">
+            <span class="eyebrow anim-fade-up">The Full Story</span>
+            <h2 class="anim-fade-up delay-1">Our Experience Is Our <em>Advantage.</em></h2>
+            <p class="anim-fade-up delay-2">
+              From our founding to a fully integrated retail engine — see how 35 years of dedicated focus in suburban
+              open-air shopping centers built a highly operational leasing, architecture, and construction platform.
+            </p>
+          </div>
+
+          <div class="video-player-frame anim-scale delay-3">
+            <div class="video-aspect-wrapper">
+              <!-- High-fidelity playable YouTube Embed -->
+              <iframe src="https://www.youtube.com/embed/KPlSCRVw3yc?rel=0&modestbranding=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 03 — VOICES OF DLC (PEAKING CAROUSEL & MODAL VIDEO) ── -->
+    <section class="section section-carousel" id="carousel">
+      <div class="container">
+        <div class="carousel-intro">
+          <span class="eyebrow anim-fade-up">Culture &amp; People</span>
+          <h2 class="anim-fade-up delay-1">Voices of <em>DLC.</em></h2>
+          <p class="anim-fade-up delay-2">
+            Meet the leaders behind our operational execution. Click any video card to view their complete story in our
+            interactive lightbox player.
+          </p>
+
+          <div class="carousel-stat-pill anim-fade-up delay-3">
+            <div class="carousel-stat-num">85%</div>
+            <div class="carousel-stat-desc">
+              say it's a great place<br>to work
+            </div>
+            <a href="#cta" class="btn-ghost" style="margin-left: 24px; font-size: 11px;">Connect with us &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Peaking Carousel Track -->
+      <div class="carousel-track-wrapper anim-fade-up delay-2">
+        <div class="carousel-track">
+
+          <!-- Card 1: Adam Ifshin -->
+          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+            <div class="carousel-thumb-container">
+              <!-- Looping 10-second GIF placeholder (Professional stock avatar styled in CSS) -->
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+                alt="Adam Ifshin">
+              <div class="carousel-play-overlay">
+                <div class="carousel-play-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-card-body">
+              <div class="carousel-name">Adam Ifshin</div>
+              <div class="carousel-role">Chief Executive Officer</div>
+              <div class="carousel-takeaway-drawer">
+                "Execution has always been our structural edge. We lead by doing."
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Anya Wolf -->
+          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+            <div class="carousel-thumb-container">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+                alt="Anya Wolf">
+              <div class="carousel-play-overlay">
+                <div class="carousel-play-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-card-body">
+              <div class="carousel-name">Anya Wolf</div>
+              <div class="carousel-role">Leadership Evolution</div>
+              <div class="carousel-takeaway-drawer">
+                "Adapting to shifts early is how we protect and unlock client value."
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Vinay Kaushik -->
+          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+            <div class="carousel-thumb-container">
+              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80"
+                alt="Vinay Kaushik">
+              <div class="carousel-play-overlay">
+                <div class="carousel-play-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-card-body">
+              <div class="carousel-name">Vinay Kaushik</div>
+              <div class="carousel-role">Capital Markets</div>
+              <div class="carousel-takeaway-drawer">
+                "Capital markets reward deep operational integration and execution."
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Blay Bradley -->
+          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+            <div class="carousel-thumb-container">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+                alt="Blay Bradley">
+              <div class="carousel-play-overlay">
+                <div class="carousel-play-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-card-body">
+              <div class="carousel-name">Blay Bradley</div>
+              <div class="carousel-role">Execution &amp; Platform</div>
+              <div class="carousel-takeaway-drawer">
+                "A platform means everything runs right, down to the last tenant detail."
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Julia Grismore -->
+          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+            <div class="carousel-thumb-container">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
+                alt="Julia Grismore">
+              <div class="carousel-play-overlay">
+                <div class="carousel-play-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-card-body">
+              <div class="carousel-name">Julia Grismore</div>
+              <div class="carousel-role">Retail Innovation</div>
+              <div class="carousel-takeaway-drawer">
+                "Real retail innovation is about solving property obstacles faster."
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Jillian Klein -->
+          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+            <div class="carousel-thumb-container">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+                alt="Jillian Klein">
+              <div class="carousel-play-overlay">
+                <div class="carousel-play-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-card-body">
+              <div class="carousel-name">Jillian Klein</div>
+              <div class="carousel-role">People &amp; Culture</div>
+              <div class="carousel-takeaway-drawer">
+                "Our supportive culture is the absolute core of our performance."
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 7: Mark Bradshaw -->
+          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+            <div class="carousel-thumb-container">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+                alt="Mark Bradshaw">
+              <div class="carousel-play-overlay">
+                <div class="carousel-play-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-card-body">
+              <div class="carousel-name">Mark Bradshaw</div>
+              <div class="carousel-role">Properties &amp; Architecture</div>
+              <div class="carousel-takeaway-drawer">
+                "Portfolio scale only works when every individual design is sound."
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 8: Basil Donnelly -->
+          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+            <div class="carousel-thumb-container">
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80"
+                alt="Basil Donnelly">
+              <div class="carousel-play-overlay">
+                <div class="carousel-play-btn">
+                  <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-card-body">
+              <div class="carousel-name">Basil Donnelly</div>
+              <div class="carousel-role">Operational History</div>
+              <div class="carousel-takeaway-drawer">
+                "You build a legacy by playing the long game with operational integrity."
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="carousel-careers-bar anim-fade-up delay-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <div class="carousel-careers-text">
+            Great Place to Work certified for 9 consecutive years. <a href="https://www.dlcmgmt.com/careers/"
+              target="_blank">Explore open roles at DLC &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 04 — INTERACTIVE TIMELINE ── -->
+    <section class="section section-timeline" id="timeline">
+      <div class="container">
+        <div class="timeline-intro">
+          <span class="eyebrow anim-fade-up">35 Years of Growth</span>
+          <h2 class="anim-fade-up delay-1">From Foundation to <em>Platform.</em></h2>
+          <p class="anim-fade-up delay-2">
+            Not just a static history, but a structural evolution — from our first suburban acquisitions to a national,
+            multi-disciplinary real estate engine.
+          </p>
+        </div>
+
+        <div class="timeline-container">
+          <!-- Navigation Tabs -->
+          <div class="timeline-tabs-nav anim-fade-up delay-1">
+            <button class="timeline-tab-btn is-active" onclick="switchTimelineEra(0, this)">
+              <span class="tab-era">1991–2005</span>
+              <span class="tab-title">Foundation</span>
+            </button>
+            <button class="timeline-tab-btn" onclick="switchTimelineEra(1, this)">
+              <span class="tab-era">2006–2015</span>
+              <span class="tab-title">Scaling</span>
+            </button>
+            <button class="timeline-tab-btn" onclick="switchTimelineEra(2, this)">
+              <span class="tab-era">2016–2020</span>
+              <span class="tab-title">Institutional Growth</span>
+            </button>
+            <button class="timeline-tab-btn" onclick="switchTimelineEra(3, this)">
+              <span class="tab-era">2021–2026</span>
+              <span class="tab-title">Acceleration</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Timeline Content Grid -->
+          <div class="timeline-body anim-fade-up delay-2">
+
+            <!-- Milestones Panel -->
+            <div class="timeline-milestones" id="timelineMilestones">
+              <!-- Milestones loaded dynamically by JS -->
+            </div>
+
+            <!-- Stats/Visual Panel -->
+            <div class="timeline-visual-panel" id="timelineVisual">
+              <!-- Stats visual loaded dynamically by JS -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 05 — PLATFORM (3-COL PILLAR CARDS) ── -->
+    <section class="section section-platform" id="platform">
+      <div class="container">
+        <div class="platform-intro">
+          <span class="eyebrow anim-fade-up">DLC Today</span>
+          <h2 class="anim-fade-up delay-1">More Than an Owner. An <em>Integrated Engine.</em></h2>
+          <p class="anim-fade-up delay-2">
+            Three distinct divisions aligned under a single, high-performance platform. Speed, design control, and
+            leasing power combined.
+          </p>
+        </div>
+
+        <div class="platform-grid">
+
+          <!-- Pillar 1: DLC Management -->
+          <div class="pillar-card brand-blue anim-fade-up delay-1">
+            <div class="platform-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <path d="M8 21h8M12 17v4" />
+              </svg>
+            </div>
+            <div class="platform-card-kicker">DLC Management</div>
+            <h3 class="platform-card-title">Owner-Operator Platform</h3>
+            <p class="platform-card-tagline">Owned. Operated. Outperforming.</p>
+            <p class="platform-card-body">
+              The core management core. Vertically integrated acquisition, institutional leasing, proactive management,
+              and property development across major open-air retail spaces.
+            </p>
+            <ul class="platform-card-proofs">
+              <li>80+ properties nationwide</li>
+              <li>National anchor leasing (Walmart, Target, Costco)</li>
+              <li>$429M DRA portfolio acquisition (Dec 2025)</li>
+            </ul>
+          </div>
+
+          <!-- Pillar 2: Renovo Construction -->
+          <div class="pillar-card brand-green anim-fade-up delay-2">
+            <div class="platform-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div class="platform-card-kicker">Renovo Construction</div>
+            <h3 class="platform-card-title">Built to Open. Anywhere.</h3>
+            <p class="platform-card-tagline">General contracting built for retail speed.</p>
+            <p class="platform-card-body">
+              Eliminating the costly delays between lease signature and store opening. Dedicated in-house general
+              contracting and construction team delivering spaces on or ahead of schedule.
+            </p>
+            <ul class="platform-card-proofs">
+              <li>Direct coordination with leasing and acquisition pipelines</li>
+              <li>Specialty in complex open-air retail re-tenanting</li>
+              <li>Drastically reduced time-to-open for anchors</li>
+            </ul>
+          </div>
+
+          <!-- Pillar 3: NWS Architects -->
+          <div class="pillar-card brand-gold anim-fade-up delay-3">
+            <div class="platform-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+              </svg>
+            </div>
+            <div class="platform-card-kicker">NWS Architects</div>
+            <h3 class="platform-card-title">Designed to Move Faster.</h3>
+            <p class="platform-card-tagline">Architecture aligned with deal velocity.</p>
+            <p class="platform-card-body">
+              Architectural planning and permitting integrated directly into our leasing cycle. High-speed drawing sets,
+              structural reviews, and municipal permit filings keeping plans moving.
+            </p>
+            <ul class="platform-card-proofs">
+              <li>Integrated design-to-permit workflow</li>
+              <li>Strict alignment with national retailer specs</li>
+              <li>Zero reliance on third-party architect lag</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 06 — WHY NOW (STRATEGIC NARRATIVE) ── -->
+    <section class="section section-why" id="why">
+      <div class="container">
+        <div class="why-grid">
+
+          <div class="why-editorial">
+            <span class="eyebrow anim-fade-up">Why Now</span>
+            <h2 class="anim-fade-up delay-1">Why <em>retail.</em> &nbsp;Why <em>now.</em></h2>
+            <p class="anim-fade-up delay-2">
+              Suburban retail fundamentals have shifted permanently. Physical occupancy is constrained, construction
+              costs have limited new supply, and necessity-driven open-air spaces are in record demand.
+            </p>
+            <div class="anim-fade-up delay-3">
+              <a href="https://www.dlcmgmt.com/therentisnext/" target="_blank" class="btn-primary">The Rent Is Next
+                &rarr;</a>
+              <span class="why-editorial-badge">Explore our 2026 Thought Leadership Campaign</span>
+            </div>
+          </div>
+
+          <div class="why-list anim-fade-right delay-2">
+
+            <div class="why-list-item">
+              <div class="why-list-num">01</div>
+              <div class="why-list-text">Supply has been strictly constrained for over two decades.</div>
+            </div>
+
+            <div class="why-list-item">
+              <div class="why-list-num">02</div>
+              <div class="why-list-text">Demand is accelerating rapidly across grocery and value-add retail.</div>
+            </div>
+
+            <div class="why-list-item">
+              <div class="why-list-num">03</div>
+              <div class="why-list-text">Net effective rents are beginning to rise to reflect structural supply
+                realities.</div>
+            </div>
+
+            <div class="why-list-item">
+              <div class="why-list-num">04</div>
+              <div class="why-list-text">Dynamic operational execution — not passive ownership — drives outperformance.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 07 — BY THE NUMBERS (REAL VERIFIED DATA) ── -->
+    <section class="section section-numbers" id="numbers">
+      <div class="container">
+        <div class="numbers-intro">
+          <span class="eyebrow anim-fade-up">By the Numbers</span>
+          <h2 class="anim-fade-up delay-1">35 Years. <em>One Platform.</em></h2>
+          <p class="anim-fade-up delay-2">
+            The sheer scale of what we operate, coordinate, and execute across the nation.
+          </p>
+        </div>
+
+        <!-- 5-Cell Stats Grid -->
+        <div class="stats-grid anim-scale delay-1" id="statsGrid">
+
+          <!-- Stat 1: Acquisitions -->
+          <div class="stat-block">
+            <div class="stat-block-value" data-prefix="$" data-target="429" data-suffix="M">
+              $0M
+            </div>
+            <div class="stat-block-label">Most recent portfolio acquisition</div>
+            <div class="stat-block-sublabel">Dec 2025</div>
+          </div>
+
+          <!-- Stat 2: Properties -->
+          <div class="stat-block">
+            <div class="stat-block-value" data-prefix="" data-target="80" data-suffix="+">
+              0+
+            </div>
+            <div class="stat-block-label">Properties nationwide</div>
+            <div class="stat-block-sublabel">Under management</div>
+          </div>
+
+          <!-- Stat 3: Total Square Footage (Verified 21M SF) -->
+          <div class="stat-block">
+            <div class="stat-block-value" data-prefix="" data-target="21" data-suffix="M SF">
+              0M SF
+            </div>
+            <div class="stat-block-label">Square feet operated</div>
+            <div class="stat-block-sublabel">Necessity retail</div>
+          </div>
+
+          <!-- Stat 4: Active States (Verified 20 States) -->
+          <div class="stat-block">
+            <div class="stat-block-value" data-prefix="" data-target="20" data-suffix="">
+              0
+            </div>
+            <div class="stat-block-label">States with active portfolio</div>
+            <div class="stat-block-sublabel">Coast-to-Coast</div>
+          </div>
+
+          <!-- Stat 5: Great Place to Work -->
+          <div class="stat-block">
+            <div class="stat-block-value" style="color: var(--dlc-green);" data-prefix="" data-target="9"
+              data-suffix=" Yrs">
+              0 Yrs
+            </div>
+            <div class="stat-block-label">Great Place to Work certified</div>
+            <div class="stat-block-sublabel">Consecutive</div>
+          </div>
+
+        </div>
+
+        <p class="stats-caption anim-fade-up">
+          * Counter stats animate up dynamically using an easeOutQuart curve when visible in viewport
+        </p>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 08 — WHAT'S NEXT ── -->
+    <section class="section section-next" id="next">
+      <div class="container">
+        <div class="next-grid">
+          <div class="next-content">
+            <span class="eyebrow anim-fade-up">What's Next</span>
+            <h2 class="anim-fade-up delay-1">This Is Just<br><em>The Beginning.</em></h2>
+            <p class="next-lead anim-fade-up delay-2">
+              Our integrated construction, architectural, and property management engine is optimized for the next
+              industry cycle. Here is where we go next.
+            </p>
+
+            <div class="next-list anim-fade-up delay-3">
+
+              <div class="next-item">
+                <div class="next-item-dot"></div>
+                <div class="next-item-text">Capitalizing on structural pricing cycles in open-air retail</div>
+              </div>
+
+              <div class="next-item">
+                <div class="next-item-dot"></div>
+                <div class="next-item-text">Scaling grocery-anchored asset acquisition in major sub-markets</div>
+              </div>
+
+              <div class="next-item">
+                <div class="next-item-dot"></div>
+                <div class="next-item-text">Expanding NWS Architects &amp; Renovo third-party builder pipelines</div>
+              </div>
+
+              <div class="next-item">
+                <div class="next-item-dot"></div>
+                <div class="next-item-text">Pioneering data-driven Enterprise Intelligence systems at property level
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 09 — FINAL CTA ── -->
+    <section class="section section-cta" id="cta">
+      <div class="container">
+        <div class="cta-content">
+          <span class="eyebrow anim-fade-up">Connect</span>
+          <h2 class="anim-fade-up delay-1">Ready to move?</h2>
+          <p class="anim-fade-up delay-2">
+            Whether you are a national retailer seeking immediate store placement, an investor looking for
+            high-outperformance retail operators, or an industry partner — DLC is built for you.
+          </p>
+          <div class="cta-actions anim-fade-up delay-3">
+            <a href="https://www.dlcmgmt.com/properties/" target="_blank" class="btn-primary">Explore Our Properties</a>
+            <a href="https://www.dlcmgmt.com/contact/" target="_blank" class="btn-outline">Connect with Our Team</a>
+          </div>
+
+          <div class="cta-divider-line anim-fade-up"></div>
+
+          <a href="https://www.linkedin.com/company/dlc-management-corp/" target="_blank"
+            class="cta-social-link anim-fade-up">
+            <div class="social-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </div>
+            Follow DLC on LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Custom Lightbox Video Modal Window -->
+    <div class="dlc-modal" id="videoModal">
+      <div class="dlc-modal-overlay" id="modalOverlay"></div>
+      <div class="dlc-modal-content">
+        <button class="dlc-modal-close" id="modalClose">&times;</button>
+        <div class="dlc-modal-video-wrapper">
+          <iframe id="modalIframe" src="" allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- ============================================================
+       ELEMENTOR LANDING PAGE CONTENT END
+       ============================================================ -->
+
+  <!-- ============================================================
+       WORDPRESS THEME FOOTER MOCK (GREYED OUT)
+       ============================================================ -->
+  <footer class="mock-chrome-footer">
+    <div class="mock-chrome-footer-left">
+      <div class="mock-chrome-logo">
+        <div class="mock-chrome-logo-icon"></div>
+        <div class="mock-chrome-logo-text">DLC</div>
+      </div>
+      <div style="font-family: 'Lato', sans-serif; font-size: 10px; color: rgba(255, 255, 255, 0.2); margin-top: 8px;">
+        &copy; 2026 DLC Management Corp. All rights reserved.
+      </div>
+    </div>
+
+    <div class="mock-chrome-footer-left" style="align-items: flex-end;">
+      <div class="mock-chrome-footer-links">
+        <div class="mock-chrome-footer-link"></div>
+        <div class="mock-chrome-footer-link"></div>
+        <div class="mock-chrome-footer-link"></div>
+      </div>
+      <span class="mock-chrome-label" style="margin-top: 8px;">WP Theme Footer (Greyed Out)</span>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JS — AUTOPLAY HERO VIDEO, TIMELINE ERAS, MODALS & COUNTERS
+       ============================================================ -->
+  <script>
+    /* ── SCROLL PROGRESS BAR ── */
+    const bar = document.getElementById('dlcProgressBar');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (bar && total > 0) {
+        bar.style.width = (scrolled / total * 100) + '%';
+      }
+    }, { passive: true });
+
+    /* ── YOUTUBE HERO BACKGROUND PLAYER ── */
+    let heroPlayer;
+    function onYouTubeIframeAPIReady() {
+      heroPlayer = new YT.Player('heroPlayer', {
+        videoId: 'KPlSCRVw3yc',
+        playerVars: {
+          'autoplay': 1,
+          'controls': 0,
+          'modestbranding': 1,
+          'loop': 1,
+          'playlist': 'KPlSCRVw3yc', /* required for looping */
+          'rel': 0,
+          'showinfo': 0,
+          'mute': 1,
+          'iv_load_policy': 3,
+          'disablekb': 1,
+          'playsinline': 1
+        },
+        events: {
+          'onReady': (event) => {
+            event.target.playVideo();
+            event.target.mute();
+          },
+          'onStateChange': (event) => {
+            // Loop assurance
+            if (event.data === YT.PlayerState.ENDED) {
+              heroPlayer.seekTo(0);
+              heroPlayer.playVideo();
+            }
+          }
+        }
+      });
+    }
+
+    // Inject YouTube IFrame API Script
+    const ytScriptTag = document.createElement('script');
+    ytScriptTag.src = "https://www.youtube.com/iframe_api";
+    const firstScript = document.getElementsByTagName('script')[0];
+    firstScript.parentNode.insertBefore(ytScriptTag, firstScript);
+
+    /* ── INTERACTIVE TIMELINE DATA & ENGINE ── */
+    const timelineEras = [
+      {
+        eraRange: '1991–2005',
+        eraTitle: 'Foundation',
+        visualStat: '14',
+        visualUnit: 'properties',
+        visualDesc: 'Establishing our necessity-based investment thesis. Vertically integrated acquisition, leasing, and property management platform built from day one.',
+        milestones: [
+          '<strong>1991</strong> — DLC Management Corp founded by Adam Ifshin in Elmsford, NY.',
+          '<strong>Northeast Portfolio</strong> — Acquired and repositioned first suburban open-air shopping assets.',
+          '<strong>Necessity Thesis</strong> established — grocery-anchored focus in high-barrier suburban sectors.',
+          '<strong>Vertical Integration</strong> — Assembled dedicated internal leasing and operations teams.'
+        ]
+      },
+      {
+        eraRange: '2006–2015',
+        eraTitle: 'Scaling',
+        visualStat: '40+',
+        visualUnit: 'properties',
+        visualDesc: 'Deepening geographic footprint into Mid-Atlantic and Southeast regions. Partnering with major national anchors to diversify retailer portfolios.',
+        milestones: [
+          '<strong>Sub-Market Expansion</strong> — Entered key secondary and tertiary growth markets.',
+          '<strong>Anchor Deepening</strong> — Solidified leasing relations with TJX, Walmart, Target, and off-price leaders.',
+          '<strong>Operational Systems</strong> — Upgraded internal asset management and billing systems for institutional load.',
+          '<strong>Regional Offices</strong> opened across operational density centers.'
+        ]
+      },
+      {
+        eraRange: '2016–2020',
+        eraTitle: 'Institutional Growth',
+        visualStat: '60+',
+        visualUnit: 'properties',
+        visualDesc: 'Seeding major joint-ventures with institutional capital partners. Seeding proprietary data/analytics software to inform site selections.',
+        milestones: [
+          '<strong>Institutional Joint-Ventures</strong> — Formed major capital co-investment channels.',
+          '<strong>Platform Upgrades</strong> — Deployed software algorithms to monitor foot-traffic data at scale.',
+          '<strong>California/Midwest Expansion</strong> — Successfully established assets in high-density Western states.',
+          '<strong>Great Place to Work</strong> — First series of national workplace culture certifications.'
+        ]
+      },
+      {
+        eraRange: '2021–2026',
+        eraTitle: 'Acceleration',
+        visualStat: '80+',
+        visualUnit: 'properties',
+        visualDesc: 'Achieving total platform integration — launching Renovo construction and NWS architects alongside massive portfolio acquisitions.',
+        milestones: [
+          '<strong>DRA Portfolio Acquisition</strong> — Acquired landmark $429M open-air retail portfolio in Dec 2025.',
+          '<strong>Renovo Construction</strong> launched — fully integrated, in-house general contracting speeds up openings.',
+          '<strong>NWS Architects</strong> acquired — in-house engineering and permitting removes development delays.',
+          '<strong>Enterprise Intelligence</strong> — Unified proprietary database tracking leasing foot-traffic and asset velocity.'
+        ]
+      }
+    ];
+
+    function switchTimelineEra(index, buttonElement) {
+      // Toggle Nav Active states
+      document.querySelectorAll('.timeline-tab-btn').forEach(btn => btn.classList.remove('is-active'));
+      buttonElement.classList.add('is-active');
+
+      const era = timelineEras[index];
+
+      // Fade content container out, update values, fade back in
+      const body = document.querySelector('.timeline-body');
+      body.style.opacity = 0.2;
+      body.style.transform = 'translateY(10px)';
+      body.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+
+      setTimeout(() => {
+        // Build milestones
+        const milestonesContainer = document.getElementById('timelineMilestones');
+        milestonesContainer.innerHTML = era.milestones.map((m, idx) => `
+          <div class="timeline-milestone-item" style="animation-delay: ${idx * 60}ms">
+            <div class="timeline-milestone-dot"></div>
+            <div class="timeline-milestone-text">${m}</div>
+          </div>
+        `).join('');
+
+        // Build visual panel
+        const visualContainer = document.getElementById('timelineVisual');
+        visualContainer.innerHTML = `
+          <div class="timeline-visual-label">${era.eraRange} &nbsp;·&nbsp; ${era.eraTitle}</div>
+          <div class="timeline-visual-stat">${era.visualStat}<span>${era.visualUnit}</span></div>
+          <div class="timeline-visual-desc">${era.visualDesc}</div>
+        `;
+
+        body.style.opacity = 1;
+        body.style.transform = 'translateY(0)';
+      }, 250);
+    }
+
+    // Initialize first timeline era
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstTab = document.querySelector('.timeline-tab-btn');
+      if (firstTab) switchTimelineEra(0, firstTab);
+    });
+
+    /* ── CUSTOM YOUTUBE LIGHTBOX MODAL ── */
+    const modal = document.getElementById('videoModal');
+    const modalIframe = document.getElementById('modalIframe');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+
+    // Attach click events to carousel cards
+    document.querySelectorAll('.carousel-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const videoId = card.getAttribute('data-video-id');
+        if (videoId) {
+          // Open Modal
+          modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+          modal.classList.add('is-active');
+        }
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove('is-active');
+      // Delay cleaning source slightly to allow fade out transition to complete
+      setTimeout(() => {
+        modalIframe.src = '';
+      }, 350);
+    }
+
+    modalOverlay.addEventListener('click', closeModal);
+    modalClose.addEventListener('click', closeModal);
+
+    // Escape Key closure support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+        closeModal();
+      }
+    });
+
+    /* ── SCROLL-DRIVEN ENTRY ANIMATIONS (INTERSECTION OBSERVER) ── */
+    const observerOptions = {
+      threshold: 0.18,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+
+          // If stats grid is in view, trigger count-up counters
+          if (entry.target.id === 'statsGrid') {
+            triggerCountUp();
+          }
+
+          scrollObserver.unobserve(entry.target); // Trigger once only
+        }
+      });
+    }, observerOptions);
+
+    // Observe animated elements
+    document.querySelectorAll('.anim-fade-up, .anim-fade-left, .anim-fade-right, .anim-scale').forEach(el => {
+      scrollObserver.observe(el);
+    });
+
+    // Specifically observe stats grid to trigger counters at threshold
+    const statsGrid = document.getElementById('statsGrid');
+    if (statsGrid) scrollObserver.observe(statsGrid);
+
+    /* ── COUNT-UP ANIMATION ENGINE (easeOutQuart Easing) ── */
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    let countersTriggered = false;
+    function triggerCountUp() {
+      if (countersTriggered) return;
+      countersTriggered = true;
+
+      const duration = 1800; // Counter animation length in ms
+
+      document.querySelectorAll('.stat-block-value').forEach(stat => {
+        const targetValue = parseInt(stat.getAttribute('data-target'), 10);
+        const prefix = stat.getAttribute('data-prefix') || '';
+        const suffix = stat.getAttribute('data-suffix') || '';
+        const hasDecimals = stat.getAttribute('data-decimals') === 'true';
+
+        let startTime = null;
+
+        function animateCounter(currentTime) {
+          if (!startTime) startTime = currentTime;
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+          const easedProgress = easeOutQuart(progress);
+          const currentValue = easedProgress * targetValue;
+
+          // Format value string
+          let formattedValue = '';
+          if (hasDecimals) {
+            formattedValue = currentValue.toFixed(1);
+          } else {
+            formattedValue = Math.floor(currentValue).toString();
+          }
+
+          // Build layout block with dynamic small suffix
+          if (suffix.includes('+') || suffix.includes('M') || suffix.includes('SF') || suffix.includes('Yrs')) {
+            stat.innerHTML = `${prefix}${formattedValue}<span class="small-suffix">${suffix}</span>`;
+          } else {
+            stat.innerHTML = `${prefix}${formattedValue}${suffix}`;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(animateCounter);
+          }
+        }
+
+        requestAnimationFrame(animateCounter);
+      });
+    }
+  </script>
+</body>
+
+</html>
