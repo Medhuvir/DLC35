@@ -355,18 +355,38 @@
 
     /* ============================================================
      SECTION 01 — HERO
-     ============================================================ */
+     ============================================================
+
+     ── GRADIENT CONTROLS ───────────────────────────────────────
+     Adjust these four variables to tune the video overlay:
+       --hero-grad-bottom   : colour/opacity at the very bottom edge
+       --hero-grad-mid      : colour/opacity blended at mid-height
+       --hero-grad-top      : colour/opacity at the very top edge
+       --hero-accent-glow   : centre radial accent (blue shimmer)
+       --hero-video-opacity : base opacity of the video layer (0–1)
+       --hero-video-filter  : CSS filter applied to the raw video
+     ──────────────────────────────────────────────────────────── */
     .dlc-lp .hero {
-      height: calc(100vh - 80px);
-      /* adjusted for mock header */
-      min-height: 600px;
+      --hero-grad-bottom: rgba(13, 24, 36, 0.97);
+      --hero-grad-mid: rgba(18, 32, 48, 0.60);
+      --hero-grad-top: rgba(13, 24, 36, 0.80);
+      --hero-accent-glow: rgba(22, 143, 190, 0.07);
+      --hero-video-opacity: 0.38;
+      --hero-video-filter: grayscale(10%) contrast(108%) brightness(92%);
+
+      /* Layout — true full-bleed viewport lock */
+      width: 100vw;
+      height: 100vh;
+      min-height: 560px;
       display: flex;
       align-items: center;
       position: relative;
       overflow: hidden;
-      background: var(--dlc-navy-dark);
+      background: #0d1824;
+      /* dark fallback while video loads */
     }
 
+    /* ── VIDEO LAYER ── */
     .hero-video-container {
       position: absolute;
       inset: 0;
@@ -375,75 +395,46 @@
       pointer-events: none;
     }
 
+    /* Scale + centre the 16:9 iframe to always fill the hero */
     .hero-video-container iframe {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 100%;
-      height: 100%;
-      /* 16:9 ratio and crop excess */
+      /* Ensure video covers all viewport sizes */
+      width: 100vw;
+      height: 56.25vw;
+      /* 16:9 at viewport width */
       min-height: 100vh;
-      min-width: 177.77vh;
+      min-width: 177.78vh;
+      /* 16:9 at viewport height */
       transform: translate(-50%, -50%);
-      opacity: 0.35;
-      filter: grayscale(15%) contrast(105%) brightness(95%);
+      opacity: var(--hero-video-opacity);
+      filter: var(--hero-video-filter);
+      pointer-events: none;
+      border: none;
     }
 
+    /* ── GRADIENT OVERLAY ── */
     .hero-video-overlay {
       position: absolute;
       inset: 0;
       z-index: 1;
-      background:
-        radial-gradient(ellipse 55% 55% at 50% 40%, rgba(22, 143, 190, 0.08) 0%, transparent 80%),
-        linear-gradient(to top, var(--bg) 0%, rgba(22, 39, 54, 0.8) 50%, var(--bg) 100%);
       pointer-events: none;
+      background:
+        /* Accent radial shimmer — centre of frame */
+        radial-gradient(ellipse 60% 50% at 50% 42%, var(--hero-accent-glow) 0%, transparent 70%),
+        /* Main tone gradient — bottom heavy for legibility */
+        linear-gradient(to top,
+          var(--hero-grad-bottom) 0%,
+          var(--hero-grad-mid) 45%,
+          var(--hero-grad-top) 100%);
     }
 
-    .hero-video-badge {
-      position: absolute;
-      top: 24px;
-      right: var(--gutter);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(22, 143, 190, 0.25);
-      border-radius: 4px;
-      padding: 6px 14px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-      z-index: 2;
-    }
-
-    .hero-video-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--dlc-blue);
-      animation: dlcBlink 1.5s ease-in-out infinite;
-    }
-
-    @keyframes dlcBlink {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.3;
-        transform: scale(0.85);
-      }
-    }
-
+    /* ── CONTENT ── */
     .dlc-lp .hero-inner {
       position: relative;
       z-index: 2;
-      max-width: 820px;
+      max-width: 780px;
     }
 
     .dlc-lp .hero h1 {
@@ -451,7 +442,7 @@
       font-weight: 900;
       line-height: 1.05;
       color: var(--text-primary);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       letter-spacing: -1.5px;
     }
 
@@ -462,55 +453,108 @@
 
     .dlc-lp .hero-lead {
       font-size: var(--size-lead);
-      color: var(--text-secondary);
-      max-width: 580px;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 560px;
       line-height: 1.7;
       margin-bottom: 40px;
       font-weight: 300;
     }
 
-    .dlc-lp .hero-actions {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .hero-scroll-hint {
+    /* ── SCROLL CHEVRON ── */
+    .hero-scroll-chevron {
       position: absolute;
-      bottom: 30px;
+      bottom: 36px;
       left: 50%;
       transform: translateX(-50%);
+      z-index: 2;
+
+      /* Animate in after content stagger completes */
+      opacity: 0;
+      animation:
+        dlcChevronEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards,
+        dlcChevronBounce 2.6s cubic-bezier(0.45, 0, 0.55, 1) 2.0s infinite;
+
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      opacity: 0.35;
-      z-index: 2;
-      animation: dlcBounce 2.4s ease-in-out infinite;
+      gap: 0;
+      cursor: pointer;
+      text-decoration: none;
     }
 
-    .hero-scroll-hint span {
-      font-size: 9px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-primary);
-      font-weight: 700;
+    /* Radial glow disc behind the chevron */
+    .hero-scroll-chevron::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(22, 143, 190, 0.22) 0%, transparent 72%);
+      animation: dlcGlowPulse 2.6s ease-in-out 2.0s infinite;
+      pointer-events: none;
     }
 
-    .hero-scroll-hint svg {
+    .hero-scroll-chevron svg {
+      display: block;
       color: var(--dlc-blue);
+      filter: drop-shadow(0 0 10px rgba(22, 143, 190, 0.55));
+      transition: filter 0.3s;
     }
 
-    @keyframes dlcBounce {
+    .hero-scroll-chevron:hover svg {
+      filter: drop-shadow(0 0 18px rgba(22, 143, 190, 0.85));
+    }
+
+    /* Fade + rise entrance */
+    @keyframes dlcChevronEnter {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* Gentle eased bounce loop — easeInOut feel */
+    @keyframes dlcChevronBounce {
 
       0%,
       100% {
         transform: translateX(-50%) translateY(0);
       }
 
-      50% {
-        transform: translateX(-50%) translateY(8px);
+      40% {
+        transform: translateX(-50%) translateY(10px);
+      }
+
+      60% {
+        transform: translateX(-50%) translateY(10px);
+      }
+    }
+
+    /* Glow pulse synced with bounce */
+    @keyframes dlcGlowPulse {
+
+      0%,
+      100% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      40% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.18);
+      }
+
+      60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.18);
       }
     }
 
@@ -584,29 +628,116 @@
       margin-bottom: 48px;
     }
 
-    .carousel-stat-pill {
+    /* Great Place to Work Full-Width Takeover Component */
+    .gptw-card {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      background: linear-gradient(135deg, rgba(22, 143, 190, 0.06) 0%, rgba(22, 143, 190, 0.02) 100%);
+      border: 1px solid rgba(22, 143, 190, 0.18);
+      border-radius: 12px;
+      padding: 40px;
+      margin-top: 56px;
+      max-width: 100%;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .gptw-card:hover {
+      background: linear-gradient(135deg, rgba(22, 143, 190, 0.09) 0%, rgba(22, 143, 190, 0.03) 100%);
+      border-color: rgba(22, 143, 190, 0.35);
+      transform: translateY(-4px);
+    }
+
+    .gptw-image-wrapper {
+      flex: 0 0 260px;
+      width: 260px;
+      height: 260px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(22, 143, 190, 0.25);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      transition: border-color 0.3s;
+    }
+
+    .gptw-card:hover .gptw-image-wrapper {
+      border-color: rgba(22, 143, 190, 0.45);
+    }
+
+    .gptw-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gptw-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gptw-headline {
+      font-size: clamp(22px, 2.2vw, 28px);
+      font-weight: 900;
+      color: var(--text-primary);
+      margin: 0;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+
+    .gptw-body {
+      font-size: clamp(14px, 1.2vw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+      font-weight: 300;
+    }
+
+    .gptw-cta {
+      align-self: flex-start;
+      background: var(--dlc-blue);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 4px;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 15px rgba(22, 143, 190, 0.3);
       display: inline-flex;
       align-items: center;
-      gap: 16px;
-      background: rgba(22, 143, 190, 0.08);
-      border: 1px solid rgba(22, 143, 190, 0.18);
-      border-radius: 6px;
-      padding: 12px 24px;
-      margin-top: 24px;
+      gap: 6px;
     }
 
-    .carousel-stat-num {
-      font-size: 26px;
-      font-weight: 900;
-      color: var(--dlc-blue);
-      line-height: 1;
+    .gptw-cta:hover {
+      background: white;
+      color: var(--dlc-navy-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
     }
 
-    .carousel-stat-desc {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.4;
-      font-weight: 300;
+    @media (max-width: 768px) {
+      .gptw-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+        padding: 32px 24px;
+      }
+
+      .gptw-image-wrapper {
+        width: 200px;
+        height: 200px;
+        flex: 0 0 200px;
+      }
+
+      .gptw-cta {
+        align-self: center;
+      }
     }
 
     /* Full-Bleed Peaking Carousel Track System */
@@ -655,6 +786,10 @@
       cursor: pointer;
       transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform, border-color, background;
+    }
+
+    .carousel-card:first-of-type {
+      margin-left: 40px;
     }
 
     .carousel-card::before {
@@ -1751,11 +1886,16 @@
 
     <!-- ── SECTION 01 — HERO (CINEMATIC BACKDROP) ── -->
     <section class="hero" id="hero">
+
+      <!-- Muted, looped, control-free YouTube background via IFrame Player API -->
       <div class="hero-video-container">
-        <!-- YouTube loop via Iframe Player API -->
         <div id="heroPlayer"></div>
       </div>
+
+      <!-- Gradient overlay (tune via CSS variables on .dlc-lp .hero) -->
       <div class="hero-video-overlay"></div>
+
+      <!-- Copy: eyebrow → H1 → sub-copy → single CTA -->
       <div class="container">
         <div class="hero-inner">
           <p class="eyebrow anim-fade-up">DLC Management Corp. &nbsp;·&nbsp; 35th Anniversary</p>
@@ -1763,22 +1903,22 @@
             Built on 35 Years<br>of <em>Execution.</em>
           </h1>
           <p class="hero-lead anim-fade-up delay-2">
-            Positioned for what the market demands next. In-house contracting, architecture, and necessity-based
-            property operation aligned for ultimate deal velocity.
+            Positioned for what the market demands next — an integrated, in-house platform built for deal velocity.
           </p>
-          <div class="hero-actions anim-fade-up delay-3">
+          <div class="anim-fade-up delay-3">
             <a href="#video" class="btn-primary">Watch Our Story</a>
-            <a href="#platform" class="btn-ghost">Our Platform &rarr;</a>
           </div>
         </div>
       </div>
 
-      <div class="hero-scroll-hint">
-        <span>Scroll</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-          <path d="M12 5v14M5 12l7 7 7-7" />
+      <!-- Large glowing animated chevron — nudges user to scroll -->
+      <a href="#video" class="hero-scroll-chevron" aria-label="Scroll to next section">
+        <svg viewBox="0 0 48 26" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"
+          stroke-linejoin="round" width="52" height="28">
+          <path d="M4 4 L24 22 L44 4" />
         </svg>
-      </div>
+      </a>
+
     </section>
 
     <div class="section-transition-divider"></div>
@@ -1821,210 +1961,214 @@
             interactive lightbox player.
           </p>
 
-          <div class="carousel-stat-pill anim-fade-up delay-3">
-            <div class="carousel-stat-num">85%</div>
-            <div class="carousel-stat-desc">
-              say it's a great place<br>to work
-            </div>
-            <a href="#cta" class="btn-ghost" style="margin-left: 24px; font-size: 11px;">Connect with us &rarr;</a>
-          </div>
-        </div>
-      </div>
 
-      <!-- Peaking Carousel Track -->
-      <div class="carousel-track-wrapper anim-fade-up delay-2">
-        <div class="carousel-track">
 
-          <!-- Card 1: Adam Ifshin -->
-          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
-            <div class="carousel-thumb-container">
-              <!-- Looping 10-second GIF placeholder (Professional stock avatar styled in CSS) -->
-              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
-                alt="Adam Ifshin">
-              <div class="carousel-play-overlay">
-                <div class="carousel-play-btn">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+          <!-- Peaking Carousel Track -->
+          <div class="carousel-track-wrapper anim-fade-up delay-2">
+            <div class="carousel-track">
+
+              <!-- Card 1: Adam Ifshin -->
+              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+                <div class="carousel-thumb-container">
+                  <!-- Looping 10-second GIF placeholder (Professional stock avatar styled in CSS) -->
+                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+                    alt="Adam Ifshin">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Adam Ifshin</div>
+                  <div class="carousel-role">Chief Executive Officer</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Execution has always been our structural edge. We lead by doing."
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="carousel-card-body">
-              <div class="carousel-name">Adam Ifshin</div>
-              <div class="carousel-role">Chief Executive Officer</div>
-              <div class="carousel-takeaway-drawer">
-                "Execution has always been our structural edge. We lead by doing."
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 2: Anya Wolf -->
-          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
-            <div class="carousel-thumb-container">
-              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
-                alt="Anya Wolf">
-              <div class="carousel-play-overlay">
-                <div class="carousel-play-btn">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+              <!-- Card 2: Anya Wolf -->
+              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+                    alt="Anya Wolf">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Anya Wolf</div>
+                  <div class="carousel-role">Leadership Evolution</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Adapting to shifts early is how we protect and unlock client value."
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="carousel-card-body">
-              <div class="carousel-name">Anya Wolf</div>
-              <div class="carousel-role">Leadership Evolution</div>
-              <div class="carousel-takeaway-drawer">
-                "Adapting to shifts early is how we protect and unlock client value."
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 3: Vinay Kaushik -->
-          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
-            <div class="carousel-thumb-container">
-              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80"
-                alt="Vinay Kaushik">
-              <div class="carousel-play-overlay">
-                <div class="carousel-play-btn">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+              <!-- Card 3: Vinay Kaushik -->
+              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80"
+                    alt="Vinay Kaushik">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Vinay Kaushik</div>
+                  <div class="carousel-role">Capital Markets</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Capital markets reward deep operational integration and execution."
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="carousel-card-body">
-              <div class="carousel-name">Vinay Kaushik</div>
-              <div class="carousel-role">Capital Markets</div>
-              <div class="carousel-takeaway-drawer">
-                "Capital markets reward deep operational integration and execution."
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 4: Blay Bradley -->
-          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
-            <div class="carousel-thumb-container">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
-                alt="Blay Bradley">
-              <div class="carousel-play-overlay">
-                <div class="carousel-play-btn">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+              <!-- Card 4: Blay Bradley -->
+              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+                    alt="Blay Bradley">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Blay Bradley</div>
+                  <div class="carousel-role">Execution &amp; Platform</div>
+                  <div class="carousel-takeaway-drawer">
+                    "A platform means everything runs right, down to the last tenant detail."
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="carousel-card-body">
-              <div class="carousel-name">Blay Bradley</div>
-              <div class="carousel-role">Execution &amp; Platform</div>
-              <div class="carousel-takeaway-drawer">
-                "A platform means everything runs right, down to the last tenant detail."
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 5: Julia Grismore -->
-          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
-            <div class="carousel-thumb-container">
-              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
-                alt="Julia Grismore">
-              <div class="carousel-play-overlay">
-                <div class="carousel-play-btn">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+              <!-- Card 5: Julia Grismore -->
+              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
+                    alt="Julia Grismore">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Julia Grismore</div>
+                  <div class="carousel-role">Retail Innovation</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Real retail innovation is about solving property obstacles faster."
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="carousel-card-body">
-              <div class="carousel-name">Julia Grismore</div>
-              <div class="carousel-role">Retail Innovation</div>
-              <div class="carousel-takeaway-drawer">
-                "Real retail innovation is about solving property obstacles faster."
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 6: Jillian Klein -->
-          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
-            <div class="carousel-thumb-container">
-              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
-                alt="Jillian Klein">
-              <div class="carousel-play-overlay">
-                <div class="carousel-play-btn">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+              <!-- Card 6: Jillian Klein -->
+              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+                    alt="Jillian Klein">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Jillian Klein</div>
+                  <div class="carousel-role">People &amp; Culture</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Our supportive culture is the absolute core of our performance."
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="carousel-card-body">
-              <div class="carousel-name">Jillian Klein</div>
-              <div class="carousel-role">People &amp; Culture</div>
-              <div class="carousel-takeaway-drawer">
-                "Our supportive culture is the absolute core of our performance."
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 7: Mark Bradshaw -->
-          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
-            <div class="carousel-thumb-container">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
-                alt="Mark Bradshaw">
-              <div class="carousel-play-overlay">
-                <div class="carousel-play-btn">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+              <!-- Card 7: Mark Bradshaw -->
+              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+                    alt="Mark Bradshaw">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Mark Bradshaw</div>
+                  <div class="carousel-role">Properties &amp; Architecture</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Portfolio scale only works when every individual design is sound."
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="carousel-card-body">
-              <div class="carousel-name">Mark Bradshaw</div>
-              <div class="carousel-role">Properties &amp; Architecture</div>
-              <div class="carousel-takeaway-drawer">
-                "Portfolio scale only works when every individual design is sound."
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 8: Basil Donnelly -->
-          <div class="carousel-card" data-video-id="KPlSCRVw3yc">
-            <div class="carousel-thumb-container">
-              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80"
-                alt="Basil Donnelly">
-              <div class="carousel-play-overlay">
-                <div class="carousel-play-btn">
-                  <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+              <!-- Card 8: Basil Donnelly -->
+              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80"
+                    alt="Basil Donnelly">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Basil Donnelly</div>
+                  <div class="carousel-role">Operational History</div>
+                  <div class="carousel-takeaway-drawer">
+                    "You build a legacy by playing the long game with operational integrity."
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="carousel-card-body">
-              <div class="carousel-name">Basil Donnelly</div>
-              <div class="carousel-role">Operational History</div>
-              <div class="carousel-takeaway-drawer">
-                "You build a legacy by playing the long game with operational integrity."
-              </div>
+
             </div>
           </div>
-
-        </div>
-      </div>
-
-      <div class="container">
-        <div class="carousel-careers-bar anim-fade-up delay-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-          <div class="carousel-careers-text">
-            Great Place to Work certified for 9 consecutive years. <a href="https://www.dlcmgmt.com/careers/"
-              target="_blank">Explore open roles at DLC &rarr;</a>
+          <!-- Great Place to Work Full-Width Takeover Component -->
+          <div class="gptw-card anim-fade-up delay-3">
+            <div class="gptw-image-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&h=600&q=80"
+                alt="DLC Great Place to Work Certified Team">
+            </div>
+            <div class="gptw-content">
+              <h3 class="gptw-headline">9 Years Certified Great Place to Work</h3>
+              <p class="gptw-body">
+                85% of our team members proudly rate DLC as a great place to work—outperforming the national average by over 28%. We drive execution through a collaborative, people-first culture that fosters long-term growth and success.
+              </p>
+              <a href="https://www.dlcmgmt.com/careers/" target="_blank" class="gptw-cta">
+                Explore Open Roles &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -2043,7 +2187,6 @@
             multi-disciplinary real estate engine.
           </p>
         </div>
-
         <div class="timeline-container">
           <!-- Navigation Tabs -->
           <div class="timeline-tabs-nav anim-fade-up delay-1">
