@@ -145,6 +145,7 @@
       --section-pad: clamp(80px, 9vw, 120px);
       --gutter: clamp(24px, 5vw, 80px);
       --col-max: 1160px;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     /* Scoped Reset and Core Layout */
@@ -628,24 +629,48 @@
       margin-bottom: 48px;
     }
 
-    /* Great Place to Work Full-Width Takeover Component */
+    /* ============================================================
+     SECTION 03B — GREAT PLACE TO WORK
+     ============================================================ */
+    .section-gptw {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      background-attachment: fixed;
+      padding: 100px 0;
+    }
+
+    .section-gptw::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(13, 24, 36, 0.95) 0%, rgba(22, 143, 190, 0.35) 100%);
+      z-index: 0;
+    }
+
+    .section-gptw .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Great Place to Work Glassmorphic Takeover Component */
     .gptw-card {
       display: flex;
       align-items: center;
-      gap: 48px;
-      background: linear-gradient(135deg, rgba(22, 143, 190, 0.06) 0%, rgba(22, 143, 190, 0.02) 100%);
-      border: 1px solid rgba(22, 143, 190, 0.18);
+      gap: 56px;
+      background: rgba(13, 24, 36, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
-      padding: 40px;
-      margin-top: 56px;
+      padding: 48px;
       max-width: 100%;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
       transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .gptw-card:hover {
-      background: linear-gradient(135deg, rgba(22, 143, 190, 0.09) 0%, rgba(22, 143, 190, 0.03) 100%);
-      border-color: rgba(22, 143, 190, 0.35);
+      background: rgba(13, 24, 36, 0.5);
+      border-color: rgba(255, 255, 255, 0.3);
       transform: translateY(-4px);
     }
 
@@ -754,7 +779,8 @@
       gap: 24px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding: 16px calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2) 24px;
+      padding: 16px max(var(--gutter), calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2)) 24px;
+      scroll-padding-left: max(var(--gutter), calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2));
       scrollbar-width: thin;
       scrollbar-color: var(--dlc-blue) rgba(255, 255, 255, 0.05);
       scroll-behavior: smooth;
@@ -786,10 +812,6 @@
       cursor: pointer;
       transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform, border-color, background;
-    }
-
-    .carousel-card:first-of-type {
-      margin-left: 40px;
     }
 
     .carousel-card::before {
@@ -1808,6 +1830,7 @@
 
       .carousel-track {
         padding: 16px var(--gutter);
+        scroll-padding-left: var(--gutter);
       }
     }
 
@@ -2153,22 +2176,28 @@
 
             </div>
           </div>
-          <!-- Great Place to Work Full-Width Takeover Component -->
-          <div class="gptw-card anim-fade-up delay-3">
-            <div class="gptw-image-wrapper">
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&h=600&q=80"
-                alt="DLC Great Place to Work Certified Team">
-            </div>
-            <div class="gptw-content">
-              <h3 class="gptw-headline">9 Years Certified Great Place to Work</h3>
-              <p class="gptw-body">
-                85% of our team members proudly rate DLC as a great place to work—outperforming the national average by over 28%. We drive execution through a collaborative, people-first culture that fosters long-term growth and success.
-              </p>
-              <a href="https://www.dlcmgmt.com/careers/" target="_blank" class="gptw-cta">
-                Explore Open Roles &rarr;
-              </a>
-            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 03B — GREAT PLACE TO WORK ── -->
+    <section class="section section-gptw" id="gptw">
+      <div class="container">
+        <!-- Great Place to Work Glassmorphic Takeover Component -->
+        <div class="gptw-card anim-fade-up">
+          <div class="gptw-image-wrapper">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&h=600&q=80"
+              alt="DLC Great Place to Work Certified Team">
+          </div>
+          <div class="gptw-content">
+            <h3 class="gptw-headline">9 Years Certified Great Place to Work</h3>
+            <p class="gptw-body">
+              85% of our team members proudly rate DLC as a great place to work—outperforming the national average by over 28%. We drive execution through a collaborative, people-first culture that fosters long-term growth and success.
+            </p>
+            <a href="https://www.dlcmgmt.com/careers/" target="_blank" class="gptw-cta">
+              Explore Open Roles &rarr;
+            </a>
           </div>
         </div>
       </div>
@@ -2611,12 +2640,12 @@
         eraTitle: 'Foundation',
         visualStat: '14',
         visualUnit: 'properties',
-        visualDesc: 'Establishing our necessity-based investment thesis. Vertically integrated acquisition, leasing, and property management platform built from day one.',
+        visualDesc: 'Establishing our necessity-based investment thesis and building a foundation for entrepreneurial deal-making.',
         milestones: [
-          '<strong>1991</strong> — DLC Management Corp founded by Adam Ifshin in Elmsford, NY.',
+          '<strong>1991</strong> — DLC Management Corp founded by Adam Ifshin and his father Steve Ifshin as a small operation.',
           '<strong>Northeast Portfolio</strong> — Acquired and repositioned first suburban open-air shopping assets.',
-          '<strong>Necessity Thesis</strong> established — grocery-anchored focus in high-barrier suburban sectors.',
-          '<strong>Vertical Integration</strong> — Assembled dedicated internal leasing and operations teams.'
+          '<strong>2003</strong> — Founder Adam Ifshin completes Harvard University’s "Running a Real Estate Company" executive program.',
+          '<strong>Vertical Integration</strong> — Assembled dedicated internal leasing and operations teams from day one.'
         ]
       },
       {
@@ -2624,12 +2653,12 @@
         eraTitle: 'Scaling',
         visualStat: '40+',
         visualUnit: 'properties',
-        visualDesc: 'Deepening geographic footprint into Mid-Atlantic and Southeast regions. Partnering with major national anchors to diversify retailer portfolios.',
+        visualDesc: 'Deepening geographic footprint into Mid-Atlantic and Southeast regions while gaining national industry recognition.',
         milestones: [
           '<strong>Sub-Market Expansion</strong> — Entered key secondary and tertiary growth markets.',
-          '<strong>Anchor Deepening</strong> — Solidified leasing relations with TJX, Walmart, Target, and off-price leaders.',
-          '<strong>Operational Systems</strong> — Upgraded internal asset management and billing systems for institutional load.',
-          '<strong>Regional Offices</strong> opened across operational density centers.'
+          '<strong>2010 & 2014</strong> — Adam Ifshin recognized as a finalist in the Ernst & Young Entrepreneur of the Year Program.',
+          '<strong>Anchor Deepening</strong> — Solidified leasing relations with major national off-price leaders.',
+          '<strong>Operational Systems</strong> — Upgraded internal asset management and billing systems for institutional load.'
         ]
       },
       {
@@ -2637,25 +2666,25 @@
         eraTitle: 'Institutional Growth',
         visualStat: '60+',
         visualUnit: 'properties',
-        visualDesc: 'Seeding major joint-ventures with institutional capital partners. Seeding proprietary data/analytics software to inform site selections.',
+        visualDesc: 'Forming major joint-ventures with institutional capital partners and celebrating our 25th anniversary with record-breaking acquisitions.',
         milestones: [
-          '<strong>Institutional Joint-Ventures</strong> — Formed major capital co-investment channels.',
-          '<strong>Platform Upgrades</strong> — Deployed software algorithms to monitor foot-traffic data at scale.',
-          '<strong>California/Midwest Expansion</strong> — Successfully established assets in high-density Western states.',
-          '<strong>Great Place to Work</strong> — First series of national workplace culture certifications.'
+          '<strong>2016 Landmark Acquisition</strong> — Partnered with DRA Advisors on a 16-property portfolio, adding 4.85M sq ft.',
+          '<strong>$2.7 Billion Milestone</strong> — Portfolio value crossed a major threshold during our 25th anniversary year.',
+          '<strong>Buffalo Expansion</strong> — Opened a new regional satellite office in Buffalo, NY to support the growing footprint.',
+          '<strong>In-House Capabilities</strong> — Further developed our in-house affiliate general contractor business, Renovo Construction.'
         ]
       },
       {
         eraRange: '2021–2026',
         eraTitle: 'Acceleration',
-        visualStat: '80+',
-        visualUnit: 'properties',
-        visualDesc: 'Achieving total platform integration — launching Renovo construction and NWS architects alongside massive portfolio acquisitions.',
+        visualStat: '$2.3B',
+        visualUnit: 'buying power',
+        visualDesc: 'Securing massive strategic capital commitments and continuing to earn national recognition for our company culture.',
         milestones: [
-          '<strong>DRA Portfolio Acquisition</strong> — Acquired landmark $429M open-air retail portfolio in Dec 2025.',
-          '<strong>Renovo Construction</strong> launched — fully integrated, in-house general contracting speeds up openings.',
-          '<strong>NWS Architects</strong> acquired — in-house engineering and permitting removes development delays.',
-          '<strong>Enterprise Intelligence</strong> — Unified proprietary database tracking leasing foot-traffic and asset velocity.'
+          '<strong>2021 Recognition</strong> — Named a "Best Place to Work" in real estate by GlobeSt.com.',
+          '<strong>2026 Strategic Capital</strong> — Secured new commitment from Temerity Strategic Partners, expanding buying power to $2.3 billion.',
+          '<strong>Great Place to Work</strong> — Maintained consistent national certification based on overwhelming positive employee feedback.',
+          '<strong>National Presence</strong> — Expanded regional offices across Atlanta, Buffalo, Chicago, Dallas, and Washington, D.C.'
         ]
       }
     ];
