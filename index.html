@@ -2914,12 +2914,20 @@
       track.addEventListener('pointercancel', endDrag);
       track.addEventListener('pointerleave', endDrag);
 
-      track.querySelectorAll('.carousel-card').forEach(card => {
-        card.addEventListener('click', () => {
-          if (isDragging) return;
-          const videoId = card.dataset.videoId;
-          if (videoId) openModal(videoId);
-        });
+      track.addEventListener('click', (e) => {
+        if (isDragging) return;
+
+        // If pointer capture causes the event target to be the track,
+        // look up the actual card under the click coordinates.
+        let card = e.target.closest('.carousel-card');
+        if (!card) {
+          const hit = document.elementFromPoint(e.clientX, e.clientY);
+          card = hit ? hit.closest('.carousel-card') : null;
+        }
+        if (!card) return;
+
+        const videoId = card.dataset.videoId;
+        if (videoId) openModal(videoId);
       });
     })();
 
