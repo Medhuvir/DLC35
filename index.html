@@ -634,7 +634,7 @@
      ============================================================ */
     .section-gptw {
       position: relative;
-      background: url('https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      background: url('https://images.pexels.com/photos/18426836/pexels-photo-18426836.jpeg') center/cover no-repeat;
       background-attachment: fixed;
       padding: 100px 0;
     }
@@ -1218,12 +1218,12 @@
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 44px 36px;
       transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      padding: 0; /* Remove padding for full-bleed image */
     }
 
     /* Top Accent Rule (scaleX drawing) */
@@ -1237,6 +1237,37 @@
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 5; /* Stay above image */
+    }
+
+    /* New Image Header System */
+    .pillar-card-image {
+      width: 100%;
+      height: 200px; /* Filling approx 35% of standard card height */
+      overflow: hidden;
+      position: relative;
+      background: var(--surface-deep);
+    }
+
+    .pillar-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: grayscale(20%) brightness(90%) contrast(110%);
+    }
+
+    .pillar-card:hover .pillar-card-image img {
+      transform: scale(1.08);
+      filter: grayscale(0%) brightness(100%) contrast(100%);
+    }
+
+    /* Content Wrapper to restore padding */
+    .pillar-card-content {
+      padding: 32px 36px 44px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
 
     /* Custom Theme Accent Border Colors */
@@ -1275,46 +1306,6 @@
 
     .pillar-card:hover::before {
       transform: scaleX(1);
-    }
-
-    .platform-icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 28px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      transition: background 0.3s, border-color 0.3s;
-    }
-
-    .pillar-card.brand-blue .platform-icon-box {
-      color: var(--dlc-blue);
-    }
-
-    .pillar-card.brand-green .platform-icon-box {
-      color: var(--dlc-green);
-    }
-
-    .pillar-card.brand-gold .platform-icon-box {
-      color: var(--dlc-gold);
-    }
-
-    .pillar-card.brand-blue:hover .platform-icon-box {
-      background: rgba(22, 143, 190, 0.12);
-      border-color: rgba(22, 143, 190, 0.25);
-    }
-
-    .pillar-card.brand-green:hover .platform-icon-box {
-      background: rgba(92, 165, 71, 0.12);
-      border-color: rgba(92, 165, 71, 0.25);
-    }
-
-    .pillar-card.brand-gold:hover .platform-icon-box {
-      background: rgba(201, 168, 76, 0.12);
-      border-color: rgba(201, 168, 76, 0.25);
     }
 
     .platform-card-kicker {
@@ -2287,68 +2278,65 @@
 
           <!-- Pillar 1: DLC Management -->
           <div class="pillar-card brand-blue anim-fade-up delay-1">
-            <div class="platform-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <path d="M8 21h8M12 17v4" />
-              </svg>
+            <div class="pillar-card-image">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="DLC Management">
             </div>
-            <div class="platform-card-kicker">DLC Management</div>
-            <h3 class="platform-card-title">Owner-Operator Platform</h3>
-            <p class="platform-card-tagline">Owned. Operated. Outperforming.</p>
-            <p class="platform-card-body">
-              The core management core. Vertically integrated acquisition, institutional leasing, proactive management,
-              and property development across major open-air retail spaces.
-            </p>
-            <ul class="platform-card-proofs">
-              <li>80+ properties nationwide</li>
-              <li>National anchor leasing (Walmart, Target, Costco)</li>
-              <li>$429M DRA portfolio acquisition (Dec 2025)</li>
-            </ul>
+            <div class="pillar-card-content">
+              <div class="platform-card-kicker">DLC Management</div>
+              <h3 class="platform-card-title">Owner-Operator Platform</h3>
+              <p class="platform-card-tagline">Owned. Operated. Outperforming.</p>
+              <p class="platform-card-body">
+                The core management core. Vertically integrated acquisition, institutional leasing, proactive management,
+                and property development across major open-air retail spaces.
+              </p>
+              <ul class="platform-card-proofs">
+                <li>80+ properties nationwide</li>
+                <li>National anchor leasing (Walmart, Target, Costco)</li>
+                <li>$429M DRA portfolio acquisition (Dec 2025)</li>
+              </ul>
+            </div>
           </div>
 
           <!-- Pillar 2: Renovo Construction -->
           <div class="pillar-card brand-green anim-fade-up delay-2">
-            <div class="platform-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-              </svg>
+            <div class="pillar-card-image">
+              <img src="https://images.pexels.com/photos/4067525/pexels-photo-4067525.jpeg" alt="Renovo Construction" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1200 800&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23e6e6e6&quot;/><text x=&quot;50%&quot; y=&quot;50%25&quot; dominant-baseline=&quot;middle&quot; text-anchor=&quot;middle&quot; fill=&quot;%23333&quot; font-size=&quot;36&quot; font-family=&quot;Arial, Helvetica, sans-serif&quot;>Image unavailable</text></svg>';">
             </div>
-            <div class="platform-card-kicker">Renovo Construction</div>
-            <h3 class="platform-card-title">Built to Open. Anywhere.</h3>
-            <p class="platform-card-tagline">General contracting built for retail speed.</p>
-            <p class="platform-card-body">
-              Eliminating the costly delays between lease signature and store opening. Dedicated in-house general
-              contracting and construction team delivering spaces on or ahead of schedule.
-            </p>
-            <ul class="platform-card-proofs">
-              <li>Direct coordination with leasing and acquisition pipelines</li>
-              <li>Specialty in complex open-air retail re-tenanting</li>
-              <li>Drastically reduced time-to-open for anchors</li>
-            </ul>
+            <div class="pillar-card-content">
+              <div class="platform-card-kicker">Renovo Construction</div>
+              <h3 class="platform-card-title">Built to Open. Anywhere.</h3>
+              <p class="platform-card-tagline">General contracting built for retail speed.</p>
+              <p class="platform-card-body">
+                Eliminating the costly delays between lease signature and store opening. Dedicated in-house general
+                contracting and construction team delivering spaces on or ahead of schedule.
+              </p>
+              <ul class="platform-card-proofs">
+                <li>Direct coordination with leasing and acquisition pipelines</li>
+                <li>Specialty in complex open-air retail re-tenanting</li>
+                <li>Drastically reduced time-to-open for anchors</li>
+              </ul>
+            </div>
           </div>
 
           <!-- Pillar 3: NWS Architects -->
           <div class="pillar-card brand-gold anim-fade-up delay-3">
-            <div class="platform-icon-box">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
-                <path
-                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-              </svg>
+            <div class="pillar-card-image">
+              <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80" alt="NWS Architects">
             </div>
-            <div class="platform-card-kicker">NWS Architects</div>
-            <h3 class="platform-card-title">Designed to Move Faster.</h3>
-            <p class="platform-card-tagline">Architecture aligned with deal velocity.</p>
-            <p class="platform-card-body">
-              Architectural planning and permitting integrated directly into our leasing cycle. High-speed drawing sets,
-              structural reviews, and municipal permit filings keeping plans moving.
-            </p>
-            <ul class="platform-card-proofs">
-              <li>Integrated design-to-permit workflow</li>
-              <li>Strict alignment with national retailer specs</li>
-              <li>Zero reliance on third-party architect lag</li>
-            </ul>
+            <div class="pillar-card-content">
+              <div class="platform-card-kicker">NWS Architects</div>
+              <h3 class="platform-card-title">Designed to Move Faster.</h3>
+              <p class="platform-card-tagline">Architecture aligned with deal velocity.</p>
+              <p class="platform-card-body">
+                Architectural planning and permitting integrated directly into our leasing cycle. High-speed drawing sets,
+                structural reviews, and municipal permit filings keeping plans moving.
+              </p>
+              <ul class="platform-card-proofs">
+                <li>Integrated design-to-permit workflow</li>
+                <li>Strict alignment with national retailer specs</li>
+                <li>Zero reliance on third-party architect lag</li>
+              </ul>
+            </div>
           </div>
 
         </div>
