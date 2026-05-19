@@ -1055,7 +1055,7 @@
     }
 
     .timeline-tab-btn.is-active {
-      border-bottom-color: var(--dlc-blue);
+      border-bottom-color: var(--dlc-green);
     }
 
     .timeline-tab-btn .tab-era {
@@ -1063,7 +1063,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--dlc-blue);
+      color: var(--dlc-green);
       margin-bottom: 6px;
       display: block;
       transition: color 0.3s;
@@ -1078,11 +1078,15 @@
     }
 
     .timeline-tab-btn:not(.is-active) .tab-era {
-      color: rgba(22, 143, 190, 0.4);
+      color: rgba(92, 165, 71, 0.45);
     }
 
     .timeline-tab-btn:not(.is-active) .tab-title {
       color: var(--text-muted);
+    }
+
+    .timeline-tab-btn:hover:not(.is-active) .tab-era {
+      color: rgba(92, 165, 71, 0.75);
     }
 
     .timeline-tab-btn:hover:not(.is-active) .tab-title {
@@ -1948,7 +1952,7 @@
 
       .timeline-tab-btn.is-active {
         border-bottom-color: rgba(255, 255, 255, 0.05);
-        border-left-color: var(--dlc-blue);
+        border-left-color: var(--dlc-green);
       }
 
       .carousel-track {
@@ -1957,16 +1961,16 @@
       }
 
       .carousel-card {
-        min-width: 42vw;
-        flex: 0 0 auto;
+        min-width: calc((100vw - 26px) / 1.75);
+        max-width: calc((100vw - 26px) / 1.75);
       }
 
       .carousel-thumb-container {
-        height: 150px;
+        height: 115px;
       }
 
       .carousel-card-body {
-        padding: 16px;
+        padding: 12px;
       }
 
       .carousel-name {
@@ -2294,7 +2298,6 @@
               </div>
 
             </div>
-            <div class="carousel-indicator" aria-hidden="false"></div>
           </div>
         </div>
       </div>
