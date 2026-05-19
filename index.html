@@ -424,7 +424,7 @@
       object-fit: cover;
       z-index: 1;
       opacity: 1;
-      transition: opacity 2s ease-out;
+      transition: opacity 3s ease-out;
     }
 
     .hero-fallback.fade-out {
@@ -436,7 +436,7 @@
     .hero-video-overlay {
       position: absolute;
       inset: 0;
-      z-index: 1;
+      z-index: 2;
       pointer-events: none;
       background:
         /* Accent radial shimmer — centre of frame */
@@ -2643,8 +2643,8 @@
     }
 
     function onYouTubeIframeAPIReady() {
-      // 2-second timeout fallback: fade out the image after 2s regardless of video state
-      setTimeout(fadeFallbackImage, 2000);
+      // 3-second timeout fallback: fade out the image after 3s regardless of video state
+      setTimeout(fadeFallbackImage, 3000);
 
       heroPlayer = new YT.Player('heroPlayer', {
         videoId: 'KPlSCRVw3yc',
