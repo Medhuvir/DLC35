@@ -788,8 +788,10 @@
       width: 100vw;
       margin-left: calc(-50vw + 50%);
       margin-right: calc(-50vw + 50%);
-      /* overflow:hidden clips cards for peaking effect but we need x to pass through */
       overflow: hidden;
+      /* Fade cards at both edges to signal more content */
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
     }
 
     .carousel-track {
@@ -812,7 +814,11 @@
     }
 
     .carousel-track::-webkit-scrollbar {
-      height: 6px;
+      height: 11px;
+    }
+
+    .carousel-track::-webkit-scrollbar-button {
+      display: none;
     }
 
     .carousel-track::-webkit-scrollbar-track {
@@ -829,6 +835,7 @@
       flex: 0 0 290px;
       /* Fixed card width so cards peak visually */
       scroll-snap-align: start;
+      cursor: pointer;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -1969,7 +1976,7 @@
             Built on 35 Years<br>of <em>Execution.</em>
           </h1>
           <p class="hero-lead anim-fade-up delay-2">
-            Positioned for what the market demands next — an integrated, in-house platform built for deal velocity.
+            Positioned for what the market demands next <br>An integrated, in-house platform built for deal velocity.
           </p>
           <div class="anim-fade-up delay-3">
             <a href="#video" class="btn-primary">Watch Our Story</a>
@@ -2034,7 +2041,7 @@
             <div class="carousel-track">
 
               <!-- Card 1: Adam Ifshin -->
-              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <!-- Looping 10-second GIF placeholder (Professional stock avatar styled in CSS) -->
                   <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
@@ -2057,7 +2064,7 @@
               </div>
 
               <!-- Card 2: Anya Wolf -->
-              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
@@ -2080,7 +2087,7 @@
               </div>
 
               <!-- Card 3: Vinay Kaushik -->
-              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80"
@@ -2103,7 +2110,7 @@
               </div>
 
               <!-- Card 4: Blay Bradley -->
-              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
@@ -2126,7 +2133,7 @@
               </div>
 
               <!-- Card 5: Julia Grismore -->
-              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
@@ -2149,7 +2156,7 @@
               </div>
 
               <!-- Card 6: Jillian Klein -->
-              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
@@ -2172,7 +2179,7 @@
               </div>
 
               <!-- Card 7: Mark Bradshaw -->
-              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
@@ -2195,7 +2202,7 @@
               </div>
 
               <!-- Card 8: Basil Donnelly -->
-              <div class="carousel-card" data-video-id="KPlSCRVw3yc">
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80"
@@ -2307,7 +2314,7 @@
       <div class="container">
         <div class="platform-intro">
           <span class="eyebrow anim-fade-up">DLC Today</span>
-          <h2 class="anim-fade-up delay-1">More Than an Owner. An <em>Integrated Engine.</em></h2>
+          <h2 class="anim-fade-up delay-1">More Than an Owner. <br>An <em>Integrated Engine.</em></h2>
           <p class="anim-fade-up delay-2">
             Three distinct divisions aligned under a single, high-performance platform. Speed, design control, and
             leasing power combined.
@@ -2635,6 +2642,8 @@
 
     /* ── YOUTUBE HERO BACKGROUND PLAYER ── */
     let heroPlayer;
+    let heroLoopInterval = null;
+
     function fadeFallbackImage() {
       const fallback = document.getElementById('heroFallback');
       if (fallback && !fallback.classList.contains('fade-out')) {
@@ -2642,8 +2651,24 @@
       }
     }
 
+    function startLoopGuard() {
+      if (heroLoopInterval) return;
+      heroLoopInterval = setInterval(() => {
+        if (!heroPlayer || typeof heroPlayer.getCurrentTime !== 'function') return;
+        try {
+          const current = heroPlayer.getCurrentTime();
+          const duration = heroPlayer.getDuration();
+          // Seek back 0.5s before natural end to skip the loop-transition animation
+          if (duration > 0 && current >= duration - 0.5) {
+            heroPlayer.seekTo(0);
+            heroPlayer.playVideo();
+          }
+        } catch (e) {}
+      }, 250);
+    }
+
     function onYouTubeIframeAPIReady() {
-      // 3-second timeout fallback: fade out the image after 3s regardless of video state
+      // 3-second timeout: fade fallback regardless of video state
       setTimeout(fadeFallbackImage, 3000);
 
       heroPlayer = new YT.Player('heroPlayer', {
@@ -2652,14 +2677,13 @@
           'autoplay': 1,
           'controls': 0,
           'modestbranding': 1,
-          'loop': 1,
-          'playlist': 'KPlSCRVw3yc', /* required for looping */
           'rel': 0,
           'showinfo': 0,
           'mute': 1,
           'iv_load_policy': 3,
           'disablekb': 1,
-          'playsinline': 1
+          'playsinline': 1,
+          'fs': 0
         },
         events: {
           'onReady': (event) => {
@@ -2667,23 +2691,25 @@
             event.target.mute();
           },
           'onStateChange': (event) => {
-            // Fade out fallback when video starts playing
             if (event.data === YT.PlayerState.PLAYING) {
               fadeFallbackImage();
+              startLoopGuard();
             }
-            // Loop assurance
-            if (event.data === YT.PlayerState.ENDED) {
-              heroPlayer.seekTo(0);
+            // Immediately resume if paused (catches loop-transition pause flash)
+            if (event.data === YT.PlayerState.PAUSED) {
               heroPlayer.playVideo();
             }
           },
-          'onError': (event) => {
-            // On video error: keep fallback visible as permanent fallback
-            console.warn('YouTube player error:', event.data);
+          'onError': () => {
+            // Video failed — fallback image stays visible permanently
           }
         }
       });
     }
+
+    window.addEventListener('beforeunload', () => {
+      if (heroLoopInterval) clearInterval(heroLoopInterval);
+    });
 
     // Inject YouTube IFrame API Script
     const ytScriptTag = document.createElement('script');
@@ -2795,34 +2821,22 @@
     const modalOverlay = document.getElementById('modalOverlay');
     const modalClose = document.getElementById('modalClose');
 
-    // Attach click events to carousel cards
-    document.querySelectorAll('.carousel-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const videoId = card.getAttribute('data-video-id');
-        if (videoId) {
-          // Open Modal
-          modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-          modal.classList.add('is-active');
-        }
-      });
-    });
+    function openModal(videoId) {
+      modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&modestbranding=1&enablejsapi=1`;
+      modal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    }
 
     function closeModal() {
       modal.classList.remove('is-active');
-      // Delay cleaning source slightly to allow fade out transition to complete
-      setTimeout(() => {
-        modalIframe.src = '';
-      }, 350);
+      document.body.style.overflow = '';
+      setTimeout(() => { modalIframe.src = ''; }, 350);
     }
 
     modalOverlay.addEventListener('click', closeModal);
     modalClose.addEventListener('click', closeModal);
-
-    // Escape Key closure support
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('is-active')) {
-        closeModal();
-      }
+      if (e.key === 'Escape' && modal.classList.contains('is-active')) closeModal();
     });
 
     /* ── SCROLL-DRIVEN ENTRY ANIMATIONS (INTERSECTION OBSERVER) ── */
@@ -2855,43 +2869,43 @@
     const statsGrid = document.getElementById('statsGrid');
     if (statsGrid) scrollObserver.observe(statsGrid);
 
-    /* ── CAROUSEL DRAG-TO-SCROLL + SWIPE ENGINE ── */
+    /* ── CAROUSEL DRAG-TO-SCROLL + CARD CLICK ENGINE ── */
     (function () {
       const track = document.querySelector('.carousel-track');
       if (!track) return;
 
       let isDown = false;
       let startX = 0;
+      let downClientX = 0;
       let scrollLeft = 0;
       let isDragging = false;
 
-      // Pointer events (covers mouse + pen + touch on modern browsers)
       track.addEventListener('pointerdown', (e) => {
-        // Only activate for touch/pen, or primary mouse button
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         isDown = true;
         isDragging = false;
         startX = e.pageX - track.offsetLeft;
+        downClientX = e.clientX;
         scrollLeft = track.scrollLeft;
         track.setPointerCapture(e.pointerId);
         track.style.cursor = 'grabbing';
-        track.style.scrollSnapType = 'none'; // Disable snap while dragging
+        track.style.scrollSnapType = 'none';
         track.style.scrollBehavior = 'auto';
       });
 
       track.addEventListener('pointermove', (e) => {
         if (!isDown) return;
         const x = e.pageX - track.offsetLeft;
-        const walk = (x - startX) * 1.5; // Multiplier for swipe sensitivity
-        if (Math.abs(walk) > 4) isDragging = true;
-        track.scrollLeft = scrollLeft - walk;
+        if (Math.abs(e.clientX - downClientX) > 10) {
+          isDragging = true;
+        }
+        track.scrollLeft = scrollLeft - (x - startX) * 1.5;
       });
 
-      const endDrag = (e) => {
+      const endDrag = () => {
         if (!isDown) return;
         isDown = false;
         track.style.cursor = '';
-        // Re-enable scroll snap after release so it snaps to nearest card
         track.style.scrollSnapType = '';
         track.style.scrollBehavior = '';
       };
@@ -2900,14 +2914,13 @@
       track.addEventListener('pointercancel', endDrag);
       track.addEventListener('pointerleave', endDrag);
 
-      // Prevent click-through to video modal if user was actually dragging
-      track.addEventListener('click', (e) => {
-        if (isDragging) {
-          e.stopPropagation();
-          e.preventDefault();
-          isDragging = false;
-        }
-      }, true);
+      track.querySelectorAll('.carousel-card').forEach(card => {
+        card.addEventListener('click', () => {
+          if (isDragging) return;
+          const videoId = card.dataset.videoId;
+          if (videoId) openModal(videoId);
+        });
+      });
     })();
 
     /* ── COUNT-UP ANIMATION ENGINE (easeOutQuart Easing) ── */
