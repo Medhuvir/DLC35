@@ -2881,16 +2881,18 @@
       let isDragging = false;
 
       track.addEventListener('pointerdown', (e) => {
-        if (e.pointerType === 'mouse' && e.button !== 0) return;
-        isDown = true;
-        isDragging = false;
-        startX = e.pageX - track.offsetLeft;
-        downClientX = e.clientX;
-        scrollLeft = track.scrollLeft;
-        track.setPointerCapture(e.pointerId);
-        track.style.cursor = 'grabbing';
-        track.style.scrollSnapType = 'none';
-        track.style.scrollBehavior = 'auto';
+        if (e.pointerType === 'mouse') {
+          if (e.button !== 0) return;
+          isDown = true;
+          isDragging = false;
+          startX = e.pageX - track.offsetLeft;
+          downClientX = e.clientX;
+          scrollLeft = track.scrollLeft;
+          track.setPointerCapture(e.pointerId);
+          track.style.cursor = 'grabbing';
+          track.style.scrollSnapType = 'none';
+          track.style.scrollBehavior = 'auto';
+        }
       });
 
       track.addEventListener('pointermove', (e) => {
