@@ -1876,10 +1876,20 @@
       .carousel-track {
         padding: 16px var(--gutter) 28px;
         scroll-padding-left: var(--gutter);
-        /* Always show scrollbar on touch devices for discoverability */
         scrollbar-width: thin;
-        /* Stronger snap on mobile for clear one-card-at-a-time feel */
-        scroll-snap-type: x mandatory;
+        scroll-snap-type: none;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+        overscroll-behavior-x: contain;
+      }
+
+      .carousel-card {
+        min-width: 245px;
+        flex: 0 0 auto;
+      }
+
+      .carousel-track::-webkit-scrollbar {
+        height: 8px;
       }
     }
 
