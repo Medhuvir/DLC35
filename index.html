@@ -415,6 +415,23 @@
       border: none;
     }
 
+    /* ── FALLBACK IMAGE (LOADER) ── */
+    .hero-fallback {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 2s ease-out;
+    }
+
+    .hero-fallback.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     /* ── GRADIENT OVERLAY ── */
     .hero-video-overlay {
       position: absolute;
@@ -1937,6 +1954,8 @@
 
       <!-- Muted, looped, control-free YouTube background via IFrame Player API -->
       <div class="hero-video-container">
+        <!-- Fallback image: shows first, fades after 2s or when video ready -->
+        <img id="heroFallback" src="/images/youtubefallback.png" alt="Hero background" class="hero-fallback">
         <div id="heroPlayer"></div>
       </div>
 
@@ -2616,7 +2635,17 @@
 
     /* ── YOUTUBE HERO BACKGROUND PLAYER ── */
     let heroPlayer;
+    function fadeFallbackImage() {
+      const fallback = document.getElementById('heroFallback');
+      if (fallback && !fallback.classList.contains('fade-out')) {
+        fallback.classList.add('fade-out');
+      }
+    }
+
     function onYouTubeIframeAPIReady() {
+      // 2-second timeout fallback: fade out the image after 2s regardless of video state
+      setTimeout(fadeFallbackImage, 2000);
+
       heroPlayer = new YT.Player('heroPlayer', {
         videoId: 'KPlSCRVw3yc',
         playerVars: {
@@ -2638,11 +2667,19 @@
             event.target.mute();
           },
           'onStateChange': (event) => {
+            // Fade out fallback when video starts playing
+            if (event.data === YT.PlayerState.PLAYING) {
+              fadeFallbackImage();
+            }
             // Loop assurance
             if (event.data === YT.PlayerState.ENDED) {
               heroPlayer.seekTo(0);
               heroPlayer.playVideo();
             }
+          },
+          'onError': (event) => {
+            // On video error: keep fallback visible as permanent fallback
+            console.warn('YouTube player error:', event.data);
           }
         }
       });
