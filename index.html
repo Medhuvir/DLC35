@@ -1397,6 +1397,28 @@
      ============================================================ */
     .dlc-lp .section-why {
       background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dlc-lp .section-why::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.pexels.com/photos/361530/pexels-photo-361530.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: var(--bg);
+      background-blend-mode: multiply;
+      opacity: 0.1; /* image visible at ~10% */
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dlc-lp .section-why > .container {
+      position: relative;
+      z-index: 1;
     }
 
     .why-grid {
@@ -1924,7 +1946,6 @@
       <!-- Copy: eyebrow → H1 → sub-copy → single CTA -->
       <div class="container">
         <div class="hero-inner">
-          <p class="eyebrow anim-fade-up">DLC Management Corp. &nbsp;·&nbsp; 35th Anniversary</p>
           <h1 class="anim-fade-up delay-1">
             Built on 35 Years<br>of <em>Execution.</em>
           </h1>
