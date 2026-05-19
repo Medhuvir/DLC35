@@ -1874,8 +1874,9 @@
       }
 
       .carousel-track {
-        padding: 16px var(--gutter) 28px;
-        scroll-padding-left: var(--gutter);
+        gap: 18px;
+        padding: 16px 16px 28px;
+        scroll-padding-left: 16px;
         scrollbar-width: thin;
         scroll-snap-type: none;
         -webkit-overflow-scrolling: touch;
@@ -1884,7 +1885,7 @@
       }
 
       .carousel-card {
-        min-width: 245px;
+        min-width: min(86vw, 300px);
         flex: 0 0 auto;
       }
 
@@ -1920,6 +1921,35 @@
       .timeline-tab-btn.is-active {
         border-bottom-color: rgba(255, 255, 255, 0.05);
         border-left-color: var(--dlc-blue);
+      }
+
+      .carousel-track {
+        gap: 14px;
+        padding: 14px 12px 24px;
+      }
+
+      .carousel-card {
+        min-width: min(92vw, 280px);
+      }
+
+      .carousel-thumb-container {
+        height: 150px;
+      }
+
+      .carousel-card-body {
+        padding: 16px;
+      }
+
+      .carousel-name {
+        font-size: 14px;
+      }
+
+      .carousel-role {
+        font-size: 10px;
+      }
+
+      .carousel-takeaway-drawer {
+        font-size: 12px;
       }
 
       .cta-actions {
