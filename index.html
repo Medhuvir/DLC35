@@ -1892,6 +1892,34 @@
       .carousel-track::-webkit-scrollbar {
         height: 8px;
       }
+
+      /* Mobile carousel indicator (dots) */
+      .carousel-indicator {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 12px;
+        align-items: center;
+      }
+
+      .carousel-indicator-dot {
+        width: 8px;
+        height: 8px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 50%;
+        border: none;
+        padding: 0;
+        transition: background 0.18s ease, transform 0.18s ease;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+      }
+
+      .carousel-indicator-dot.is-active {
+        background: var(--dlc-blue);
+        transform: scale(1.25);
+        box-shadow: 0 0 8px rgba(22,143,190,0.28);
+      }
     }
 
     @media (max-width: 600px) {
@@ -1929,7 +1957,8 @@
       }
 
       .carousel-card {
-        min-width: min(92vw, 280px);
+        min-width: 42vw;
+        flex: 0 0 auto;
       }
 
       .carousel-thumb-container {
@@ -2265,6 +2294,7 @@
               </div>
 
             </div>
+            <div class="carousel-indicator" aria-hidden="false"></div>
           </div>
         </div>
       </div>
@@ -2971,6 +3001,59 @@
         const videoId = card.dataset.videoId;
         if (videoId) openModal(videoId);
       });
+    })();
+
+    /* ── CAROUSEL DOT INDICATOR (MOBILE) ── */
+    (function () {
+      const track = document.querySelector('.carousel-track');
+      if (!track) return;
+
+      const wrapper = document.querySelector('.carousel-track-wrapper');
+      const indicator = document.querySelector('.carousel-indicator');
+      if (!indicator || !wrapper) return;
+
+      const cards = Array.from(track.querySelectorAll('.carousel-card'));
+
+      function renderDots() {
+        indicator.innerHTML = '';
+        cards.forEach((c, i) => {
+          const btn = document.createElement('button');
+          btn.className = 'carousel-indicator-dot';
+          btn.setAttribute('aria-label', `Card ${i + 1}`);
+          btn.addEventListener('click', () => {
+            const padLeft = parseInt(getComputedStyle(track).paddingLeft, 10) || 0;
+            track.scrollTo({ left: Math.max(0, c.offsetLeft - padLeft), behavior: 'smooth' });
+          });
+          indicator.appendChild(btn);
+        });
+        updateActive();
+      }
+
+      function updateActive() {
+        const center = track.scrollLeft + track.clientWidth / 2;
+        let closest = 0;
+        let closestDist = Infinity;
+        cards.forEach((c, i) => {
+          const cCenter = c.offsetLeft + c.clientWidth / 2;
+          const dist = Math.abs(center - cCenter);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closest = i;
+          }
+        });
+        const dots = Array.from(indicator.children);
+        dots.forEach((d, idx) => d.classList.toggle('is-active', idx === closest));
+      }
+
+      let raf = null;
+      function onScroll() {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => { updateActive(); raf = null; });
+      }
+
+      renderDots();
+      track.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', renderDots);
     })();
 
     /* ── COUNT-UP ANIMATION ENGINE (easeOutQuart Easing) ── */
