@@ -17,8 +17,8 @@
      WP CHROME STYLING (MOCK GLOBAL HEADER & FOOTER — GREYED OUT)
      ============================================================ */
     .mock-chrome-header {
-      background: #111a24;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: #edf1f6;
+      border-bottom: 1px solid rgba(28, 50, 68, 0.10);
       height: 80px;
       display: flex;
       align-items: center;
@@ -42,7 +42,7 @@
     .mock-chrome-logo-icon {
       width: 24px;
       height: 24px;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(28, 50, 68, 0.25);
       clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
     }
 
@@ -50,7 +50,7 @@
       font-family: 'Lato', sans-serif;
       font-size: 14px;
       font-weight: 900;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(28, 50, 68, 0.55);
       letter-spacing: 2px;
     }
 
@@ -61,7 +61,7 @@
 
     .mock-chrome-nav-item {
       height: 8px;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(28, 50, 68, 0.15);
       border-radius: 4px;
     }
 
@@ -71,15 +71,15 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.3);
-      border: 1px dashed rgba(255, 255, 255, 0.15);
+      color: rgba(28, 50, 68, 0.35);
+      border: 1px dashed rgba(28, 50, 68, 0.18);
       padding: 4px 10px;
       border-radius: 4px;
     }
 
     .mock-chrome-footer {
-      background: #0b1118;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: #dde5ed;
+      border-top: 1px solid rgba(28, 50, 68, 0.08);
       padding: 48px 40px;
       display: flex;
       align-items: center;
@@ -104,7 +104,7 @@
     .mock-chrome-footer-link {
       width: 48px;
       height: 6px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(28, 50, 68, 0.12);
       border-radius: 3px;
     }
 
@@ -117,21 +117,21 @@
       --dlc-blue: #168FBE;
       --dlc-green: #5CA547;
       --dlc-gold: #C9A84C;
-      --bg: #162736;
-      --bg-alt: #1a303f;
-      --surface: #213B4E;
-      --surface-raised: #2a4a60;
-      --surface-deep: #122030;
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.75);
-      --text-muted: rgba(255, 255, 255, 0.45);
-      --text-faint: rgba(255, 255, 255, 0.22);
-      --border: rgba(255, 255, 255, 0.08);
+      --bg: #F4F7FA;
+      --bg-alt: #EBF1F6;
+      --surface: #FFFFFF;
+      --surface-raised: #F0F5F9;
+      --surface-deep: #E2EBF2;
+      --text-primary: #1C3244;
+      --text-secondary: rgba(28, 50, 68, 0.78);
+      --text-muted: rgba(28, 50, 68, 0.50);
+      --text-faint: rgba(28, 50, 68, 0.24);
+      --border: rgba(28, 50, 68, 0.10);
       --border-accent: rgba(22, 143, 190, 0.35);
-      --shadow: 0 12px 48px rgba(0, 0, 0, 0.55);
-      --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --shadow: 0 12px 48px rgba(28, 50, 68, 0.12);
+      --shadow-sm: 0 4px 20px rgba(28, 50, 68, 0.08);
       --shadow-blue: 0 8px 32px rgba(22, 143, 190, 0.18);
-      --grid-dot: rgba(255, 255, 255, 0.035);
+      --grid-dot: rgba(28, 50, 68, 0.04);
 
       /* Typography Tokens */
       --font-primary: 'Lato', Arial, sans-serif;
@@ -160,7 +160,7 @@
 
     .dlc-lp {
       background-color: var(--bg);
-      background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+      background-image: radial-gradient(var(--grid-dot) 1.5px, transparent 1.5px);
       background-size: 28px 28px;
       font-family: var(--font-primary);
       color: var(--text-secondary);
@@ -199,9 +199,9 @@
     }
 
     .dlc-lp .section-transition-divider {
-      height: 2px;
+      height: 1px;
       background: linear-gradient(90deg, transparent, var(--dlc-blue), transparent);
-      opacity: 0.15;
+      opacity: 0.22;
     }
 
     /* ============================================================
@@ -294,29 +294,41 @@
 
     .dlc-lp .btn-outline {
       background: transparent;
-      color: white;
+      color: var(--text-primary);
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
       padding: 16px 40px;
       border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(28, 50, 68, 0.28);
       text-decoration: none;
       display: inline-block;
-      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+      transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.25s;
       cursor: pointer;
       font-family: var(--font-primary);
     }
 
     .dlc-lp .btn-outline:hover {
-      border-color: white;
+      border-color: var(--dlc-blue);
+      color: var(--dlc-blue);
       transform: translateY(-2px);
     }
 
+    /* Hero-context outline button stays white (used on photo background) */
+    .hero .btn-outline {
+      color: rgba(255, 255, 255, 0.90);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .hero .btn-outline:hover {
+      border-color: white;
+      color: white;
+    }
+
     .dlc-lp .btn-ghost {
-      color: rgba(255, 255, 255, 0.75);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(28, 50, 68, 0.2);
       padding: 12px 0;
       font-size: 13px;
       font-weight: 700;
@@ -327,8 +339,8 @@
     }
 
     .dlc-lp .btn-ghost:hover {
-      color: white;
-      border-color: white;
+      color: var(--text-primary);
+      border-color: var(--text-primary);
     }
 
     .dlc-lp .eyebrow {
@@ -355,40 +367,21 @@
     }
 
     /* ============================================================
-     SECTION 01 — HERO
-     ============================================================
-
-     ── GRADIENT CONTROLS ───────────────────────────────────────
-     Adjust these four variables to tune the video overlay:
-       --hero-grad-bottom   : colour/opacity at the very bottom edge
-       --hero-grad-mid      : colour/opacity blended at mid-height
-       --hero-grad-top      : colour/opacity at the very top edge
-       --hero-accent-glow   : centre radial accent (blue shimmer)
-       --hero-video-opacity : base opacity of the video layer (0–1)
-       --hero-video-filter  : CSS filter applied to the raw video
-     ──────────────────────────────────────────────────────────── */
+     SECTION 01 — HERO (3-IMAGE FADE + PAN SLIDESHOW)
+     ============================================================ */
     .dlc-lp .hero {
-      --hero-grad-bottom: rgba(13, 24, 36, 0.97);
-      --hero-grad-mid: rgba(18, 32, 48, 0.60);
-      --hero-grad-top: rgba(13, 24, 36, 0.80);
-      --hero-accent-glow: rgba(22, 143, 190, 0.07);
-      --hero-video-opacity: 0.38;
-      --hero-video-filter: grayscale(10%) contrast(108%) brightness(92%);
-
-      /* Layout — true full-bleed viewport lock */
       width: 100vw;
       height: 100vh;
       min-height: 560px;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       position: relative;
       overflow: hidden;
-      background: #0d1824;
-      /* dark fallback while video loads */
+      background: #1a2e3d;
     }
 
-    /* ── VIDEO LAYER ── */
-    .hero-video-container {
+    /* ── SLIDESHOW LAYER ── */
+    .hero-slideshow {
       position: absolute;
       inset: 0;
       z-index: 0;
@@ -396,70 +389,71 @@
       pointer-events: none;
     }
 
-    /* Scale + centre the 16:9 iframe to always fill the hero */
-    .hero-video-container iframe {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      /* Ensure video covers all viewport sizes */
-      width: 100vw;
-      height: 56.25vw;
-      /* 16:9 at viewport width */
-      min-height: 100vh;
-      min-width: 177.78vh;
-      /* 16:9 at viewport height */
-      transform: translate(-50%, -50%);
-      opacity: var(--hero-video-opacity);
-      filter: var(--hero-video-filter);
-      pointer-events: none;
-      border: none;
-    }
-
-    /* ── FALLBACK IMAGE (LOADER) ── */
-    .hero-fallback {
+    .hero-slide {
       position: absolute;
       inset: 0;
+      opacity: 0;
+      transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity;
+    }
+
+    .hero-slide.is-active {
+      opacity: 1;
+    }
+
+    .hero-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: 1;
-      opacity: 1;
-      transition: opacity 3s ease-out;
+      transform-origin: center center;
     }
 
-    .hero-fallback.fade-out {
-      opacity: 0;
-      pointer-events: none;
+    /* Each slide gets its own pan direction — starts immediately, plays while slide is visible */
+    .hero-slide:nth-child(1) img { animation: heroPan1 14s ease-in-out infinite alternate; }
+    .hero-slide:nth-child(2) img { animation: heroPan2 16s ease-in-out infinite alternate; }
+    .hero-slide:nth-child(3) img { animation: heroPan3 13s ease-in-out infinite alternate; }
+
+    @keyframes heroPan1 {
+      from { transform: scale(1.08) translate(2%, 0%); }
+      to   { transform: scale(1.02) translate(-2%, 1.5%); }
+    }
+    @keyframes heroPan2 {
+      from { transform: scale(1.05) translate(-1.5%, 1.5%); }
+      to   { transform: scale(1.10) translate(1.5%, -1%); }
+    }
+    @keyframes heroPan3 {
+      from { transform: scale(1.10) translate(0%, -1.5%); }
+      to   { transform: scale(1.04) translate(2%, 1%); }
     }
 
     /* ── GRADIENT OVERLAY ── */
-    .hero-video-overlay {
+    .hero-slideshow-overlay {
       position: absolute;
       inset: 0;
       z-index: 2;
       pointer-events: none;
       background:
-        /* Accent radial shimmer — centre of frame */
-        radial-gradient(ellipse 60% 50% at 50% 42%, var(--hero-accent-glow) 0%, transparent 40%),
-        /* Main tone gradient — bottom heavy for legibility */
+        radial-gradient(ellipse 55% 45% at 25% 65%, rgba(22, 143, 190, 0.08) 0%, transparent 50%),
         linear-gradient(to top,
-          var(--hero-grad-bottom) 0%,
-          var(--hero-grad-mid) 45%,
-          var(--hero-grad-top) 100%);
+          rgba(15, 30, 44, 0.92) 0%,
+          rgba(15, 30, 44, 0.55) 38%,
+          rgba(15, 30, 44, 0.18) 72%,
+          rgba(244, 247, 250, 0.0) 100%);
     }
 
     /* ── CONTENT ── */
     .dlc-lp .hero-inner {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       max-width: 780px;
+      padding-bottom: clamp(80px, 10vh, 140px);
     }
 
     .dlc-lp .hero h1 {
       font-size: var(--size-hero);
       font-weight: 900;
       line-height: 1.05;
-      color: var(--text-primary);
+      color: #ffffff;
       margin-bottom: 20px;
       letter-spacing: -1.5px;
     }
@@ -471,11 +465,39 @@
 
     .dlc-lp .hero-lead {
       font-size: var(--size-lead);
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(255, 255, 255, 0.76);
       max-width: 560px;
       line-height: 1.7;
       margin-bottom: 40px;
       font-weight: 300;
+    }
+
+    /* ── SLIDE DOTS ── */
+    .hero-dots {
+      position: absolute;
+      bottom: clamp(32px, 5vh, 60px);
+      right: clamp(24px, 4vw, 60px);
+      z-index: 4;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .hero-dot.is-active {
+      background: var(--dlc-blue);
+      transform: scale(1.3);
+      box-shadow: 0 0 10px rgba(22, 143, 190, 0.55);
     }
 
     /* ── SCROLL CHEVRON ── */
@@ -484,7 +506,7 @@
       bottom: 125px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 2;
+      z-index: 4;
 
       /* Animate in after content stagger completes */
       opacity: 0;
@@ -602,7 +624,7 @@
 
     .video-player-frame {
       width: 100%;
-      background: rgba(22, 39, 54, 0.4);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 12px;
@@ -660,7 +682,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(13, 24, 36, 0.95) 0%, rgba(22, 143, 190, 0.35) 100%);
+      background: linear-gradient(135deg, rgba(244, 247, 250, 0.94) 0%, rgba(22, 143, 190, 0.22) 100%);
       z-index: 0;
     }
 
@@ -674,21 +696,22 @@
       display: flex;
       align-items: center;
       gap: 56px;
-      background: rgba(13, 24, 36, 0.4);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(22, 143, 190, 0.16);
       border-radius: 12px;
       padding: 48px;
       max-width: 100%;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 16px 48px rgba(28, 50, 68, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
     }
 
     .gptw-card:hover {
-      background: rgba(13, 24, 36, 0.5);
-      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(22, 143, 190, 0.25);
       transform: translateY(-4px);
+      box-shadow: 0 24px 56px rgba(28, 50, 68, 0.15), var(--shadow-blue);
     }
 
     .gptw-image-wrapper {
@@ -697,14 +720,15 @@
       height: 260px;
       border-radius: 8px;
       overflow: hidden;
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(22, 143, 190, 0.25);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-      transition: border-color 0.3s;
+      background: var(--surface-deep);
+      border: 1px solid rgba(22, 143, 190, 0.20);
+      box-shadow: 0 8px 24px rgba(28, 50, 68, 0.14);
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
 
     .gptw-card:hover .gptw-image-wrapper {
-      border-color: rgba(22, 143, 190, 0.45);
+      border-color: rgba(22, 143, 190, 0.40);
+      box-shadow: 0 8px 24px rgba(28, 50, 68, 0.14), var(--shadow-blue);
     }
 
     .gptw-image-wrapper img {
@@ -756,10 +780,10 @@
     }
 
     .gptw-cta:hover {
-      background: white;
-      color: var(--dlc-navy-dark);
+      background: var(--dlc-navy);
+      color: white;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 6px 20px rgba(28, 50, 68, 0.22);
     }
 
     @media (max-width: 768px) {
@@ -803,13 +827,10 @@
       padding: 16px max(var(--gutter), calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2)) 24px;
       scroll-padding-left: max(var(--gutter), calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2));
       scrollbar-width: thin;
-      scrollbar-color: var(--dlc-blue) rgba(255, 255, 255, 0.05);
+      scrollbar-color: var(--dlc-blue) rgba(28, 50, 68, 0.06);
       scroll-behavior: smooth;
-      /* Enable native touch momentum scrolling on iOS */
       -webkit-overflow-scrolling: touch;
-      /* Allow horizontal panning / swipe gesture passthrough */
       touch-action: pan-x;
-      /* Prevent y-scroll interference on touch */
       overscroll-behavior-x: contain;
     }
 
@@ -822,7 +843,7 @@
     }
 
     .carousel-track::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(28, 50, 68, 0.06);
       border-radius: 4px;
     }
 
@@ -833,16 +854,14 @@
 
     .carousel-card {
       flex: 0 0 290px;
-      /* Fixed card width so cards peak visually */
       scroll-snap-align: start;
       cursor: pointer;
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       overflow: hidden;
       position: relative;
-      cursor: pointer;
-      transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s var(--ease-out);
       will-change: transform, border-color, background;
     }
 
@@ -868,7 +887,7 @@
 
     .carousel-card:hover {
       border-color: var(--border-accent);
-      background: rgba(22, 143, 190, 0.06);
+      background: rgba(22, 143, 190, 0.04);
       transform: translateY(-6px);
       box-shadow: var(--shadow-sm), var(--shadow-blue);
     }
@@ -888,7 +907,7 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease, filter 0.4s ease;
-      filter: grayscale(10%) contrast(105%) brightness(90%);
+      filter: grayscale(8%) contrast(103%) brightness(96%);
     }
 
     .carousel-card:hover .carousel-thumb-container img {
@@ -899,7 +918,7 @@
     .carousel-play-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(22, 39, 54, 0.4);
+      background: rgba(28, 50, 68, 0.22);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -907,7 +926,7 @@
     }
 
     .carousel-card:hover .carousel-play-overlay {
-      background: rgba(22, 143, 190, 0.15);
+      background: rgba(22, 143, 190, 0.18);
     }
 
     .carousel-play-btn {
@@ -961,7 +980,7 @@
       font-size: 13px;
       font-style: italic;
       color: var(--dlc-blue);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--border);
       padding-top: 12px;
       opacity: 0;
       transform: translateY(10px);
@@ -989,7 +1008,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
       padding: 16px 24px;
@@ -1037,7 +1056,7 @@
     .timeline-tabs-nav {
       display: flex;
       width: 100%;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 2px solid rgba(28, 50, 68, 0.08);
       margin-bottom: 40px;
     }
 
@@ -1112,10 +1131,10 @@
       gap: 20px;
       align-items: flex-start;
       padding: 20px 24px;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
-      transition: background 0.3s, border-color 0.3s, transform 0.25s;
+      transition: background 0.3s, border-color 0.3s, transform 0.25s, box-shadow 0.3s;
       animation: dlcMilestoneFade 0.4s var(--ease-out) forwards;
       opacity: 0;
       transform: translateY(12px);
@@ -1129,9 +1148,10 @@
     }
 
     .timeline-milestone-item:hover {
-      background: rgba(22, 143, 190, 0.04);
-      border-color: rgba(22, 143, 190, 0.15);
+      background: rgba(22, 143, 190, 0.05);
+      border-color: rgba(22, 143, 190, 0.22);
       transform: translateX(4px);
+      box-shadow: var(--shadow-sm);
     }
 
     .timeline-milestone-dot {
@@ -1179,7 +1199,7 @@
 
     /* Era Visual Detail Card */
     .timeline-visual-panel {
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 40px;
@@ -1197,7 +1217,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 100% 100%, rgba(22, 143, 190, 0.04) 0%, transparent 60%);
+      background: radial-gradient(circle at 100% 100%, rgba(22, 143, 190, 0.06) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -1269,15 +1289,15 @@
 
     /* Pillar Card Custom Implementation */
     .pillar-card {
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
-      transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      padding: 0; /* Remove padding for full-bleed image */
+      padding: 0;
     }
 
     /* Top Accent Rule (scaleX drawing) */
@@ -1411,7 +1431,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--border);
       padding-top: 20px;
     }
 
@@ -1510,7 +1530,7 @@
 
     .why-list-item {
       padding: 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: flex-start;
       gap: 20px;
@@ -1519,12 +1539,12 @@
     }
 
     .why-list-item:first-child {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid var(--border);
     }
 
     .why-list-item:hover {
-      background: rgba(22, 143, 190, 0.04);
-      border-color: rgba(22, 143, 190, 0.15);
+      background: rgba(22, 143, 190, 0.05);
+      border-color: rgba(22, 143, 190, 0.20);
     }
 
     .why-list-num {
@@ -1547,7 +1567,7 @@
      SECTION 07 — BY THE NUMBERS (COUNT-UP STATS GRID)
      ============================================================ */
     .dlc-lp .section-numbers {
-      background: var(--bg-alt);
+      background: #dde6ee;
     }
 
     .numbers-intro {
@@ -1570,23 +1590,23 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 2px;
-      background: rgba(22, 143, 190, 0.1);
+      background: rgba(22, 143, 190, 0.12);
       border-radius: 8px;
       overflow: hidden;
-      border: 1px solid rgba(22, 143, 190, 0.15);
+      border: 1px solid rgba(22, 143, 190, 0.18);
       box-shadow: var(--shadow-sm);
     }
 
     /* Stat Block Token alignment */
     .stat-block {
-      background: rgba(22, 39, 54, 0.85);
+      background: var(--surface);
       padding: 48px 24px;
       text-align: center;
       transition: background 0.3s;
     }
 
     .stat-block:hover {
-      background: rgba(22, 143, 190, 0.06);
+      background: rgba(22, 143, 190, 0.05);
     }
 
     .stat-block-value {
@@ -1635,7 +1655,7 @@
      SECTION 08 — WHAT'S NEXT
      ============================================================ */
     .dlc-lp .section-next {
-      background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+      background: linear-gradient(180deg, #1a2e3d 0%, #1a303f 100%);
     }
 
     .next-grid {
@@ -1668,18 +1688,19 @@
 
     .next-item {
       padding: 20px 24px;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 6px;
       display: flex;
       align-items: center;
       gap: 16px;
-      transition: background 0.3s, border-color 0.3s;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
 
     .next-item:hover {
-      background: rgba(22, 143, 190, 0.03);
-      border-color: rgba(22, 143, 190, 0.12);
+      background: rgba(22, 143, 190, 0.04);
+      border-color: rgba(22, 143, 190, 0.18);
+      box-shadow: var(--shadow-sm);
     }
 
     .next-item-dot {
@@ -1701,7 +1722,7 @@
      SECTION 09 — FINAL CTA
      ============================================================ */
     .dlc-lp .section-cta {
-      background: var(--bg);
+      background: #1a303f;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -1711,7 +1732,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(22, 143, 190, 0.06) 0%, transparent 65%);
+      background: radial-gradient(circle at 50% 50%, rgba(22, 143, 190, 0.07) 0%, transparent 65%);
       pointer-events: none;
     }
 
@@ -1739,7 +1760,7 @@
 
     .cta-divider-line {
       height: 1px;
-      background: rgba(255, 255, 255, 0.06);
+      background: var(--border);
       margin: 56px auto;
       max-width: 480px;
     }
@@ -1765,7 +1786,7 @@
       width: 32px;
       height: 32px;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--surface);
       border: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -1810,11 +1831,11 @@
       position: relative;
       width: 90%;
       max-width: 800px;
-      background: #122030;
+      background: #1a2e3d;
       border: 1px solid rgba(22, 143, 190, 0.25);
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 32px rgba(22, 143, 190, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 32px rgba(22, 143, 190, 0.18);
       transform: scale(0.92);
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
       z-index: 10;
@@ -1935,7 +1956,7 @@
       .carousel-indicator-dot {
         width: 8px;
         height: 8px;
-        background: rgba(255,255,255,0.12);
+        background: rgba(28, 50, 68, 0.18);
         border-radius: 50%;
         border: none;
         padding: 0;
@@ -1976,13 +1997,13 @@
         display: flex;
         flex-direction: column;
         gap: 0;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border);
         border-radius: 12px;
         overflow: hidden;
       }
 
       .timeline-accordion-item {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        border-bottom: 1px solid var(--border);
       }
 
       .timeline-accordion-item:last-child {
@@ -1995,7 +2016,7 @@
         align-items: center;
         gap: 12px;
         padding: 16px 18px;
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--surface);
         border: none;
         cursor: pointer;
         text-align: left;
@@ -2003,8 +2024,8 @@
       }
 
       .timeline-accordion-item.is-open .timeline-accordion-header {
-        background: rgba(255, 255, 255, 0.06);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        background: var(--surface-raised);
+        border-bottom: 1px solid var(--border);
       }
 
       .accordion-era {
@@ -2030,7 +2051,7 @@
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        color: rgba(255, 255, 255, 0.4);
+        color: var(--text-muted);
         transition: transform 0.25s ease, color 0.2s ease;
       }
 
@@ -2085,8 +2106,8 @@
 
       /* Stats panel inside accordion */
       .accordion-visual-panel {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.07);
+        background: var(--surface-raised);
+        border: 1px solid var(--border);
         border-radius: 10px;
         padding: 18px;
         display: flex;
@@ -2098,7 +2119,7 @@
         font-family: 'Roboto Mono', monospace;
         font-size: 10px;
         letter-spacing: 0.08em;
-        color: rgba(255, 255, 255, 0.35);
+        color: var(--text-muted);
         text-transform: uppercase;
         margin-bottom: 4px;
       }
@@ -2166,6 +2187,229 @@
         text-align: center;
       }
     }
+
+    /* ============================================================
+     SECTION 06B — PHOTO COLLAGE (MASONRY ACCENT GRID)
+     ============================================================ */
+    .dlc-lp .section-collage {
+      background: #eceef1;
+      padding: 0 0 var(--section-pad);
+      overflow: hidden;
+    }
+
+    .collage-header {
+      max-width: var(--col-max);
+      margin: 0 auto;
+      padding: 40px var(--gutter) clamp(32px, 4vw, 52px);
+    }
+
+    .collage-grid {
+      columns: 4 200px;
+      column-gap: 24px;
+      max-width: var(--col-max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    .collage-item {
+      break-inside: avoid;
+      margin-bottom: 28px;
+      position: relative;
+      /* Polaroid frame */
+      background: #fff;
+      padding: 10px 10px 38px;
+      box-shadow:
+        0 4px 6px rgba(28, 50, 68, 0.10),
+        0 12px 28px rgba(28, 50, 68, 0.14),
+        0 2px 4px rgba(28, 50, 68, 0.06);
+      /* Animation start state — includes resting rotation */
+      opacity: 0;
+      transform: translateY(32px) scale(0.95) rotate(var(--tilt, 0deg));
+      transition:
+        opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease;
+      will-change: opacity, transform;
+    }
+
+    .collage-item.is-visible {
+      opacity: 1;
+      transform: rotate(var(--tilt, 0deg)) translateY(0) scale(1);
+    }
+
+    /* Gentle random tilts — each photo slightly different */
+    .collage-item:nth-child(1)  { --tilt: -1.8deg; }
+    .collage-item:nth-child(2)  { --tilt:  1.2deg; }
+    .collage-item:nth-child(3)  { --tilt: -0.7deg; }
+    .collage-item:nth-child(4)  { --tilt:  2.1deg; }
+    .collage-item:nth-child(5)  { --tilt: -1.4deg; }
+    .collage-item:nth-child(6)  { --tilt:  0.9deg; }
+    .collage-item:nth-child(7)  { --tilt: -2.2deg; }
+    .collage-item:nth-child(8)  { --tilt:  1.6deg; }
+    .collage-item:nth-child(9)  { --tilt: -0.5deg; }
+    .collage-item:nth-child(10) { --tilt:  1.9deg; }
+
+    /* Stagger cascade */
+    .collage-item:nth-child(1)  { transition-delay: 0.00s; }
+    .collage-item:nth-child(2)  { transition-delay: 0.07s; }
+    .collage-item:nth-child(3)  { transition-delay: 0.14s; }
+    .collage-item:nth-child(4)  { transition-delay: 0.21s; }
+    .collage-item:nth-child(5)  { transition-delay: 0.28s; }
+    .collage-item:nth-child(6)  { transition-delay: 0.35s; }
+    .collage-item:nth-child(7)  { transition-delay: 0.42s; }
+    .collage-item:nth-child(8)  { transition-delay: 0.49s; }
+    .collage-item:nth-child(9)  { transition-delay: 0.56s; }
+    .collage-item:nth-child(10) { transition-delay: 0.63s; }
+
+    /* Lift + straighten on hover */
+    .collage-item:hover {
+      transform: rotate(0deg) translateY(-6px) scale(1.03);
+      box-shadow:
+        0 8px 16px rgba(28, 50, 68, 0.13),
+        0 24px 48px rgba(28, 50, 68, 0.20),
+        0 2px 4px rgba(28, 50, 68, 0.06);
+      z-index: 10;
+    }
+
+    .collage-item img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      pointer-events: none;
+      user-select: none;
+      filter: grayscale(18%) sepia(8%) contrast(104%) brightness(97%);
+      transition: filter 0.4s ease;
+    }
+
+    .collage-item:hover img {
+      filter: grayscale(0%) sepia(0%) contrast(102%) brightness(100%);
+    }
+
+    @media (max-width: 900px) {
+      .collage-grid { columns: 3 160px; column-gap: 16px; }
+      .collage-item  { margin-bottom: 20px; padding: 8px 8px 30px; }
+    }
+
+    @media (max-width: 540px) {
+      .collage-grid { columns: 2 130px; column-gap: 12px; }
+      .collage-item  { margin-bottom: 16px; padding: 6px 6px 26px; }
+    }
+
+    /* ============================================================
+     DARK MODE REVERSION — SECTIONS 07 (STATS), 08, 09 + FOOTER
+     These override the global light-mode tokens for the lower page.
+     ============================================================ */
+
+    /* ── SECTION 07: BY THE NUMBERS — stat grid goes dark ── */
+    .dlc-lp .section-numbers .stats-grid {
+      background: rgba(22, 143, 190, 0.10);
+      border-color: rgba(22, 143, 190, 0.18);
+    }
+
+    .dlc-lp .section-numbers .stat-block {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .dlc-lp .section-numbers .stat-block:hover {
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .dlc-lp .section-numbers .stat-block-label {
+      color: var(--text-secondary);
+    }
+
+    .dlc-lp .section-numbers .stat-block-sublabel {
+      color: var(--text-muted);
+    }
+
+    .dlc-lp .section-numbers .stats-caption {
+      color: var(--text-muted);
+    }
+
+    /* ── SECTION 08: WHAT'S NEXT — full dark ── */
+    .dlc-lp .section-next h2 {
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-next h2 em {
+      color: var(--dlc-blue);
+    }
+
+    .dlc-lp .section-next .eyebrow {
+      color: var(--dlc-blue);
+    }
+
+    .dlc-lp .section-next .next-lead {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .dlc-lp .section-next .next-item {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .dlc-lp .section-next .next-item:hover {
+      background: rgba(22, 143, 190, 0.06);
+      border-color: rgba(22, 143, 190, 0.20);
+      box-shadow: none;
+    }
+
+    .dlc-lp .section-next .next-item-text {
+      color: #ffffff;
+    }
+
+    /* ── SECTION 09: FINAL CTA — full dark ── */
+    .dlc-lp .section-cta h2 {
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-cta .cta-content > p {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .dlc-lp .section-cta .eyebrow {
+      color: var(--dlc-blue);
+    }
+
+    /* Restore white outline button in dark section */
+    .dlc-lp .section-cta .btn-outline {
+      color: rgba(255, 255, 255, 0.88);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .dlc-lp .section-cta .btn-outline:hover {
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-cta .cta-divider-line {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .dlc-lp .section-cta .cta-social-link {
+      color: rgba(255, 255, 255, 0.48);
+    }
+
+    .dlc-lp .section-cta .cta-social-link:hover {
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-cta .social-icon-wrapper {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.10);
+    }
+
+    .dlc-lp .section-cta .cta-social-link:hover .social-icon-wrapper {
+      background: rgba(22, 143, 190, 0.14);
+      border-color: rgba(22, 143, 190, 0.38);
+      color: var(--dlc-blue);
+    }
+
+    /* ── MOCK FOOTER — dark chrome ── */
+    .mock-chrome-footer {
+      background: #111e2a !important;
+      border-top-color: rgba(255, 255, 255, 0.05) !important;
+    }
   </style>
 </head>
 
@@ -2200,27 +2444,43 @@
     <!-- Scoped top scroll progress bar -->
     <div class="dlc-scroll-progress" id="dlcProgressBar"></div>
 
-    <!-- ── SECTION 01 — HERO (CINEMATIC BACKDROP) ── -->
+    <!-- ── SECTION 01 — HERO (3-IMAGE FADE + PAN SLIDESHOW) ── -->
     <section class="hero" id="hero">
 
-      <!-- Muted, looped, control-free YouTube background via IFrame Player API -->
-      <div class="hero-video-container">
-        <!-- Fallback image: shows first, fades after 2s or when video ready -->
-        <img id="heroFallback" src="/images/youtubefallback.png" alt="Hero background" class="hero-fallback">
-        <div id="heroPlayer"></div>
+      <!-- Crossfade image slideshow — 3 images with Ken Burns pan per slide -->
+      <div class="hero-slideshow">
+        <div class="hero-slide is-active">
+          <img src="https://images.pexels.com/photos/1098460/pexels-photo-1098460.jpeg?auto=compress&cs=tinysrgb&w=1920&q=85"
+            alt="Open-air retail shopping center">
+        </div>
+        <div class="hero-slide">
+          <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1920&q=85"
+            alt="DLC leadership team">
+        </div>
+        <div class="hero-slide">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=85"
+            alt="Retail real estate portfolio">
+        </div>
       </div>
 
-      <!-- Gradient overlay (tune via CSS variables on .dlc-lp .hero) -->
-      <div class="hero-video-overlay"></div>
+      <!-- Gradient overlay — dark-bottom for text legibility, fades to page colour at top -->
+      <div class="hero-slideshow-overlay"></div>
 
-      <!-- Copy: eyebrow → H1 → sub-copy → single CTA -->
+      <!-- Slide navigation dots -->
+      <div class="hero-dots" id="heroDots">
+        <button class="hero-dot is-active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+      </div>
+
+      <!-- Copy: H1 → sub-copy → CTA — anchored to bottom-left -->
       <div class="container">
         <div class="hero-inner">
           <h1 class="anim-fade-up delay-1">
             Built on 35 Years<br>of <em>Execution.</em>
           </h1>
           <p class="hero-lead anim-fade-up delay-2">
-            Positioned for what the market demands next <br>An integrated, in-house platform built for deal velocity.
+            Positioned for what the market demands next —<br>an integrated, in-house platform built for deal velocity.
           </p>
           <div class="anim-fade-up delay-3">
             <a href="#video" class="btn-primary">Watch Our Story</a>
@@ -2689,6 +2949,77 @@
       </div>
     </section>
 
+    <!-- ── SECTION 06B — PHOTO COLLAGE (MASONRY ACCENT) ── -->
+    <section class="section-collage" id="collage">
+      <div class="collage-header">
+        <span class="eyebrow anim-fade-up">Our History</span>
+        <h2 class="anim-fade-up delay-1">A few throwbacks to<br>remember <em>who we are.</em></h2>
+      </div>
+      <div class="collage-grid" id="collageGrid">
+
+        <!-- Portrait — office collaboration -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Landscape — open-air shopping center exterior -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/1098460/pexels-photo-1098460.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Portrait — glass tower facades -->
+        <div class="collage-item">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&h=840&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Landscape — suburban retail plaza -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/2977565/pexels-photo-2977565.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Portrait — construction site detail -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/4067525/pexels-photo-4067525.jpeg?auto=compress&cs=tinysrgb&w=600&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Landscape — executive team discussion -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Portrait — modern commercial building -->
+        <div class="collage-item">
+          <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=600&h=820&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Landscape — aerial retail development -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/1470405/pexels-photo-1470405.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Portrait — architecture interior detail -->
+        <div class="collage-item">
+          <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=600&h=800&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Landscape — business handshake / deal -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
+            alt="" loading="lazy">
+        </div>
+
+      </div>
+    </section>
+
     <div class="section-transition-divider"></div>
 
     <!-- ── SECTION 07 — BY THE NUMBERS (REAL VERIFIED DATA) ── -->
@@ -2864,13 +3195,13 @@
       </div>
     </div>
 
-    <div class="mock-chrome-footer-left" style="align-items: flex-end;">
+    <div class="mock-chrome-footer-left" style="align-items: flex-end; --footer-link-bg: rgba(255,255,255,0.10);">
       <div class="mock-chrome-footer-links">
-        <div class="mock-chrome-footer-link"></div>
-        <div class="mock-chrome-footer-link"></div>
-        <div class="mock-chrome-footer-link"></div>
+        <div class="mock-chrome-footer-link" style="background: rgba(255,255,255,0.10);"></div>
+        <div class="mock-chrome-footer-link" style="background: rgba(255,255,255,0.10);"></div>
+        <div class="mock-chrome-footer-link" style="background: rgba(255,255,255,0.10);"></div>
       </div>
-      <span class="mock-chrome-label" style="margin-top: 8px;">WP Theme Footer (Greyed Out)</span>
+      <span class="mock-chrome-label" style="margin-top: 8px; color: rgba(255,255,255,0.28); border-color: rgba(255,255,255,0.12);">WP Theme Footer (Greyed Out)</span>
     </div>
   </footer>
 
@@ -2888,82 +3219,42 @@
       }
     }, { passive: true });
 
-    /* ── YOUTUBE HERO BACKGROUND PLAYER ── */
-    let heroPlayer;
-    let heroLoopInterval = null;
+    /* ── HERO IMAGE SLIDESHOW ENGINE ── */
+    (function () {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.hero-dot');
+      if (!slides.length) return;
 
-    function fadeFallbackImage() {
-      const fallback = document.getElementById('heroFallback');
-      if (fallback && !fallback.classList.contains('fade-out')) {
-        fallback.classList.add('fade-out');
+      let current = 0;
+      let timer = null;
+      const INTERVAL = 5800; // ms between transitions
+
+      function goTo(index) {
+        slides[current].classList.remove('is-active');
+        dots[current] && dots[current].classList.remove('is-active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('is-active');
+        dots[current] && dots[current].classList.add('is-active');
       }
-    }
 
-    function startLoopGuard() {
-      if (heroLoopInterval) return;
-      heroLoopInterval = setInterval(() => {
-        if (!heroPlayer || typeof heroPlayer.getCurrentTime !== 'function') return;
-        try {
-          const current = heroPlayer.getCurrentTime();
-          const duration = heroPlayer.getDuration();
-          // Seek back 0.5s before natural end to skip the loop-transition animation
-          if (duration > 0 && current >= duration - 0.5) {
-            heroPlayer.seekTo(0);
-            heroPlayer.playVideo();
-          }
-        } catch (e) {}
-      }, 250);
-    }
+      function advance() { goTo(current + 1); }
 
-    function onYouTubeIframeAPIReady() {
-      // 3-second timeout: fade fallback regardless of video state
-      setTimeout(fadeFallbackImage, 3000);
+      function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(advance, INTERVAL);
+      }
 
-      heroPlayer = new YT.Player('heroPlayer', {
-        videoId: 'KPlSCRVw3yc',
-        playerVars: {
-          'autoplay': 1,
-          'controls': 0,
-          'modestbranding': 1,
-          'rel': 0,
-          'showinfo': 0,
-          'mute': 1,
-          'iv_load_policy': 3,
-          'disablekb': 1,
-          'playsinline': 1,
-          'fs': 0
-        },
-        events: {
-          'onReady': (event) => {
-            event.target.playVideo();
-            event.target.mute();
-          },
-          'onStateChange': (event) => {
-            if (event.data === YT.PlayerState.PLAYING) {
-              fadeFallbackImage();
-              startLoopGuard();
-            }
-            // Immediately resume if paused (catches loop-transition pause flash)
-            if (event.data === YT.PlayerState.PAUSED) {
-              heroPlayer.playVideo();
-            }
-          },
-          'onError': () => {
-            // Video failed — fallback image stays visible permanently
-          }
-        }
+      // Dot click navigation
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.dataset.slide, 10);
+          goTo(idx);
+          startTimer(); // reset timer on manual navigation
+        });
       });
-    }
 
-    window.addEventListener('beforeunload', () => {
-      if (heroLoopInterval) clearInterval(heroLoopInterval);
-    });
-
-    // Inject YouTube IFrame API Script
-    const ytScriptTag = document.createElement('script');
-    ytScriptTag.src = "https://www.youtube.com/iframe_api";
-    const firstScript = document.getElementsByTagName('script')[0];
-    firstScript.parentNode.insertBefore(ytScriptTag, firstScript);
+      startTimer();
+    })();
 
     /* ── INTERACTIVE TIMELINE DATA & ENGINE ── */
     const timelineEras = [
@@ -3285,6 +3576,26 @@
       renderDots();
       track.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', renderDots);
+    })();
+
+    /* ── PHOTO COLLAGE — SCROLL-TRIGGERED STAGGER ── */
+    (function () {
+      const grid = document.getElementById('collageGrid');
+      if (!grid) return;
+
+      const items = Array.from(grid.querySelectorAll('.collage-item'));
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            /* Trigger all items — CSS nth-child delays handle stagger */
+            items.forEach(item => item.classList.add('is-visible'));
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      io.observe(grid);
     })();
 
     /* ── COUNT-UP ANIMATION ENGINE (easeOutQuart Easing) ── */
