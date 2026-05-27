@@ -348,9 +348,34 @@
       font-weight: 700;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--dlc-blue);
+      color: white;
       margin-bottom: 16px;
-      display: block;
+      display: inline-block;
+      position: relative;
+      padding: 3px 0;
+      z-index: 0;
+    }
+
+    .dlc-lp .eyebrow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -5px;
+      right: -5px;
+      background: var(--dlc-navy);
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    .dlc-lp .eyebrow.is-visible::before {
+      animation: eyebrowMarker 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+    }
+
+    @keyframes eyebrowMarker {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
     }
 
     .dlc-lp h2 {
@@ -409,21 +434,37 @@
     }
 
     /* Each slide gets its own pan direction — starts immediately, plays while slide is visible */
+    /* Min scale is 1.10 so translate never reveals an edge regardless of source image size */
     .hero-slide:nth-child(1) img { animation: heroPan1 14s ease-in-out infinite alternate; }
     .hero-slide:nth-child(2) img { animation: heroPan2 16s ease-in-out infinite alternate; }
     .hero-slide:nth-child(3) img { animation: heroPan3 13s ease-in-out infinite alternate; }
+    .hero-slide:nth-child(4) img { animation: heroPan4 15s ease-in-out infinite alternate; }
+    .hero-slide:nth-child(5) img { animation: heroPan5 17s ease-in-out infinite alternate; }
+    .hero-slide:nth-child(6) img { animation: heroPan6 12s ease-in-out infinite alternate; }
 
     @keyframes heroPan1 {
-      from { transform: scale(1.08) translate(2%, 0%); }
-      to   { transform: scale(1.02) translate(-2%, 1.5%); }
+      from { transform: scale(1.12) translate(2%, 0%); }
+      to   { transform: scale(1.10) translate(-2%, 1.5%); }
     }
     @keyframes heroPan2 {
-      from { transform: scale(1.05) translate(-1.5%, 1.5%); }
-      to   { transform: scale(1.10) translate(1.5%, -1%); }
+      from { transform: scale(1.10) translate(-1.5%, 1.5%); }
+      to   { transform: scale(1.14) translate(1.5%, -1%); }
     }
     @keyframes heroPan3 {
-      from { transform: scale(1.10) translate(0%, -1.5%); }
-      to   { transform: scale(1.04) translate(2%, 1%); }
+      from { transform: scale(1.14) translate(0%, -1.5%); }
+      to   { transform: scale(1.10) translate(2%, 1%); }
+    }
+    @keyframes heroPan4 {
+      from { transform: scale(1.10) translate(1.5%, 1%); }
+      to   { transform: scale(1.13) translate(-1.5%, -1.5%); }
+    }
+    @keyframes heroPan5 {
+      from { transform: scale(1.13) translate(-2%, -1%); }
+      to   { transform: scale(1.10) translate(1%, 1.5%); }
+    }
+    @keyframes heroPan6 {
+      from { transform: scale(1.10) translate(0%, 1.5%); }
+      to   { transform: scale(1.14) translate(-2%, -1%); }
     }
 
     /* ── GRADIENT OVERLAY ── */
@@ -433,7 +474,7 @@
       z-index: 2;
       pointer-events: none;
       background:
-        radial-gradient(ellipse 55% 45% at 25% 65%, rgba(22, 143, 190, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 55% 45% at 25% 65%, rgba(22, 143, 190, 0.08) 0%, transparent 40%),
         linear-gradient(to top,
           rgba(15, 30, 44, 0.92) 0%,
           rgba(15, 30, 44, 0.55) 38%,
@@ -449,6 +490,22 @@
       padding-bottom: clamp(80px, 30vh, 140px);
     }
 
+    .dlc-lp .hero-title-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: clamp(24px, 3vw, 48px);
+      margin-bottom: 0;
+    }
+
+    .dlc-lp .hero-logo {
+      display: block;
+      height: calc(var(--size-hero) * 1.9); /* 2 lines × 1.05 line-height = h1 block height */
+      width: auto;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.55)) drop-shadow(0 1px 6px rgba(0, 0, 0, 0.35));
+    }
+
     .dlc-lp .hero h1 {
       font-size: var(--size-hero);
       font-weight: 900;
@@ -456,6 +513,7 @@
       color: #ffffff;
       margin-bottom: 20px;
       letter-spacing: -1.5px;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.55), 0 1px 6px rgba(0, 0, 0, 0.35);
     }
 
     .dlc-lp .hero h1 em {
@@ -469,7 +527,8 @@
       max-width: 560px;
       line-height: 1.7;
       margin-bottom: 40px;
-      font-weight: 300;
+      font-weight: 400;
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.50), 0 1px 4px rgba(0, 0, 0, 0.30);
     }
 
     /* ── SLIDE DOTS ── */
@@ -673,7 +732,7 @@
      ============================================================ */
     .section-gptw {
       position: relative;
-      background: url('https://images.pexels.com/photos/18426836/pexels-photo-18426836.jpeg') center/cover no-repeat;
+      background: url('images/collage.jpg') center/cover no-repeat;
       background-attachment: fixed;
       padding: 100px 0;
     }
@@ -1040,7 +1099,23 @@
      SECTION 04 — INTERACTIVE TIMELINE
      ============================================================ */
     .dlc-lp .section-timeline {
-      background: var(--bg);
+      background:
+        /* 10% opacity horizontal scanlines */
+        repeating-linear-gradient(
+          180deg,
+          rgba(28, 50, 68, 0.10) 0px,
+          rgba(28, 50, 68, 0.10) 1px,
+          transparent 1px,
+          transparent 4px
+        ),
+        /* diagonal gradient — light top-left to dark bottom-right */
+        linear-gradient(
+          135deg,
+          #F4F7FA 0%,
+          #d8e4ee 40%,
+          #b8ccde 70%,
+          #8aaec8 100%
+        );
     }
 
     .timeline-intro {
@@ -1292,6 +1367,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(28, 50, 68, 0.14), 0 2px 8px rgba(28, 50, 68, 0.08);
       transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
       position: relative;
       overflow: hidden;
@@ -1336,6 +1412,30 @@
       filter: grayscale(0%) brightness(100%) contrast(100%);
     }
 
+    /* Logo variant — centered logo on light-blue-to-white gradient */
+    .pillar-card-image--logo {
+      background: linear-gradient(145deg, #daeef7 0%, #edf6fb 45%, #ffffff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 48px;
+    }
+
+    .pillar-card-image--logo img {
+      width: auto;
+      height: auto;
+      max-width: 72%;
+      max-height: 120px;
+      object-fit: contain;
+      filter: none;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .pillar-card:hover .pillar-card-image--logo img {
+      transform: scale(1.06);
+      filter: none;
+    }
+
     /* Content Wrapper to restore padding */
     .pillar-card-content {
       padding: 32px 36px 44px;
@@ -1360,7 +1460,7 @@
     .pillar-card:hover {
       transform: translateY(-6px);
       border-color: var(--border-accent);
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 20px 56px rgba(28, 50, 68, 0.20), 0 6px 18px rgba(22, 143, 190, 0.12);
     }
 
     .pillar-card.brand-blue:hover {
@@ -1422,7 +1522,7 @@
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 24px;
-      font-weight: 300;
+      font-weight: 400;
       flex-grow: 1;
     }
 
@@ -2341,7 +2441,7 @@
     }
 
     .dlc-lp .section-next .eyebrow {
-      color: var(--dlc-blue);
+      color: white;
     }
 
     .dlc-lp .section-next .next-lead {
@@ -2373,7 +2473,7 @@
     }
 
     .dlc-lp .section-cta .eyebrow {
-      color: var(--dlc-blue);
+      color: white;
     }
 
     /* Restore white outline button in dark section */
@@ -2455,16 +2555,28 @@
       <!-- Crossfade image slideshow — 3 images with Ken Burns pan per slide -->
       <div class="hero-slideshow">
         <div class="hero-slide is-active">
-          <img src="https://images.pexels.com/photos/1098460/pexels-photo-1098460.jpeg?auto=compress&cs=tinysrgb&w=1920&q=85"
+          <img src="images/dlc35hero1.jpg"
             alt="Open-air retail shopping center">
         </div>
         <div class="hero-slide">
-          <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1920&q=85"
+          <img src="images/dlc35hero2.jpg"
             alt="DLC leadership team">
         </div>
         <div class="hero-slide">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=85"
+          <img src="images/dlc35hero3.jpg"
             alt="Retail real estate portfolio">
+        </div>
+        <div class="hero-slide">
+          <img src="images/dlc35hero4.jpg"
+            alt="DLC retail property">
+        </div>
+        <div class="hero-slide">
+          <img src="images/dlc35hero5.jpg"
+            alt="DLC retail property">
+        </div>
+        <div class="hero-slide">
+          <img src="images/dlc35hero6.jpg"
+            alt="DLC retail property">
         </div>
       </div>
 
@@ -2476,14 +2588,20 @@
         <button class="hero-dot is-active" data-slide="0" aria-label="Slide 1"></button>
         <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
         <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+        <button class="hero-dot" data-slide="3" aria-label="Slide 4"></button>
+        <button class="hero-dot" data-slide="4" aria-label="Slide 5"></button>
+        <button class="hero-dot" data-slide="5" aria-label="Slide 6"></button>
       </div>
 
       <!-- Copy: H1 → sub-copy → CTA — anchored to bottom-left -->
       <div class="container">
         <div class="hero-inner">
-          <h1 class="anim-fade-up delay-1">
-            Built on 35 Years<br>of <em>Execution.</em>
-          </h1>
+          <div class="hero-title-row">
+            <img src="images/DLC35.png" class="hero-logo anim-fade-up" alt="DLC 35">
+            <h1 class="anim-fade-up delay-1">
+              Built on 35 Years<br>of <em>Execution.</em>
+            </h1>
+          </div>
           <p class="hero-lead anim-fade-up delay-2">
             Positioned for what the market demands next —<br>an integrated, in-house platform built for deal velocity.
           </p>
@@ -2838,8 +2956,8 @@
 
           <!-- Pillar 1: DLC Management -->
           <div class="pillar-card brand-blue anim-fade-up delay-1">
-            <div class="pillar-card-image">
-              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="DLC Management">
+            <div class="pillar-card-image pillar-card-image--logo">
+              <img src="images/logos/DLC%20Logo_(primary_full%20color).png" alt="DLC Management">
             </div>
             <div class="pillar-card-content">
               <div class="platform-card-kicker">DLC Management</div>
@@ -2859,8 +2977,8 @@
 
           <!-- Pillar 2: Renovo Construction -->
           <div class="pillar-card brand-green anim-fade-up delay-2">
-            <div class="pillar-card-image">
-              <img src="https://images.pexels.com/photos/4067525/pexels-photo-4067525.jpeg" alt="Renovo Construction" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 1200 800&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23e6e6e6&quot;/><text x=&quot;50%&quot; y=&quot;50%25&quot; dominant-baseline=&quot;middle&quot; text-anchor=&quot;middle&quot; fill=&quot;%23333&quot; font-size=&quot;36&quot; font-family=&quot;Arial, Helvetica, sans-serif&quot;>Image unavailable</text></svg>';">
+            <div class="pillar-card-image pillar-card-image--logo">
+              <img src="images/logos/RENOVO%20logo%20(full%20color).png" alt="Renovo Construction">
             </div>
             <div class="pillar-card-content">
               <div class="platform-card-kicker">Renovo Construction</div>
@@ -2880,8 +2998,8 @@
 
           <!-- Pillar 3: NWS Architects -->
           <div class="pillar-card brand-gold anim-fade-up delay-3">
-            <div class="pillar-card-image">
-              <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80" alt="NWS Architects">
+            <div class="pillar-card-image pillar-card-image--logo">
+              <img src="images/logos/NWS%20logo%20(full%20color).png" alt="NWS Architects">
             </div>
             <div class="pillar-card-content">
               <div class="platform-card-kicker">NWS Architects</div>
@@ -2962,76 +3080,44 @@
       </div>
       <div class="collage-grid" id="collageGrid">
 
-        <!-- Portrait — office collaboration -->
         <div class="collage-item">
-          <img src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600&q=82"
-            alt="" loading="lazy">
+          <img src="images/photogallery/collage.jpg"
+            alt="DLC team photo" loading="lazy">
         </div>
 
-        <!-- Landscape — open-air shopping center exterior -->
         <div class="collage-item">
-          <img src="https://images.pexels.com/photos/1098460/pexels-photo-1098460.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
-            alt="" loading="lazy">
+          <img src="images/photogallery/adam%20magazine.png"
+            alt="Adam — magazine feature" loading="lazy">
         </div>
 
-        <!-- Portrait — glass tower facades -->
         <div class="collage-item">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&h=840&q=82"
-            alt="" loading="lazy">
+          <img src="images/photogallery/jen%20magazine.png"
+            alt="Jen — magazine feature" loading="lazy">
         </div>
 
-        <!-- Landscape — suburban retail plaza -->
         <div class="collage-item">
-          <img src="https://images.pexels.com/photos/2977565/pexels-photo-2977565.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
-            alt="" loading="lazy">
+          <img src="images/photogallery/carolyn%20magazine.png"
+            alt="Carolyn — magazine feature" loading="lazy">
         </div>
 
-        <!-- Portrait — construction site detail -->
         <div class="collage-item">
-          <img src="https://images.pexels.com/photos/4067525/pexels-photo-4067525.jpeg?auto=compress&cs=tinysrgb&w=600&q=82"
-            alt="" loading="lazy">
+          <img src="images/photogallery/steve%20magazine%20cover.PNG"
+            alt="Steve — magazine cover" loading="lazy">
         </div>
 
-        <!-- Landscape — executive team discussion -->
         <div class="collage-item">
-          <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
-            alt="" loading="lazy">
+          <img src="images/photogallery/Photo%20May%2011%202026%2C%201%2030%2045%20PM.jpg"
+            alt="DLC team" loading="lazy">
         </div>
 
-        <!-- Portrait — modern commercial building -->
         <div class="collage-item">
-          <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=600&h=820&q=82"
-            alt="" loading="lazy">
+          <img src="images/photogallery/Photo%20May%2026%202026%2C%2012%2036%2000%20PM.jpg"
+            alt="DLC event" loading="lazy">
         </div>
 
-        <!-- Landscape — aerial retail development -->
         <div class="collage-item">
-          <img src="https://images.pexels.com/photos/1470405/pexels-photo-1470405.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
-            alt="" loading="lazy">
-        </div>
-
-        <!-- Portrait — architecture interior detail -->
-        <div class="collage-item">
-          <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=600&h=800&q=82"
-            alt="" loading="lazy">
-        </div>
-
-        <!-- Landscape — business handshake / deal -->
-        <div class="collage-item">
-          <img src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
-            alt="" loading="lazy">
-        </div>
-
-        <!-- Portrait — city mixed-use development -->
-        <div class="collage-item">
-          <img src="https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg?auto=compress&cs=tinysrgb&w=600&q=82"
-            alt="" loading="lazy">
-        </div>
-
-        <!-- Landscape — team at work around table -->
-        <div class="collage-item">
-          <img src="https://images.pexels.com/photos/3182781/pexels-photo-3182781.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
-            alt="" loading="lazy">
+          <img src="images/photogallery/Photo%20May%2026%202026%2C%2012%2036%2033%20PM.jpg"
+            alt="DLC event" loading="lazy">
         </div>
 
       </div>
@@ -3236,13 +3322,32 @@
 
     /* ── HERO IMAGE SLIDESHOW ENGINE ── */
     (function () {
-      const slides = document.querySelectorAll('.hero-slide');
-      const dots = document.querySelectorAll('.hero-dot');
-      if (!slides.length) return;
+      const slideshow = document.querySelector('.hero-slideshow');
+      const dotsContainer = document.getElementById('heroDots');
+      if (!slideshow) return;
+
+      // Shuffle slides into a random order on every load
+      const slideEls = Array.from(slideshow.querySelectorAll('.hero-slide'));
+      for (let i = slideEls.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        slideshow.appendChild(slideEls[j]);
+        slideEls.splice(j, 1, slideEls[i]);
+        slideEls.splice(i, 1, slideEls[j]);
+      }
+
+      // Re-query in their new DOM order
+      const slides = Array.from(slideshow.querySelectorAll('.hero-slide'));
+      const dots = Array.from(dotsContainer.querySelectorAll('.hero-dot'));
+
+      // Reset active state to first slide in shuffled order
+      slides.forEach(s => s.classList.remove('is-active'));
+      dots.forEach(d => d.classList.remove('is-active'));
+      slides[0].classList.add('is-active');
+      dots[0] && dots[0].classList.add('is-active');
 
       let current = 0;
       let timer = null;
-      const INTERVAL = 5800; // ms between transitions
+      const INTERVAL = 5800;
 
       function goTo(index) {
         slides[current].classList.remove('is-active');
@@ -3259,12 +3364,10 @@
         timer = setInterval(advance, INTERVAL);
       }
 
-      // Dot click navigation
-      dots.forEach(dot => {
+      dots.forEach((dot, i) => {
         dot.addEventListener('click', () => {
-          const idx = parseInt(dot.dataset.slide, 10);
-          goTo(idx);
-          startTimer(); // reset timer on manual navigation
+          goTo(i);
+          startTimer();
         });
       });
 
