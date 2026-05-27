@@ -1989,6 +1989,30 @@
       border: none;
     }
 
+    /* Photo lightbox content box — sizes to image, not fixed 16:9 */
+    .dlc-photo-modal-content {
+      position: relative;
+      max-width: min(92vw, 1100px);
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 32px rgba(22, 143, 190, 0.18);
+      cursor: zoom-out;
+      z-index: 10;
+    }
+
+    .dlc-photo-modal-content img {
+      max-width: min(92vw, 1100px);
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
     /* ============================================================
      RESPONSIVE RULES (DESIGN.MD AND WIREFRAME MATCHES)
      ============================================================ */
@@ -2315,6 +2339,7 @@
     .collage-item {
       position: relative;
       overflow: hidden;
+      cursor: zoom-in;
       /* Polaroid frame */
       background: #fff;
       padding: 10px 10px 38px;
@@ -2864,7 +2889,7 @@
         <div class="gptw-card anim-fade-up">
           <div class="gptw-image-wrapper">
             <img
-              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&h=600&q=80"
+              src="images/value-creators-image-1400x766.webp"
               alt="DLC Great Place to Work Certified Team">
           </div>
           <div class="gptw-content">
@@ -3120,6 +3145,26 @@
             alt="DLC event" loading="lazy">
         </div>
 
+        <div class="collage-item">
+          <img src="images/photogallery/Ifshin%20hall%201.jpg"
+            alt="Ifshin Hall" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="images/photogallery/Ifshin%20Hall%202.jpg"
+            alt="Ifshin Hall" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="images/photogallery/Ifshin%20Hall%203.jpg"
+            alt="Ifshin Hall" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="images/photogallery/adam%20ifhin%20hall.webp"
+            alt="Adam at Ifshin Hall" loading="lazy">
+        </div>
+
       </div>
     </section>
 
@@ -3264,6 +3309,15 @@
         </div>
       </div>
     </section>
+
+    <!-- Photo Lightbox Modal -->
+    <div class="dlc-modal" id="photoModal" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+      <div class="dlc-modal-overlay" id="photoModalOverlay"></div>
+      <div class="dlc-photo-modal-content" id="photoModalContent">
+        <button class="dlc-modal-close" id="photoModalClose" aria-label="Close">&times;</button>
+        <img id="photoModalImg" src="" alt="" style="display:block;width:100%;height:100%;object-fit:contain;">
+      </div>
+    </div>
 
     <!-- Custom Lightbox Video Modal Window -->
     <div class="dlc-modal" id="videoModal">
@@ -3548,6 +3602,45 @@
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('is-active')) closeModal();
     });
+
+    /* ── PHOTO COLLAGE LIGHTBOX ── */
+    (function () {
+      const photoModal    = document.getElementById('photoModal');
+      const photoImg      = document.getElementById('photoModalImg');
+      const photoOverlay  = document.getElementById('photoModalOverlay');
+      const photoClose    = document.getElementById('photoModalClose');
+      const photoContent  = document.getElementById('photoModalContent');
+
+      function openPhoto(src, alt) {
+        photoImg.src = src;
+        photoImg.alt = alt || '';
+        photoModal.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePhoto() {
+        photoModal.classList.remove('is-active');
+        document.body.style.overflow = '';
+        setTimeout(() => { photoImg.src = ''; }, 350);
+      }
+
+      // Wire up each collage item
+      document.querySelectorAll('.collage-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          if (img) openPhoto(img.src, img.alt);
+        });
+      });
+
+      // Close on overlay, X button, clicking the image itself
+      photoOverlay.addEventListener('click', closePhoto);
+      photoClose.addEventListener('click', closePhoto);
+      photoContent.addEventListener('click', closePhoto);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && photoModal.classList.contains('is-active')) closePhoto();
+      });
+    })();
 
     /* ── SCROLL-DRIVEN ENTRY ANIMATIONS (INTERSECTION OBSERVER) ── */
     const observerOptions = {
