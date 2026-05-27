@@ -371,7 +371,7 @@
      ============================================================ */
     .dlc-lp .hero {
       width: 100vw;
-      height: 100vh;
+      height: 90vh;
       min-height: 560px;
       display: flex;
       align-items: flex-end;
@@ -446,7 +446,7 @@
       position: relative;
       z-index: 3;
       max-width: 780px;
-      padding-bottom: clamp(80px, 10vh, 140px);
+      padding-bottom: clamp(80px, 30vh, 140px);
     }
 
     .dlc-lp .hero h1 {
@@ -503,7 +503,7 @@
     /* ── SCROLL CHEVRON ── */
     .hero-scroll-chevron {
       position: absolute;
-      bottom: 125px;
+      bottom: 80px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 4;
@@ -1722,7 +1722,7 @@
      SECTION 09 — FINAL CTA
      ============================================================ */
     .dlc-lp .section-cta {
-      background: #1a303f;
+      background: linear-gradient(160deg, #0d1e28 0%, var(--dlc-navy) 55%, #0d1e28 100%);
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -1732,7 +1732,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 50%, rgba(22, 143, 190, 0.07) 0%, transparent 65%);
+      background: radial-gradient(circle at 50% 40%, rgba(22, 143, 190, 0.18) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -2204,17 +2204,17 @@
     }
 
     .collage-grid {
-      columns: 4 200px;
-      column-gap: 24px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
       max-width: var(--col-max);
       margin: 0 auto;
       padding: 0 var(--gutter);
     }
 
     .collage-item {
-      break-inside: avoid;
-      margin-bottom: 28px;
       position: relative;
+      overflow: hidden;
       /* Polaroid frame */
       background: #fff;
       padding: 10px 10px 38px;
@@ -2248,6 +2248,8 @@
     .collage-item:nth-child(8)  { --tilt:  1.6deg; }
     .collage-item:nth-child(9)  { --tilt: -0.5deg; }
     .collage-item:nth-child(10) { --tilt:  1.9deg; }
+    .collage-item:nth-child(11) { --tilt: -1.1deg; }
+    .collage-item:nth-child(12) { --tilt:  0.7deg; }
 
     /* Stagger cascade */
     .collage-item:nth-child(1)  { transition-delay: 0.00s; }
@@ -2260,6 +2262,8 @@
     .collage-item:nth-child(8)  { transition-delay: 0.49s; }
     .collage-item:nth-child(9)  { transition-delay: 0.56s; }
     .collage-item:nth-child(10) { transition-delay: 0.63s; }
+    .collage-item:nth-child(11) { transition-delay: 0.70s; }
+    .collage-item:nth-child(12) { transition-delay: 0.77s; }
 
     /* Lift + straighten on hover */
     .collage-item:hover {
@@ -2273,6 +2277,7 @@
 
     .collage-item img {
       width: 100%;
+      aspect-ratio: 1 / 1;
       display: block;
       object-fit: cover;
       pointer-events: none;
@@ -2286,13 +2291,13 @@
     }
 
     @media (max-width: 900px) {
-      .collage-grid { columns: 3 160px; column-gap: 16px; }
-      .collage-item  { margin-bottom: 20px; padding: 8px 8px 30px; }
+      .collage-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .collage-item  { padding: 8px 8px 30px; }
     }
 
     @media (max-width: 540px) {
-      .collage-grid { columns: 2 130px; column-gap: 12px; }
-      .collage-item  { margin-bottom: 16px; padding: 6px 6px 26px; }
+      .collage-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .collage-item  { padding: 6px 6px 26px; }
     }
 
     /* ============================================================
@@ -3017,6 +3022,18 @@
             alt="" loading="lazy">
         </div>
 
+        <!-- Portrait — city mixed-use development -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg?auto=compress&cs=tinysrgb&w=600&q=82"
+            alt="" loading="lazy">
+        </div>
+
+        <!-- Landscape — team at work around table -->
+        <div class="collage-item">
+          <img src="https://images.pexels.com/photos/3182781/pexels-photo-3182781.jpeg?auto=compress&cs=tinysrgb&w=900&q=82"
+            alt="" loading="lazy">
+        </div>
+
       </div>
     </section>
 
@@ -3131,9 +3148,7 @@
       </div>
     </section>
 
-    <div class="section-transition-divider"></div>
-
-    <!-- ── SECTION 09 — FINAL CTA ── -->
+     <!-- ── SECTION 09 — FINAL CTA ── -->
     <section class="section section-cta" id="cta">
       <div class="container">
         <div class="cta-content">
