@@ -474,12 +474,13 @@
       z-index: 2;
       pointer-events: none;
       background:
-        radial-gradient(ellipse 55% 45% at 25% 65%, rgba(22, 143, 190, 0.08) 0%, transparent 40%),
+        radial-gradient(ellipse 55% 45% at 25% 65%, rgba(22, 143, 190, 0.10) 0%, transparent 40%),
         linear-gradient(to top,
-          rgba(15, 30, 44, 0.92) 0%,
-          rgba(15, 30, 44, 0.55) 38%,
-          rgba(15, 30, 44, 0.18) 72%,
-          rgba(244, 247, 250, 0.0) 100%);
+          rgba(11, 22, 33, 0.97) 0%,
+          rgba(11, 22, 33, 0.82) 35%,
+          rgba(11, 22, 33, 0.52) 62%,
+          rgba(11, 22, 33, 0.18) 85%,
+          rgba(11, 22, 33, 0.0) 100%);
     }
 
     /* ── CONTENT ── */
@@ -719,12 +720,12 @@
      ============================================================ */
     .dlc-lp .section-carousel {
       background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
-      overflow: hidden;
+      padding-bottom: calc(var(--section-pad) * 0.75);
     }
 
     .carousel-intro {
       max-width: 680px;
-      margin-bottom: 48px;
+      margin-bottom: 32px;
     }
 
     /* ============================================================
@@ -868,13 +869,8 @@
     /* Full-Bleed Peaking Carousel Track System */
     .carousel-track-wrapper {
       position: relative;
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
-      margin-right: calc(-50vw + 50%);
+      width: 100%;
       overflow: hidden;
-      /* Fade cards at both edges to signal more content */
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
     }
 
     .carousel-track {
@@ -883,10 +879,9 @@
       overflow-x: auto;
       overflow-y: visible;
       scroll-snap-type: x mandatory;
-      padding: 16px max(var(--gutter), calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2)) 24px;
-      scroll-padding-left: max(var(--gutter), calc((100vw - var(--col-max) + 2 * var(--gutter)) / 2));
-      scrollbar-width: thin;
-      scrollbar-color: var(--dlc-blue) rgba(28, 50, 68, 0.06);
+      padding: 16px clamp(16px, 2.5vw, 32px) 24px;
+      scroll-padding-left: clamp(16px, 2.5vw, 32px);
+      scrollbar-width: none;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       touch-action: pan-x;
@@ -894,21 +889,71 @@
     }
 
     .carousel-track::-webkit-scrollbar {
-      height: 11px;
-    }
-
-    .carousel-track::-webkit-scrollbar-button {
       display: none;
     }
 
-    .carousel-track::-webkit-scrollbar-track {
-      background: rgba(28, 50, 68, 0.06);
-      border-radius: 4px;
+    /* Carousel Controls: dots + arrows */
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
     }
 
-    .carousel-track::-webkit-scrollbar-thumb {
+    .carousel-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    .carousel-arrow:hover {
       background: var(--dlc-blue);
-      border-radius: 4px;
+      border-color: var(--dlc-blue);
+      color: white;
+      box-shadow: 0 4px 12px rgba(22, 143, 190, 0.30);
+    }
+
+    .carousel-arrow:disabled {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .carousel-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .carousel-indicator-dot {
+      width: 8px;
+      height: 8px;
+      background: rgba(28, 50, 68, 0.18);
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      transition: background 0.18s ease, transform 0.18s ease;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .carousel-indicator-dot.is-active {
+      background: var(--dlc-blue);
+      transform: scale(1.25);
+      box-shadow: 0 0 8px rgba(22, 143, 190, 0.28);
     }
 
     .carousel-card {
@@ -2049,10 +2094,10 @@
       }
 
       .carousel-track {
-        gap: 18px;
+        gap: 14px;
         padding: 16px 16px 28px;
         scroll-padding-left: 16px;
-        scrollbar-width: thin;
+        scrollbar-width: none;
         scroll-snap-type: none;
         -webkit-overflow-scrolling: touch;
         touch-action: pan-x;
@@ -2063,43 +2108,11 @@
         min-width: min(86vw, 300px);
         flex: 0 0 auto;
       }
-
-      .carousel-track::-webkit-scrollbar {
-        height: 8px;
-      }
-
-      /* Mobile carousel indicator (dots) */
-      .carousel-indicator {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 12px;
-        align-items: center;
-      }
-
-      .carousel-indicator-dot {
-        width: 8px;
-        height: 8px;
-        background: rgba(28, 50, 68, 0.18);
-        border-radius: 50%;
-        border: none;
-        padding: 0;
-        transition: background 0.18s ease, transform 0.18s ease;
-        -webkit-appearance: none;
-        appearance: none;
-        cursor: pointer;
-      }
-
-      .carousel-indicator-dot.is-active {
-        background: var(--dlc-blue);
-        transform: scale(1.25);
-        box-shadow: 0 0 8px rgba(22,143,190,0.28);
-      }
     }
 
     @media (max-width: 600px) {
       .dlc-lp .hero {
-        height: calc(100vh - 64px);
+        height: calc(100vh - 84px);
       }
 
       .dlc-lp .hero h1 {
@@ -2688,12 +2701,12 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
           <p class="anim-fade-up delay-2">
            The people behind the platform.
           </p>
+        </div>
+      </div>
 
-
-
-          <!-- Peaking Carousel Track -->
-          <div class="carousel-track-wrapper anim-fade-up delay-2">
-            <div class="carousel-track">
+      <!-- Full-bleed carousel track — outside container -->
+      <div class="carousel-track-wrapper anim-fade-up delay-2">
+        <div class="carousel-track">
 
               <!-- Card 1: Adam Ifshin -->
               <div class="carousel-card" data-video-id="mJpNmYeooQE">
@@ -2879,10 +2892,20 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                 </div>
               </div>
 
-            </div>
-          </div>
         </div>
       </div>
+
+      <!-- Carousel Controls: Prev / Dot Indicators / Next -->
+      <div class="carousel-controls">
+        <button class="carousel-arrow carousel-arrow--prev" id="carouselPrev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="carousel-indicator" id="carouselIndicator"></div>
+        <button class="carousel-arrow carousel-arrow--next" id="carouselNext" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
     </section>
 
     <!-- ── SECTION 03B — GREAT PLACE TO WORK ── -->
@@ -3732,57 +3755,65 @@ As retail enters its next chapter, DLC is positioned to continue doing what it h
       });
     })();
 
-    /* ── CAROUSEL DOT INDICATOR (MOBILE) ── */
+    /* ── CAROUSEL DOT INDICATOR + ARROW NAVIGATION ── */
     (function () {
       const track = document.querySelector('.carousel-track');
       if (!track) return;
 
-      const wrapper = document.querySelector('.carousel-track-wrapper');
-      const indicator = document.querySelector('.carousel-indicator');
-      if (!indicator || !wrapper) return;
-
+      const indicator = document.getElementById('carouselIndicator');
+      const prevBtn = document.getElementById('carouselPrev');
+      const nextBtn = document.getElementById('carouselNext');
       const cards = Array.from(track.querySelectorAll('.carousel-card'));
 
-      function renderDots() {
-        indicator.innerHTML = '';
-        cards.forEach((c, i) => {
-          const btn = document.createElement('button');
-          btn.className = 'carousel-indicator-dot';
-          btn.setAttribute('aria-label', `Card ${i + 1}`);
-          btn.addEventListener('click', () => {
-            const padLeft = parseInt(getComputedStyle(track).paddingLeft, 10) || 0;
-            track.scrollTo({ left: Math.max(0, c.offsetLeft - padLeft), behavior: 'smooth' });
+      /* Dots */
+      if (indicator) {
+        function renderDots() {
+          indicator.innerHTML = '';
+          cards.forEach((c, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'carousel-indicator-dot';
+            btn.setAttribute('aria-label', `Card ${i + 1}`);
+            btn.addEventListener('click', () => {
+              const padLeft = parseInt(getComputedStyle(track).paddingLeft, 10) || 0;
+              track.scrollTo({ left: Math.max(0, c.offsetLeft - padLeft), behavior: 'smooth' });
+            });
+            indicator.appendChild(btn);
           });
-          indicator.appendChild(btn);
-        });
-        updateActive();
+          updateActive();
+        }
+
+        function updateActive() {
+          const center = track.scrollLeft + track.clientWidth / 2;
+          let closest = 0;
+          let closestDist = Infinity;
+          cards.forEach((c, i) => {
+            const cCenter = c.offsetLeft + c.clientWidth / 2;
+            const dist = Math.abs(center - cCenter);
+            if (dist < closestDist) { closestDist = dist; closest = i; }
+          });
+          Array.from(indicator.children).forEach((d, idx) => d.classList.toggle('is-active', idx === closest));
+        }
+
+        let raf = null;
+        track.addEventListener('scroll', () => {
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => { updateActive(); raf = null; });
+        }, { passive: true });
+
+        renderDots();
+        window.addEventListener('resize', renderDots);
       }
 
-      function updateActive() {
-        const center = track.scrollLeft + track.clientWidth / 2;
-        let closest = 0;
-        let closestDist = Infinity;
-        cards.forEach((c, i) => {
-          const cCenter = c.offsetLeft + c.clientWidth / 2;
-          const dist = Math.abs(center - cCenter);
-          if (dist < closestDist) {
-            closestDist = dist;
-            closest = i;
-          }
-        });
-        const dots = Array.from(indicator.children);
-        dots.forEach((d, idx) => d.classList.toggle('is-active', idx === closest));
+      /* Arrows */
+      function scrollByCard(dir) {
+        const card = cards[0];
+        if (!card) return;
+        const gap = parseInt(getComputedStyle(track).gap, 10) || 24;
+        track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
       }
 
-      let raf = null;
-      function onScroll() {
-        if (raf) cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => { updateActive(); raf = null; });
-      }
-
-      renderDots();
-      track.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', renderDots);
+      if (prevBtn) prevBtn.addEventListener('click', () => scrollByCard(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => scrollByCard(1));
     })();
 
     /* ── PHOTO COLLAGE — SCROLL-TRIGGERED STAGGER ── */
