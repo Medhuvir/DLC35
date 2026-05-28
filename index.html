@@ -438,6 +438,28 @@
       font-weight: 500;
     }
 
+    .hero-watch-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      font-size: clamp(14px, 1.1vw, 16px);
+      color: var(--dlc-navy);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .hero-watch-link svg {
+      color: var(--dlc-blue);
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+
+    .hero-watch-link:hover {
+      color: var(--dlc-blue);
+    }
+
     /* ── IMAGE FRAME COLUMN — POLAROID STACK ── */
     .hero-frame-wrapper {
       position: relative;
@@ -2075,24 +2097,53 @@
         gap: 0;
       }
 
+      /* Constrain and center the polaroid stack */
       .hero-frame-wrapper {
         order: -1;
-        padding: 10px 10px 8px 24px;
-        margin-bottom: 50px;
+        max-width: 300px;
+        width: 100%;
+        margin: 0 auto 20px;
+        /* left padding absorbs the rotated ghost cards peeking out */
+        padding: 8px 8px 6px 28px;
       }
 
+      /* Reset any stale scale hack */
       .hero-frame-stack {
-        transform: scale(0.82);
-        transform-origin: top left;
-        margin-bottom: -18%;
+        transform: none;
+        margin-bottom: 0;
       }
 
+      /* Shrink polaroid caption strip (DLC logo area) by ~45% */
+      .hero-frame {
+        padding-bottom: 29px;
+      }
+
+      .hero-frame-badge {
+        padding-top: 8px;
+      }
+
+      .hero-frame-badge img {
+        height: 28px;
+      }
+
+      /* Tighten section padding so chevron stays in view */
       .dlc-lp .hero {
-        padding: 48px 0 64px;
+        padding: 28px 0 44px;
+      }
+
+      /* Tighten copy spacing */
+      .dlc-lp .hero h2 {
+        margin-bottom: 10px;
+      }
+
+      .dlc-lp .hero-lead {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        max-width: 100%;
       }
 
       .dlc-lp .hero h2,
-      .dlc-lp .hero-lead,
       .hero-split-copy .anim-fade-up {
         width: 100%;
         max-width: 100%;
@@ -2585,7 +2636,7 @@
               Retail never stands still, and neither do we. For 35 years, DLC has stayed committed to open-air retail through every cycle. Built to adapt. Built to execute. Built for what’s next.
             </p>
             <div class="anim-fade-up delay-2">
-              <a href="#video" class="btn-primary" style="display:inline-flex;align-items:center;gap:10px;">
+              <a href="#video" class="hero-watch-link">
                 <svg width="13" height="14" viewBox="0 0 13 14" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
                   <path d="M1.5 1.2L12 7L1.5 12.8V1.2Z"/>
                 </svg>
