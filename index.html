@@ -423,10 +423,34 @@
     .dlc-lp .hero h2 {
       font-size: clamp(26px, 6vw, 43px);
       font-weight: 900;
-      line-height: 1.18;
-      color: var(--dlc-navy);
+      line-height: 1.65;
+      color: var(--dlc-blue);
       letter-spacing: -1px;
       margin-bottom: 20px;
+    }
+
+    .dlc-lp .hero h2 .h2-highlight {
+      display: inline;
+      padding: 5px 14px 5px 10px;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      background-image: linear-gradient(var(--dlc-navy), var(--dlc-navy));
+      background-repeat: no-repeat;
+      background-size: 0% 100%;
+      background-position: left center;
+      color: var(--dlc-blue);
+      transition: color 0.2s ease 0s;
+    }
+
+    .dlc-lp .hero h2.is-visible .h2-highlight {
+      animation: heroH2Highlight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.65s forwards;
+      color: white;
+      transition-delay: 1.2s;
+    }
+
+    @keyframes heroH2Highlight {
+      from { background-size: 0% 100%; }
+      to   { background-size: 100% 100%; }
     }
 
     .dlc-lp .hero-lead {
@@ -2631,7 +2655,7 @@
 
           <!-- Copy column — left on desktop, bottom on mobile -->
           <div class="hero-split-copy">
-            <h2 class="anim-fade-up">35 years taught us<span class="desktop-br"><br></span> how to win through<span class="desktop-br"><br></span> every cycle.</h2>
+            <h2 class="anim-fade-up"><span class="h2-highlight">35 years taught us<span class="desktop-br"><br></span> how to win through<span class="desktop-br"><br></span> every cycle.</span></h2>
             <p class="hero-lead anim-fade-up delay-1">
               Retail never stands still, and neither do we. For 35 years, DLC has stayed committed to open-air retail through every cycle. Built to adapt. Built to execute. Built for what’s next.
             </p>
