@@ -1,0 +1,3716 @@
+﻿<!--
+  DLC Management Corp. — 35th Anniversary  |  WordPress / Elementor-ready block.
+
+  HOW TO USE:
+  1. In Elementor, add an "HTML" widget inside a full-width section (zero padding & margin).
+  2. Paste this ENTIRE snippet into that widget.
+  3. IMAGES: all images reference /wp-content/uploads/2026/05/<filename>. Upload all image
+     files directly into that WordPress media folder (no subfolders needed).
+
+  All CSS is scoped under .dlc-lp so it will not affect your theme. The greyed-out mock
+  WordPress header/footer used for local preview have been removed.
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap');
+
+.dlc-lp {
+      
+      --dlc-navy: #213B4E;
+      --dlc-blue: #168FBE;
+      --dlc-green: #5CA547;
+      --dlc-gold: #C9A84C;
+      --bg: #F4F7FA;
+      --bg-alt: #EBF1F6;
+      --surface: #FFFFFF;
+      --surface-raised: #F0F5F9;
+      --surface-deep: #E2EBF2;
+      --text-primary: #1C3244;
+      --text-secondary: rgba(28, 50, 68, 0.78);
+      --text-muted: rgba(28, 50, 68, 0.50);
+      --text-faint: rgba(28, 50, 68, 0.24);
+      --border: rgba(28, 50, 68, 0.10);
+      --border-accent: rgba(22, 143, 190, 0.35);
+      --shadow: 0 12px 48px rgba(28, 50, 68, 0.12);
+      --shadow-sm: 0 4px 20px rgba(28, 50, 68, 0.08);
+      --shadow-blue: 0 8px 32px rgba(22, 143, 190, 0.18);
+      --grid-dot: rgba(28, 50, 68, 0.04);
+
+      --font-primary: 'Lato', Arial, sans-serif;
+      --size-hero: clamp(30px, 5vw, 55px);
+      --size-h2: clamp(28px, 3.8vw, 48px);
+      --size-lead: clamp(16px, 1.4vw, 20px);
+      --size-body: clamp(14px, 1.1vw, 16px);
+      --size-kicker: 11px;
+
+      --section-pad: clamp(80px, 9vw, 120px);
+      --gutter: clamp(24px, 5vw, 80px);
+      --col-max: 1160px;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .dlc-lp,
+    .dlc-lp *,
+    .dlc-lp *::before,
+    .dlc-lp *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dlc-lp {
+      background-color: var(--bg);
+      background-image: radial-gradient(var(--grid-dot) 1.5px, transparent 1.5px);
+      background-size: 28px 28px;
+      font-family: var(--font-primary);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      width: 100%;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .dlc-lp .container {
+      max-width: var(--col-max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      width: 100%;
+    }
+
+    .dlc-lp .section {
+      padding: var(--section-pad) 0;
+      position: relative;
+    }
+
+    .dlc-lp .section-transition-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--dlc-blue), transparent);
+      opacity: 0.22;
+    }
+
+    .anim-fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .anim-fade-left {
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .anim-fade-right {
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .anim-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+
+    .is-visible.anim-fade-up,
+    .is-visible.anim-fade-left,
+    .is-visible.anim-fade-right,
+    .is-visible.anim-scale {
+      opacity: 1;
+      transform: none;
+    }
+
+    .delay-1 {
+      transition-delay: 0.10s !important;
+    }
+
+    .delay-2 {
+      transition-delay: 0.22s !important;
+    }
+
+    .delay-3 {
+      transition-delay: 0.34s !important;
+    }
+
+    .delay-4 {
+      transition-delay: 0.46s !important;
+    }
+
+    .delay-5 {
+      transition-delay: 0.58s !important;
+    }
+
+    .dlc-lp .btn-primary {
+      background: var(--dlc-blue);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 18px 46px;
+      border-radius: 4px;
+      border: none;
+      box-shadow: var(--shadow-blue);
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+
+    .dlc-lp .btn-primary:hover {
+      background: #1aa8e0;
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(22, 143, 190, 0.35);
+    }
+
+    .dlc-lp .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      border-radius: 4px;
+      border: 1px solid rgba(28, 50, 68, 0.28);
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.25s, background 0.25s, color 0.25s, transform 0.25s;
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+
+    .dlc-lp .btn-outline:hover {
+      border-color: var(--dlc-blue);
+      color: var(--dlc-blue);
+      transform: translateY(-2px);
+    }
+
+    .dlc-lp .btn-ghost {
+      color: var(--text-secondary);
+      border-bottom: 1px solid rgba(28, 50, 68, 0.2);
+      padding: 12px 0;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .dlc-lp .btn-ghost:hover {
+      color: var(--text-primary);
+      border-color: var(--text-primary);
+    }
+
+    .dlc-lp .eyebrow {
+      font-size: var(--size-kicker);
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: white;
+      margin-bottom: 16px;
+      display: inline-block;
+      position: relative;
+      padding: 3px 0;
+      z-index: 0;
+    }
+
+    .dlc-lp .eyebrow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -5px;
+      right: -5px;
+      background: var(--dlc-navy);
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    .dlc-lp .eyebrow.is-visible::before {
+      animation: eyebrowMarker 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+    }
+
+    @keyframes eyebrowMarker {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    .dlc-lp h2 {
+      font-size: var(--size-h2);
+      font-weight: 900;
+      color: var(--text-primary);
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .dlc-lp h2 em {
+      font-style: normal;
+      color: var(--dlc-blue);
+    }
+
+    .dlc-lp .hero {
+      background:
+        repeating-linear-gradient(
+          transparent 0px,
+          transparent 27px,
+          rgba(28, 50, 68, 0.07) 27px,
+          rgba(28, 50, 68, 0.07) 28px
+        ),
+        linear-gradient(
+          180deg,
+          rgba(28, 50, 68, 0.50) 0%,
+          rgba(28, 50, 68, 0.40) 12%,
+          rgba(28, 50, 68, 0.19) 32%,
+          rgba(28, 50, 68, 0.04) 56%,
+          var(--bg) 80%,
+          var(--bg) 100%
+        ),
+        var(--bg);
+      padding: clamp(64px, 9vw, 112px) 0 clamp(80px, 10vw, 128px);
+      position: relative;
+      overflow: visible;
+    }
+
+    .hero-split-inner {
+      display: grid;
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: clamp(40px, 5vw, 72px);
+      align-items: center;
+    }
+
+    .hero-split-copy {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dlc-lp .hero h2 {
+      font-size: clamp(26px, 6vw, 43px);
+      font-weight: 900;
+      line-height: 1.65;
+      color: var(--dlc-blue);
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    .dlc-lp .hero h2 .h2-highlight {
+      display: inline;
+      padding: 5px 14px 5px 10px;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      background-image: linear-gradient(var(--dlc-navy), var(--dlc-navy));
+      background-repeat: no-repeat;
+      background-size: 0% 100%;
+      background-position: left center;
+      color: var(--dlc-blue);
+      transition: color 0.2s ease 0s;
+    }
+
+    .dlc-lp .hero h2.is-visible .h2-highlight {
+      animation: heroH2Highlight 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.65s forwards;
+      color: white;
+      transition-delay: 1.2s;
+    }
+
+    @keyframes heroH2Highlight {
+      from { background-size: 0% 100%; }
+      to   { background-size: 100% 100%; }
+    }
+
+    .dlc-lp .hero-lead {
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 42px;
+      font-weight: 500;
+    }
+
+    .hero-watch-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+      font-size: clamp(14px, 1.1vw, 16px);
+      color: var(--dlc-navy);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .hero-watch-link svg {
+      color: var(--dlc-blue);
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+
+    .hero-watch-link:hover {
+      color: var(--dlc-blue);
+    }
+
+    .hero-frame-wrapper {
+      position: relative;
+      
+      padding: 20px 28px 20px 52px;
+    }
+
+    .hero-frame-stack {
+      display: grid;
+      overflow: visible;
+    }
+
+    .hero-frame-stack > * {
+      grid-column: 1;
+      grid-row: 1;
+      transform-origin: 50% 88%;
+    }
+
+    .hero-polaroid-ghost {
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 12px 12px 52px;
+      box-shadow: 0 2px 10px rgba(28, 50, 68, 0.10), 0 8px 28px rgba(28, 50, 68, 0.08);
+    }
+
+    .hero-polaroid-ghost::before {
+      content: '';
+      display: block;
+      aspect-ratio: 4 / 3;
+      background: rgba(28, 50, 68, 0.07);
+      border-radius: 4px;
+    }
+
+    .hero-polaroid-ghost.ghost-1 {
+      transform: rotate(-3.5deg);
+      z-index: 1;
+      background: #fafafa;
+    }
+
+    .hero-polaroid-ghost.ghost-2 {
+      transform: rotate(-7deg);
+      z-index: 0;
+      background: #f5f5f5;
+    }
+
+    .hero-polaroid-ghost.ghost-3 {
+      transform: rotate(-10.5deg);
+      z-index: -1;
+      background: #f0f0f0;
+    }
+
+    .hero-frame {
+      background: #f7f7f7;
+      padding: 12px 12px 52px;
+      border-radius: 8px;
+      position: relative;
+      z-index: 2;
+      transform: rotate(1.deg);
+      box-shadow:
+        0 4px 8px rgba(28, 50, 68, 0.10),
+        0 14px 36px rgba(28, 50, 68, 0.16),
+        0 32px 72px rgba(28, 50, 68, 0.12);
+    }
+
+    .hero-frame-slideshow {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #1a2e3d;
+    }
+
+    .hero-frame-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity;
+    }
+
+    .hero-frame-slide.is-active {
+      opacity: 1;
+    }
+
+    .hero-frame-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform-origin: center center;
+    }
+
+    .hero-frame-slide:nth-child(1) img { animation: heroPan1 14s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(2) img { animation: heroPan2 16s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(3) img { animation: heroPan3 13s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(4) img { animation: heroPan4 15s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(5) img { animation: heroPan5 17s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(6) img { animation: heroPan6 12s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(7) img { animation: heroPan7 15s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(8) img { animation: heroPan8 13s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(9) img { animation: heroPan9 16s ease-in-out infinite alternate; }
+    .hero-frame-slide:nth-child(10) img { animation: heroPan10 14s ease-in-out infinite alternate; }
+
+    @keyframes heroPan7 {
+      from { transform: scale(1.12) translate(-1%, 1%); }
+      to   { transform: scale(1.10) translate(2%, -1.5%); }
+    }
+    @keyframes heroPan8 {
+      from { transform: scale(1.10) translate(1.5%, -1%); }
+      to   { transform: scale(1.13) translate(-1%, 1.5%); }
+    }
+    @keyframes heroPan9 {
+      from { transform: scale(1.13) translate(0%, 1.5%); }
+      to   { transform: scale(1.10) translate(-2%, -1%); }
+    }
+    @keyframes heroPan10 {
+      from { transform: scale(1.11) translate(-1.5%, -0.5%); }
+      to   { transform: scale(1.14) translate(1%, 1%); }
+    }
+
+    @keyframes heroPan1 {
+      from { transform: scale(1.12) translate(2%, 0%); }
+      to   { transform: scale(1.10) translate(-2%, 1.5%); }
+    }
+    @keyframes heroPan2 {
+      from { transform: scale(1.10) translate(-1.5%, 1.5%); }
+      to   { transform: scale(1.14) translate(1.5%, -1%); }
+    }
+    @keyframes heroPan3 {
+      from { transform: scale(1.14) translate(0%, -1.5%); }
+      to   { transform: scale(1.10) translate(2%, 1%); }
+    }
+    @keyframes heroPan4 {
+      from { transform: scale(1.10) translate(1.5%, 1%); }
+      to   { transform: scale(1.13) translate(-1.5%, -1.5%); }
+    }
+    @keyframes heroPan5 {
+      from { transform: scale(1.13) translate(-2%, -1%); }
+      to   { transform: scale(1.10) translate(1%, 1.5%); }
+    }
+    @keyframes heroPan6 {
+      from { transform: scale(1.10) translate(0%, 1.5%); }
+      to   { transform: scale(1.14) translate(-2%, -1%); }
+    }
+
+    .hero-frame-badge {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: 32px;
+    }
+
+    .hero-frame-badge img {
+      height: 70px;
+      width: auto;
+    }
+
+    .hero-scroll-chevron {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      opacity: 0;
+      animation:
+        dlcChevronEnter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards,
+        dlcChevronBounce 2.4s ease-in-out 1.8s infinite;
+    }
+
+    .hero-scroll-chevron svg {
+      display: block;
+      color: var(--dlc-blue);
+      filter: drop-shadow(0 0 8px rgba(22, 143, 190, 0.45));
+      transition: filter 0.3s;
+    }
+
+    .hero-scroll-chevron:hover svg {
+      filter: drop-shadow(0 0 16px rgba(22, 143, 190, 0.80));
+    }
+
+    @keyframes dlcChevronEnter {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    @keyframes dlcChevronBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      45%       { transform: translateX(-50%) translateY(8px); }
+      55%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    .dlc-lp .section-video {
+      background: var(--bg);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .video-intro {
+      max-width: 680px;
+    }
+
+    .video-intro p {
+      font-size: var(--size-body);
+      color: var(--text-secondary);
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    .video-player-frame {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .video-player-frame:hover {
+      border-color: var(--border-accent);
+      box-shadow: var(--shadow), var(--shadow-blue);
+    }
+
+    .video-aspect-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      
+      height: 0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .video-aspect-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .dlc-lp .section-carousel {
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+      padding-bottom: calc(var(--section-pad) * 0.75);
+    }
+
+    .carousel-intro {
+      max-width: 680px;
+      margin-bottom: 32px;
+    }
+
+    .section-gptw {
+      position: relative;
+      background: url('/wp-content/uploads/2026/05/collage.jpg') center/cover no-repeat;
+      background-attachment: fixed;
+      padding: 100px 0;
+    }
+
+    .section-gptw::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(244, 247, 250, 0.94) 0%, rgba(22, 143, 190, 0.22) 100%);
+      z-index: 0;
+    }
+
+    .section-gptw .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .gptw-card {
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(22, 143, 190, 0.16);
+      border-radius: 12px;
+      padding: 48px;
+      max-width: 100%;
+      box-shadow: 0 16px 48px rgba(28, 50, 68, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      transition: border-color 0.3s, background 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
+    }
+
+    .gptw-card:hover {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(22, 143, 190, 0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 56px rgba(28, 50, 68, 0.15), var(--shadow-blue);
+    }
+
+    .gptw-image-wrapper {
+      flex: 0 0 260px;
+      width: 260px;
+      height: 260px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface-deep);
+      border: 1px solid rgba(22, 143, 190, 0.20);
+      box-shadow: 0 8px 24px rgba(28, 50, 68, 0.14);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .gptw-card:hover .gptw-image-wrapper {
+      border-color: rgba(22, 143, 190, 0.40);
+      box-shadow: 0 8px 24px rgba(28, 50, 68, 0.14), var(--shadow-blue);
+    }
+
+    .gptw-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gptw-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gptw-headline {
+      font-size: clamp(22px, 2.2vw, 28px);
+      font-weight: 900;
+      color: var(--text-primary);
+      margin: 0;
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+    }
+
+    .gptw-body {
+      font-size: clamp(14px, 1.2vw, 16px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .gptw-cta {
+      align-self: flex-start;
+      background: var(--dlc-blue);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 4px;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 15px rgba(22, 143, 190, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .gptw-cta:hover {
+      background: var(--dlc-navy);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(28, 50, 68, 0.22);
+    }
+
+    @media (max-width: 768px) {
+      .gptw-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+        padding: 32px 24px;
+      }
+
+      .gptw-image-wrapper {
+        width: 200px;
+        height: 200px;
+        flex: 0 0 200px;
+      }
+
+      .gptw-cta {
+        align-self: center;
+      }
+    }
+
+    .carousel-track-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      padding: 16px clamp(16px, 2.5vw, 32px) 24px;
+      scroll-padding-left: clamp(16px, 2.5vw, 32px);
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      overscroll-behavior-x: contain;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .carousel-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+      flex-shrink: 0;
+      padding: 0;
+    }
+
+    .carousel-arrow:hover {
+      background: var(--dlc-blue);
+      border-color: var(--dlc-blue);
+      color: white;
+      box-shadow: 0 4px 12px rgba(22, 143, 190, 0.30);
+    }
+
+    .carousel-arrow:disabled {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .carousel-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .carousel-indicator-dot {
+      width: 8px;
+      height: 8px;
+      background: rgba(28, 50, 68, 0.18);
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      transition: background 0.18s ease, transform 0.18s ease;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .carousel-indicator-dot.is-active {
+      background: var(--dlc-blue);
+      transform: scale(1.25);
+      box-shadow: 0 0 8px rgba(22, 143, 190, 0.28);
+    }
+
+    .carousel-card {
+      flex: 0 0 290px;
+      scroll-snap-align: start;
+      cursor: pointer;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s var(--ease-out);
+      will-change: transform, border-color, background;
+    }
+
+    .carousel-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--dlc-blue);
+      transform: scaleY(0.4);
+      transform-origin: center;
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+      z-index: 5;
+    }
+
+    .carousel-card:hover::before {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+
+    .carousel-card:hover {
+      border-color: var(--border-accent);
+      background: rgba(22, 143, 190, 0.04);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-sm), var(--shadow-blue);
+    }
+
+    .carousel-thumb-container {
+      position: relative;
+      height: 180px;
+      width: 100%;
+      background: var(--surface-deep);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .carousel-thumb-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: grayscale(8%) contrast(103%) brightness(96%);
+    }
+
+    .carousel-card:hover .carousel-thumb-container img {
+      transform: scale(1.05);
+      filter: grayscale(0%) contrast(100%) brightness(100%);
+    }
+
+    .carousel-play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(28, 50, 68, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .carousel-card:hover .carousel-play-overlay {
+      background: rgba(22, 143, 190, 0.18);
+    }
+
+    .carousel-play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(22, 143, 190, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      box-shadow: var(--shadow-sm);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s, box-shadow 0.3s;
+    }
+
+    .carousel-play-btn svg {
+      fill: currentColor;
+      margin-left: 3px;
+    }
+
+    .carousel-card:hover .carousel-play-btn {
+      transform: scale(1);
+      background: var(--dlc-blue);
+      box-shadow: 0 0 15px rgba(22, 143, 190, 0.5);
+    }
+
+    .carousel-card-body {
+      padding: 20px;
+      position: relative;
+    }
+
+    .carousel-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .carousel-role {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .carousel-takeaway-drawer {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--dlc-blue);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .carousel-card:hover .carousel-takeaway-drawer {
+      opacity: 1;
+      transform: none;
+    }
+
+    .carousel-footer-note {
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .carousel-careers-bar {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px 24px;
+    }
+
+    .carousel-careers-bar svg {
+      color: rgba(22, 143, 190, 0.5);
+      flex-shrink: 0;
+    }
+
+    .carousel-careers-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+
+    .carousel-careers-text a {
+      color: var(--dlc-blue);
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 8px;
+    }
+
+    .carousel-careers-text a:hover {
+      text-decoration: underline;
+    }
+
+    .dlc-lp .section-timeline {
+      background:
+        
+        repeating-linear-gradient(
+          180deg,
+          rgba(28, 50, 68, 0.10) 0px,
+          rgba(28, 50, 68, 0.10) 1px,
+          transparent 1px,
+          transparent 4px
+        ),
+        
+        linear-gradient(
+          135deg,
+          #F4F7FA 0%,
+          #d8e4ee 40%,
+          #b8ccde 70%,
+          #8aaec8 100%
+        );
+    }
+
+    .timeline-intro {
+      max-width: 680px;
+      margin-bottom: 56px;
+    }
+
+    .timeline-container {
+      width: 100%;
+    }
+
+    .timeline-tabs-nav {
+      display: flex;
+      width: 100%;
+      margin-bottom: 40px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .dlc-era-tab {
+      flex: 1;
+      position: relative;
+      padding: 20px !important;
+      background: none !important;
+      background-color: transparent !important;
+      background-image: none !important;
+      border: none !important;
+      border-bottom: 2px solid transparent !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-primary);
+      font-size: inherit;
+      color: inherit;
+      line-height: inherit;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      transition: border-color 0.3s, color 0.3s, background-color 0.3s;
+    }
+
+    /* Timeline separator: thin line with a centered dot between each tab */
+    .dlc-era-tab + .dlc-era-tab::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15%;
+      bottom: 15%;
+      width: 1px;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--border) 20%,
+        var(--border) 80%,
+        transparent 100%
+      );
+    }
+
+    .dlc-era-tab + .dlc-era-tab::after {
+      content: '';
+      position: absolute;
+      left: -3px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+    }
+
+    .dlc-era-tab.is-active {
+      border-bottom-color: var(--dlc-green);
+    }
+
+    .dlc-era-tab .tab-era {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dlc-green);
+      margin-bottom: 6px;
+      display: block;
+      transition: color 0.3s;
+    }
+
+    .dlc-era-tab .tab-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: block;
+      transition: color 0.3s;
+    }
+
+    .dlc-era-tab:not(.is-active) .tab-era {
+      color: rgba(92, 165, 71, 0.45);
+    }
+
+    .dlc-era-tab:not(.is-active) .tab-title {
+      color: var(--text-muted);
+    }
+
+    .dlc-era-tab:hover:not(.is-active) .tab-era {
+      color: rgba(92, 165, 71, 0.75);
+    }
+
+    .dlc-era-tab:hover:not(.is-active) .tab-title {
+      color: var(--text-secondary);
+    }
+
+    .timeline-body {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .timeline-milestones {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-milestone-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: background 0.3s, border-color 0.3s, transform 0.25s, box-shadow 0.3s;
+      animation: dlcMilestoneFade 0.4s var(--ease-out) forwards;
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    @keyframes dlcMilestoneFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .timeline-milestone-item:hover {
+      background: rgba(22, 143, 190, 0.05);
+      border-color: rgba(22, 143, 190, 0.22);
+      transform: translateX(4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timeline-milestone-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--dlc-blue);
+      flex-shrink: 0;
+      margin-top: 7px;
+      box-shadow: 0 0 8px rgba(22, 143, 190, 0.6);
+    }
+
+    .timeline-milestone-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .timeline-milestone-text strong {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .milestone-text-block {
+      display: block;
+    }
+
+    .milestone-headline {
+      display: block;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 2px;
+    }
+
+    .milestone-body {
+      display: block;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .timeline-visual-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .timeline-visual-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 100% 100%, rgba(22, 143, 190, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .timeline-visual-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--dlc-blue);
+    }
+
+    .timeline-visual-stat {
+      font-size: clamp(48px, 4.5vw, 68px);
+      font-weight: 900;
+      color: var(--text-primary);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .timeline-visual-stat span {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .timeline-visual-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .timeline-accordion {
+      display: none;
+    }
+
+    .dlc-lp .section-platform {
+      background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+    }
+
+    .platform-intro {
+      max-width: 680px;
+      margin-bottom: 56px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .platform-intro p {
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pillar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(28, 50, 68, 0.14), 0 2px 8px rgba(28, 50, 68, 0.08);
+      transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 5; 
+    }
+
+    .pillar-card-image {
+      width: 100%;
+      height: 200px; 
+      overflow: hidden;
+      position: relative;
+      background: var(--surface-deep);
+    }
+
+    .pillar-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: grayscale(20%) brightness(90%) contrast(110%);
+    }
+
+    .pillar-card:hover .pillar-card-image img {
+      transform: scale(1.08);
+      filter: grayscale(0%) brightness(100%) contrast(100%);
+    }
+
+    .pillar-card-image--logo {
+      background: linear-gradient(145deg, #daeef7 0%, #edf6fb 45%, #ffffff 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 48px;
+    }
+
+    .pillar-card-image--logo img {
+      width: auto;
+      height: auto;
+      max-width: 72%;
+      max-height: 120px;
+      object-fit: contain;
+      filter: none;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .pillar-card:hover .pillar-card-image--logo img {
+      transform: scale(1.06);
+      filter: none;
+    }
+
+    .pillar-card-content {
+      padding: 32px 36px 44px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .pillar-card.brand-blue::before {
+      background: var(--dlc-blue);
+    }
+
+    .pillar-card.brand-green::before {
+      background: var(--dlc-green);
+    }
+
+    .pillar-card.brand-gold::before {
+      background: var(--dlc-gold);
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-accent);
+      box-shadow: 0 20px 56px rgba(28, 50, 68, 0.20), 0 6px 18px rgba(22, 143, 190, 0.12);
+    }
+
+    .pillar-card.brand-blue:hover {
+      background: rgba(22, 143, 190, 0.05);
+      border-color: rgba(22, 143, 190, 0.2);
+    }
+
+    .pillar-card.brand-green:hover {
+      background: rgba(92, 165, 71, 0.05);
+      border-color: rgba(92, 165, 71, 0.2);
+    }
+
+    .pillar-card.brand-gold:hover {
+      background: rgba(201, 168, 76, 0.05);
+      border-color: rgba(201, 168, 76, 0.2);
+    }
+
+    .pillar-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .platform-card-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .pillar-card.brand-blue .platform-card-kicker {
+      color: var(--dlc-blue);
+    }
+
+    .pillar-card.brand-green .platform-card-kicker {
+      color: var(--dlc-green);
+    }
+
+    .pillar-card.brand-gold .platform-card-kicker {
+      color: var(--dlc-gold);
+    }
+
+    .platform-card-title {
+      font-size: clamp(18px, 1.6vw, 22px);
+      font-weight: 900;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .platform-card-tagline {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .platform-card-body {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      font-weight: 400;
+      flex-grow: 1;
+    }
+
+    .platform-card-proofs {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
+
+    .platform-card-proofs li {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      line-height: 1.4;
+      font-weight: 300;
+    }
+
+    .platform-card-proofs li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .pillar-card.brand-blue .platform-card-proofs li::before {
+      background: var(--dlc-blue);
+    }
+
+    .pillar-card.brand-green .platform-card-proofs li::before {
+      background: var(--dlc-green);
+    }
+
+    .pillar-card.brand-gold .platform-card-proofs li::before {
+      background: var(--dlc-gold);
+    }
+
+    .dlc-lp .section-why {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dlc-lp .section-why::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.pexels.com/photos/361530/pexels-photo-361530.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: var(--bg);
+      background-blend-mode: multiply;
+      opacity: 0.1; 
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dlc-lp .section-why > .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-editorial h2 {
+      margin-bottom: 24px;
+    }
+
+    .why-editorial p {
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .why-editorial-badge {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      font-weight: 700;
+      margin-top: 12px;
+      display: block;
+    }
+
+    .why-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .why-list-item {
+      padding: 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      transition: background 0.3s, border-color 0.3s;
+      border-radius: 6px;
+    }
+
+    .why-list-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .why-list-item:hover {
+      background: rgba(22, 143, 190, 0.05);
+      border-color: rgba(22, 143, 190, 0.20);
+    }
+
+    .why-list-num {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: var(--dlc-blue);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .why-list-text {
+      font-size: clamp(15px, 1.3vw, 17px);
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+    }
+
+    .dlc-lp .section-numbers {
+      background: #dde6ee;
+    }
+
+    .numbers-intro {
+      max-width: 680px;
+      margin-bottom: 56px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .numbers-intro p {
+      font-size: var(--size-body);
+      color: var(--text-secondary);
+      margin-top: 12px;
+      font-weight: 300;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: rgba(22, 143, 190, 0.12);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(22, 143, 190, 0.18);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stat-block {
+      background: var(--surface);
+      padding: 48px 24px;
+      text-align: center;
+      transition: background 0.3s;
+    }
+
+    .stat-block:hover {
+      background: rgba(22, 143, 190, 0.05);
+    }
+
+    .stat-block-value {
+      font-size: clamp(40px, 4.5vw, 60px);
+      font-weight: 900;
+      color: var(--dlc-blue);
+      line-height: 1.1;
+      margin-bottom: 12px;
+      letter-spacing: -2px;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 0 40px rgba(22, 143, 190, 0.2);
+    }
+
+    .stat-block-value span.small-suffix {
+      font-size: 0.55em;
+      font-weight: 900;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+
+    .stat-block-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-weight: 300;
+    }
+
+    .stat-block-sublabel {
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .stats-caption {
+      text-align: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    .dlc-lp .section-next {
+      background: linear-gradient(180deg, #1a2e3d 0%, #1a303f 100%);
+    }
+
+    .next-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .next-content h2 {
+      font-size: var(--size-hero);
+      line-height: 1.05;
+      margin-bottom: 32px;
+    }
+
+    .next-lead {
+      max-width: 600px;
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .next-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 900px;
+    }
+
+    .next-item {
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .next-item:hover {
+      background: rgba(22, 143, 190, 0.04);
+      border-color: rgba(22, 143, 190, 0.18);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .next-item-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--dlc-blue);
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(22, 143, 190, 0.6);
+    }
+
+    .next-item-text {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .dlc-lp .section-cta {
+      background: linear-gradient(160deg, #0d1e28 0%, var(--dlc-navy) 55%, #0d1e28 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dlc-lp .section-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(22, 143, 190, 0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-content p {
+      font-size: var(--size-lead);
+      color: var(--text-secondary);
+      margin-bottom: 44px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-divider-line {
+      height: 1px;
+      background: var(--border);
+      margin: 56px auto;
+      max-width: 480px;
+    }
+
+    .cta-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .cta-social-link:hover {
+      color: var(--text-primary);
+    }
+
+    .social-icon-wrapper {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .cta-social-link:hover .social-icon-wrapper {
+      background: rgba(22, 143, 190, 0.1);
+      border-color: rgba(22, 143, 190, 0.3);
+      color: var(--dlc-blue);
+    }
+
+    .dlc-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .dlc-modal.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .dlc-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 20, 28, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .dlc-modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      background: #1a2e3d;
+      border: 1px solid rgba(22, 143, 190, 0.25);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 32px rgba(22, 143, 190, 0.18);
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 10;
+    }
+
+    .dlc-modal.is-active .dlc-modal-content {
+      transform: scale(1);
+    }
+
+    .dlc-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: white;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 300;
+      cursor: pointer;
+      z-index: 15;
+      line-height: 1;
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+    }
+
+    .dlc-modal-close:hover {
+      background: var(--dlc-blue);
+      border-color: var(--dlc-blue);
+      transform: scale(1.05);
+    }
+
+    .dlc-modal-video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      
+      height: 0;
+      width: 100%;
+    }
+
+    .dlc-modal-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .dlc-photo-modal-content {
+      position: relative;
+      max-width: min(92vw, 1100px);
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 32px rgba(22, 143, 190, 0.18);
+      cursor: zoom-out;
+      z-index: 10;
+    }
+
+    .dlc-photo-modal-content img {
+      max-width: min(92vw, 1100px);
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+
+
+
+      .why-grid,
+      .timeline-body {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .platform-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .next-list {
+        grid-template-columns: 1fr;
+      }
+
+      .carousel-track {
+        gap: 14px;
+        padding: 16px 16px 28px;
+        scroll-padding-left: 16px;
+        scrollbar-width: none;
+        scroll-snap-type: none;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+        overscroll-behavior-x: contain;
+      }
+
+      .carousel-card {
+        min-width: min(86vw, 300px);
+        flex: 0 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-split-inner {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .hero-frame-wrapper {
+        order: -1;
+        max-width: 300px;
+        width: 100%;
+        margin: 0 auto 20px;
+        
+        padding: 8px 8px 6px 28px;
+      }
+
+      .hero-frame-stack {
+        transform: none;
+        margin-bottom: 0;
+      }
+
+      .hero-frame {
+        padding-bottom: 29px;
+      }
+
+      .hero-frame-badge {
+        padding-top: 8px;
+      }
+
+      .hero-frame-badge img {
+        height: 28px;
+      }
+
+      .dlc-lp .hero {
+        padding: 28px 0 44px;
+      }
+
+      .dlc-lp .hero h2 {
+        margin-bottom: 10px;
+      }
+
+      .dlc-lp .hero-lead {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+        max-width: 100%;
+      }
+
+      .dlc-lp .hero h2,
+      .hero-split-copy .anim-fade-up {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .dlc-lp .hero h2 .desktop-br {
+        display: none;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-tabs-nav,
+      .timeline-body {
+        display: none !important;
+      }
+
+      .timeline-accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .timeline-accordion-item {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .timeline-accordion-item:last-child {
+        border-bottom: none;
+      }
+
+      .dlc-acc-hdr {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px;
+        padding: 16px 18px !important;
+        background: var(--surface) !important;
+        background-image: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        cursor: pointer;
+        text-align: left !important;
+        font-family: var(--font-primary) !important;
+        font-size: inherit !important;
+        color: inherit !important;
+        line-height: inherit !important;
+        -webkit-appearance: none;
+        appearance: none;
+        transition: background 0.2s ease;
+      }
+
+      .timeline-accordion-item.is-open .dlc-acc-hdr {
+        background: var(--surface-raised);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .accordion-era {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 11px;
+        color: var(--dlc-green);
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+
+      .accordion-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-primary);
+        flex: 1;
+      }
+
+      .accordion-chevron {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        color: var(--text-muted);
+        transition: transform 0.25s ease, color 0.2s ease;
+      }
+
+      .timeline-accordion-item.is-open .accordion-chevron {
+        transform: rotate(180deg);
+        color: var(--dlc-green);
+      }
+
+      .timeline-accordion-body {
+        display: none;
+        padding: 20px 18px;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .timeline-accordion-item.is-open .timeline-accordion-body {
+        display: flex;
+      }
+
+      .accordion-milestones {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .accordion-milestones li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 13px;
+        line-height: 1.55;
+        color: var(--text-secondary);
+      }
+
+      .accordion-milestones li::before {
+        content: '';
+        flex-shrink: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--dlc-green);
+        margin-top: 6px;
+      }
+
+      .accordion-milestones li strong {
+        color: var(--text-primary);
+      }
+
+      .accordion-visual-panel {
+        background: var(--surface-raised);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .accordion-visual-label {
+        font-family: 'Roboto Mono', monospace;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .accordion-visual-stat {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--text-primary);
+        line-height: 1;
+      }
+
+      .accordion-visual-stat span {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--dlc-green);
+        margin-left: 6px;
+        vertical-align: middle;
+      }
+
+      .accordion-visual-desc {
+        font-size: 12px;
+        line-height: 1.55;
+        color: var(--text-secondary);
+        margin-top: 6px;
+      }
+
+      .carousel-track {
+        gap: 14px;
+        padding: 14px 12px 24px;
+      }
+
+      .carousel-card {
+        min-width: calc((100vw - 26px) / 1.75);
+        max-width: calc((100vw - 26px) / 1.75);
+      }
+
+      .carousel-thumb-container {
+        height: 115px;
+      }
+
+      .carousel-card-body {
+        padding: 12px;
+      }
+
+      .carousel-name {
+        font-size: 14px;
+      }
+
+      .carousel-role {
+        font-size: 10px;
+      }
+
+      .carousel-takeaway-drawer {
+        font-size: 12px;
+      }
+
+      .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cta-actions .btn-primary,
+      .cta-actions .btn-outline {
+        text-align: center;
+      }
+    }
+
+    .dlc-lp .section-collage {
+      background: #eceef1;
+      padding: 0 0 var(--section-pad);
+      overflow: hidden;
+    }
+
+    .collage-header {
+      max-width: var(--col-max);
+      margin: 0 auto;
+      padding: 40px var(--gutter) clamp(32px, 4vw, 52px);
+    }
+
+    .collage-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: var(--col-max);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    .collage-item {
+      position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+      
+      background: #fff;
+      padding: 10px 10px 38px;
+      box-shadow:
+        0 4px 6px rgba(28, 50, 68, 0.10),
+        0 12px 28px rgba(28, 50, 68, 0.14),
+        0 2px 4px rgba(28, 50, 68, 0.06);
+      
+      opacity: 0;
+      transform: translateY(32px) scale(0.95) rotate(var(--tilt, 0deg));
+      transition:
+        opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease;
+      will-change: opacity, transform;
+    }
+
+    .collage-item.is-visible {
+      opacity: 1;
+      transform: rotate(var(--tilt, 0deg)) translateY(0) scale(1);
+    }
+
+    .collage-item:nth-child(1)  { --tilt: -1.8deg; }
+    .collage-item:nth-child(2)  { --tilt:  1.2deg; }
+    .collage-item:nth-child(3)  { --tilt: -0.7deg; }
+    .collage-item:nth-child(4)  { --tilt:  2.1deg; }
+    .collage-item:nth-child(5)  { --tilt: -1.4deg; }
+    .collage-item:nth-child(6)  { --tilt:  0.9deg; }
+    .collage-item:nth-child(7)  { --tilt: -2.2deg; }
+    .collage-item:nth-child(8)  { --tilt:  1.6deg; }
+    .collage-item:nth-child(9)  { --tilt: -0.5deg; }
+    .collage-item:nth-child(10) { --tilt:  1.9deg; }
+    .collage-item:nth-child(11) { --tilt: -1.1deg; }
+    .collage-item:nth-child(12) { --tilt:  0.7deg; }
+
+    .collage-item:nth-child(1)  { transition-delay: 0.00s; }
+    .collage-item:nth-child(2)  { transition-delay: 0.07s; }
+    .collage-item:nth-child(3)  { transition-delay: 0.14s; }
+    .collage-item:nth-child(4)  { transition-delay: 0.21s; }
+    .collage-item:nth-child(5)  { transition-delay: 0.28s; }
+    .collage-item:nth-child(6)  { transition-delay: 0.35s; }
+    .collage-item:nth-child(7)  { transition-delay: 0.42s; }
+    .collage-item:nth-child(8)  { transition-delay: 0.49s; }
+    .collage-item:nth-child(9)  { transition-delay: 0.56s; }
+    .collage-item:nth-child(10) { transition-delay: 0.63s; }
+    .collage-item:nth-child(11) { transition-delay: 0.70s; }
+    .collage-item:nth-child(12) { transition-delay: 0.77s; }
+
+    .collage-item:hover {
+      transform: rotate(0deg) translateY(-6px) scale(1.03);
+      box-shadow:
+        0 8px 16px rgba(28, 50, 68, 0.13),
+        0 24px 48px rgba(28, 50, 68, 0.20),
+        0 2px 4px rgba(28, 50, 68, 0.06);
+      z-index: 10;
+    }
+
+    .collage-item img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      display: block;
+      object-fit: cover;
+      pointer-events: none;
+      user-select: none;
+      filter: grayscale(18%) sepia(8%) contrast(104%) brightness(97%);
+      transition: filter 0.4s ease;
+    }
+
+    .collage-item:hover img {
+      filter: grayscale(0%) sepia(0%) contrast(102%) brightness(100%);
+    }
+
+    @media (max-width: 900px) {
+      .collage-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .collage-item  { padding: 8px 8px 30px; }
+    }
+
+    @media (max-width: 540px) {
+      .collage-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .collage-item  { padding: 6px 6px 26px; }
+    }
+
+    
+    .dlc-lp .section-numbers .stats-grid {
+      background: rgba(22, 143, 190, 0.10);
+      border-color: rgba(22, 143, 190, 0.18);
+    }
+
+    .dlc-lp .section-numbers .stat-block {
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .dlc-lp .section-numbers .stat-block:hover {
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .dlc-lp .section-numbers .stat-block-label {
+      color: var(--text-secondary);
+    }
+
+    .dlc-lp .section-numbers .stat-block-sublabel {
+      color: var(--text-muted);
+    }
+
+    .dlc-lp .section-numbers .stats-caption {
+      color: var(--text-muted);
+    }
+
+    .dlc-lp .section-next h2 {
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-next h2 em {
+      color: var(--dlc-blue);
+    }
+
+    .dlc-lp .section-next .eyebrow {
+      color: white;
+    }
+
+    .dlc-lp .section-next .next-lead {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .dlc-lp .section-next .next-item {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .dlc-lp .section-next .next-item:hover {
+      background: rgba(22, 143, 190, 0.06);
+      border-color: rgba(22, 143, 190, 0.20);
+      box-shadow: none;
+    }
+
+    .dlc-lp .section-next .next-item-text {
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-cta h2 {
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-cta .cta-content > p {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .dlc-lp .section-cta .eyebrow {
+      color: white;
+    }
+
+    .dlc-lp .section-cta .btn-outline {
+      color: rgba(255, 255, 255, 0.88);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .dlc-lp .section-cta .btn-outline:hover {
+      border-color: #ffffff;
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-cta .cta-divider-line {
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .dlc-lp .section-cta .cta-social-link {
+      color: rgba(255, 255, 255, 0.48);
+    }
+
+    .dlc-lp .section-cta .cta-social-link:hover {
+      color: #ffffff;
+    }
+
+    .dlc-lp .section-cta .social-icon-wrapper {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.10);
+    }
+
+    .dlc-lp .section-cta .cta-social-link:hover .social-icon-wrapper {
+      background: rgba(22, 143, 190, 0.14);
+      border-color: rgba(22, 143, 190, 0.38);
+      color: var(--dlc-blue);
+    }
+</style>
+
+<div class="dlc-lp">
+
+
+    <!-- ── SECTION 01 — HERO (3-IMAGE FADE + PAN SLIDESHOW) ── -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-split-inner">
+
+          <!-- Copy column — left on desktop, bottom on mobile -->
+          <div class="hero-split-copy">
+            <h2 class="anim-fade-up"><span class="h2-highlight">35 years taught us<span class="desktop-br"><br></span> how to win through<span class="desktop-br"><br></span> every cycle.</span></h2>
+            <p class="hero-lead anim-fade-up delay-1">
+              Retail never stands still, and neither do we. For 35 years, DLC has stayed committed to open-air retail through every cycle. Built to adapt. Built to execute. Built for what’s next.
+            </p>
+            <div class="anim-fade-up delay-2">
+              <a href="#video" class="hero-watch-link">
+                <svg width="13" height="14" viewBox="0 0 13 14" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
+                  <path d="M1.5 1.2L12 7L1.5 12.8V1.2Z"/>
+                </svg>
+                Watch Our Story
+              </a>
+            </div>
+          </div>
+
+          <!-- Image frame — right on desktop, top on mobile -->
+          <div class="hero-frame-wrapper anim-fade-right delay-1">
+            <div class="hero-frame-stack">
+              <!-- Ghost polaroids — deepest to shallowest -->
+              <div class="hero-polaroid-ghost ghost-3"></div>
+              <div class="hero-polaroid-ghost ghost-2"></div>
+              <div class="hero-polaroid-ghost ghost-1"></div>
+              <!-- Active polaroid with crossfade slider -->
+              <div class="hero-frame">
+                <div class="hero-frame-slideshow">
+                  <div class="hero-frame-slide is-active">
+                    <img src="/wp-content/uploads/2026/05/dlc35hero1.jpg" alt="Open-air retail shopping center">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/dlc35hero2.jpg" alt="DLC leadership team">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/dlc35hero3.jpg" alt="Retail real estate portfolio">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/dlc35hero4.jpg" alt="DLC retail property">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/dlc35hero5.jpg" alt="DLC retail property">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/dlc35hero6.jpg" alt="DLC retail property">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/Ifshin-Hall-2.jpg" alt="Ifshin Hall">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/Photo-May-11-2026-1-30-45-PM.jpg" alt="DLC team">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/Photo-May-26-2026-12-36-33-PM.jpg" alt="DLC event">
+                  </div>
+                  <div class="hero-frame-slide">
+                    <img src="/wp-content/uploads/2026/05/adam-magazine.png" alt="Adam — magazine feature">
+                  </div>
+                </div>
+                <div class="hero-frame-badge">
+                  <img src="/wp-content/uploads/2026/05/DLC35.png" alt="DLC 35th Anniversary">
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Scroll-down chevron -->
+      <a href="#video" class="hero-scroll-chevron" aria-label="Scroll to next section">
+        <svg viewBox="0 0 44 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="44" height="24">
+          <path d="M4 4 L22 20 L40 4"/>
+        </svg>
+      </a>
+
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 02 — THE STORY (PLAYABLE EMBED) ── -->
+    <section class="section section-video" id="video">
+      <div class="container">
+        <div class="video-grid">
+          <div class="video-intro">
+            <span class="eyebrow anim-fade-up">The Full Story</span>
+            <h2 class="anim-fade-up delay-1">What built DLC still <br><em>drives us today.</em></h2>
+            <p class="anim-fade-up delay-2">
+              Thirty-five years is a long time for any company, especially in retail real estate.
+DLC has navigated changing consumer behavior, financial crises, e-commerce disruption, and a global pandemic while continuing to evolve, grow, and invest in open-air retail.
+Through every chapter, one thing remained consistent: we stayed close to the business, close to our properties, and close to the people who drive performance every day.
+
+            </p>
+          </div>
+
+          <div class="video-player-frame anim-scale delay-3">
+            <div class="video-aspect-wrapper">
+              <!-- High-fidelity playable YouTube Embed -->
+              <iframe src="https://www.youtube.com/embed/zsaGbmckKbA?rel=0&modestbranding=1"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 03 — VOICES OF DLC (PEAKING CAROUSEL & MODAL VIDEO) ── -->
+    <section class="section section-carousel" id="carousel">
+      <div class="container">
+        <div class="carousel-intro">
+          <span class="eyebrow anim-fade-up">Culture &amp; People</span>
+          <h2 class="anim-fade-up delay-1">Voices of <em>DLC.</em></h2>
+          <p class="anim-fade-up delay-2">
+           The people behind the platform.
+          </p>
+        </div>
+      </div>
+
+      <!-- Full-bleed carousel track — outside container -->
+      <div class="carousel-track-wrapper anim-fade-up delay-2">
+        <div class="carousel-track">
+
+              <!-- Card 1: Adam Ifshin -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <!-- Looping 10-second GIF placeholder (Professional stock avatar styled in CSS) -->
+                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
+                    alt="Adam Ifshin">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Adam Ifshin</div>
+                  <div class="carousel-role">Chief Executive Officer</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Execution has always been our structural edge. We lead by doing."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Anya Wolf -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+                    alt="Anya Wolf">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Anya Wolf</div>
+                  <div class="carousel-role">Leadership Evolution</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Adapting to shifts early is how we protect and unlock client value."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3: Vinay Kaushik -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80"
+                    alt="Vinay Kaushik">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Vinay Kaushik</div>
+                  <div class="carousel-role">Capital Markets</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Capital markets reward deep operational integration and execution."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 4: Blay Bradley -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+                    alt="Blay Bradley">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Blay Bradley</div>
+                  <div class="carousel-role">Execution &amp; Platform</div>
+                  <div class="carousel-takeaway-drawer">
+                    "A platform means everything runs right, down to the last tenant detail."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 5: Julia Grismore -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
+                    alt="Julia Grismore">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Julia Grismore</div>
+                  <div class="carousel-role">Retail Innovation</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Real retail innovation is about solving property obstacles faster."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 6: Jillian Klein -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
+                    alt="Jillian Klein">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Jillian Klein</div>
+                  <div class="carousel-role">People &amp; Culture</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Our supportive culture is the absolute core of our performance."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 7: Mark Bradshaw -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+                    alt="Mark Bradshaw">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Mark Bradshaw</div>
+                  <div class="carousel-role">Properties &amp; Architecture</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Portfolio scale only works when every individual design is sound."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 8: Basil Donnelly -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80"
+                    alt="Basil Donnelly">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Basil Donnelly</div>
+                  <div class="carousel-role">Operational History</div>
+                  <div class="carousel-takeaway-drawer">
+                    "You build a legacy by playing the long game with operational integrity."
+                  </div>
+                </div>
+              </div>
+
+        </div>
+      </div>
+
+      <!-- Carousel Controls: Prev / Dot Indicators / Next -->
+      <div class="carousel-controls">
+        <button class="carousel-arrow carousel-arrow--prev" id="carouselPrev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="carousel-indicator" id="carouselIndicator"></div>
+        <button class="carousel-arrow carousel-arrow--next" id="carouselNext" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ── SECTION 03B — GREAT PLACE TO WORK ── -->
+    <section class="section section-gptw" id="gptw">
+      <div class="container">
+        <!-- Great Place to Work Glassmorphic Takeover Component -->
+        <div class="gptw-card anim-fade-up">
+          <div class="gptw-image-wrapper">
+            <img
+              src="/wp-content/uploads/2026/05/value-creators-image-1400x766-1.webp"
+              alt="DLC Great Place to Work Certified Team">
+          </div>
+          <div class="gptw-content">
+            <h3 class="gptw-headline">9 Years Certified Great Place to Work</h3>
+            <p class="gptw-body">
+              85% of our team members proudly rate DLC as a great place to work—outperforming the national average by
+              over 28%. We drive execution through a collaborative, people-first culture that fosters long-term growth
+              and success.
+            </p>
+            <a href="https://www.dlcmgmt.com/careers/" target="_blank" class="btn-primary">
+              Explore Open Roles &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SECTION 06B — PHOTO COLLAGE (MASONRY ACCENT) ── -->
+    <section class="section-collage" id="collage">
+      <div class="collage-header">
+        <span class="eyebrow anim-fade-up">Moments that have built us</span>
+        <h2 class="anim-fade-up delay-1">A few throwbacks to<br>remember <em>who we are.</em></h2>
+      </div>
+      <div class="collage-grid" id="collageGrid">
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/collage-1.jpg"
+            alt="DLC team photo" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/adam-magazine.png"
+            alt="Adam — magazine feature" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/jen-magazine.png"
+            alt="Jen — magazine feature" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/carolyn-magazine.png"
+            alt="Carolyn — magazine feature" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/steve-magazine-cover.png"
+            alt="Steve — magazine cover" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/Photo-May-11-2026-1-30-45-PM.jpg"
+            alt="DLC team" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/Photo-May-26-2026-12-36-00-PM.jpg"
+            alt="DLC event" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/Photo-May-26-2026-12-36-33-PM.jpg"
+            alt="DLC event" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/Ifshin-hall-1.jpg"
+            alt="Ifshin Hall" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/Ifshin-Hall-2.jpg"
+            alt="Ifshin Hall" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/Ifshin-Hall-3.jpg"
+            alt="Ifshin Hall" loading="lazy">
+        </div>
+
+        <div class="collage-item">
+          <img src="/wp-content/uploads/2026/05/adam-ifhin-hall.webp"
+            alt="Adam at Ifshin Hall" loading="lazy">
+        </div>
+
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 04 — INTERACTIVE TIMELINE ── -->
+    <section class="section section-timeline" id="timeline">
+      <div class="container">
+        <div class="timeline-intro">
+          <span class="eyebrow anim-fade-up">35 Years of Growth</span>
+          <h2 class="anim-fade-up delay-1">From Foundation to <em>Platform.</em></h2>
+          <p class="anim-fade-up delay-2">
+            Not just a static history, but a structural evolution — from our first suburban acquisitions to a national,
+            multi-disciplinary real estate engine.
+          </p>
+        </div>
+        <div class="timeline-container">
+          <!-- Navigation Tabs -->
+          <div class="timeline-tabs-nav anim-fade-up delay-1">
+            <button class="dlc-era-tab is-active" onclick="switchTimelineEra(0, this)">
+              <span class="tab-era">1991–2005</span>
+              <span class="tab-title">Foundation</span>
+            </button>
+            <button class="dlc-era-tab" onclick="switchTimelineEra(1, this)">
+              <span class="tab-era">2006–2015</span>
+              <span class="tab-title">Scaling</span>
+            </button>
+            <button class="dlc-era-tab" onclick="switchTimelineEra(2, this)">
+              <span class="tab-era">2016–2020</span>
+              <span class="tab-title">Institutional Growth</span>
+            </button>
+            <button class="dlc-era-tab" onclick="switchTimelineEra(3, this)">
+              <span class="tab-era">2021–2026</span>
+              <span class="tab-title">Acceleration</span>
+            </button>
+          </div>
+
+          <!-- Dynamic Timeline Content Grid -->
+          <div class="timeline-body anim-fade-up delay-2">
+
+            <!-- Milestones Panel -->
+            <div class="timeline-milestones" id="timelineMilestones">
+              <!-- Milestones loaded dynamically by JS -->
+            </div>
+
+            <!-- Stats/Visual Panel -->
+            <div class="timeline-visual-panel" id="timelineVisual">
+              <!-- Stats visual loaded dynamically by JS -->
+            </div>
+
+          </div>
+
+          <!-- Mobile Accordion (hidden on desktop, built by JS) -->
+          <div class="timeline-accordion" id="timelineAccordion" aria-label="Timeline eras"></div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 06 — WHY NOW (STRATEGIC NARRATIVE) ── -->
+    <section class="section section-why" id="why">
+      <div class="container">
+        <div class="why-grid">
+
+          <div class="why-editorial">
+            <span class="eyebrow anim-fade-up">Why Now</span>
+            <h2 class="anim-fade-up delay-1">Why <em>retail.</em> &nbsp;Why <em>now.</em></h2>
+            <p class="anim-fade-up delay-2">
+              Suburban retail fundamentals have shifted permanently. Physical occupancy is constrained, construction
+              costs have limited new supply, and necessity-driven open-air spaces are in record demand.
+            </p>
+            <div class="anim-fade-up delay-3">
+              <a href="https://www.dlcmgmt.com/therentisnext/" target="_blank" class="btn-primary">The Rent Is Next
+                &rarr;</a>
+              <span class="why-editorial-badge">Explore our 2026 Thought Leadership Campaign</span>
+            </div>
+          </div>
+
+          <div class="why-list anim-fade-right delay-2">
+
+            <div class="why-list-item">
+              <div class="why-list-num">01</div>
+              <div class="why-list-text">Supply has been strictly constrained for over two decades.</div>
+            </div>
+
+            <div class="why-list-item">
+              <div class="why-list-num">02</div>
+              <div class="why-list-text">Demand is accelerating rapidly across grocery and value-add retail.</div>
+            </div>
+
+            <div class="why-list-item">
+              <div class="why-list-num">03</div>
+              <div class="why-list-text">Net effective rents are beginning to rise to reflect structural supply
+                realities.</div>
+            </div>
+
+            <div class="why-list-item">
+              <div class="why-list-num">04</div>
+              <div class="why-list-text">Dynamic operational execution — not passive ownership — drives outperformance.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 07 — BY THE NUMBERS (REAL VERIFIED DATA) ── -->
+    <section class="section section-numbers" id="numbers">
+      <div class="container">
+        <div class="numbers-intro">
+          <span class="eyebrow anim-fade-up">By the Numbers</span>
+          <h2 class="anim-fade-up delay-1">35 Years. <em>One Platform.</em></h2>
+          <p class="anim-fade-up delay-2">
+            The sheer scale of what we operate, coordinate, and execute across the nation.
+          </p>
+        </div>
+
+        <!-- 4-Cell Stats Grid -->
+        <div class="stats-grid anim-scale delay-1" id="statsGrid">
+
+          <!-- Stat 1: Transaction Volume -->
+          <div class="stat-block">
+            <div class="stat-block-value" data-prefix="$" data-target="1.3" data-suffix="B" data-decimals="true">
+              $0B
+            </div>
+            <div class="stat-block-label">Transaction volume in 2025</div>
+            <div class="stat-block-sublabel">Dec 2025</div>
+          </div>
+
+          <!-- Stat 2: Properties -->
+          <div class="stat-block">
+            <div class="stat-block-value" data-prefix="" data-target="90" data-suffix="+">
+              0+
+            </div>
+            <div class="stat-block-label">Properties nationwide</div>
+            <div class="stat-block-sublabel">Under management</div>
+          </div>
+
+          <!-- Stat 3: Total Square Footage (Verified 21M SF) -->
+          <div class="stat-block">
+            <div class="stat-block-value" data-prefix="" data-target="22" data-suffix="M SF">
+              0M SF
+            </div>
+            <div class="stat-block-label"> Assets under management</div>
+            <div class="stat-block-sublabel">and growing</div>
+          </div>
+
+          <!-- Stat 5: Great Place to Work -->
+          <div class="stat-block">
+            <div class="stat-block-value" style="color: var(--dlc-green);" data-prefix="" data-target="9"
+              data-suffix=" Yrs">
+              0 Yrs
+            </div>
+            <div class="stat-block-label">Great Place to Work certified</div>
+            <div class="stat-block-sublabel">Consecutive</div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 05 — PLATFORM (3-COL PILLAR CARDS) ── -->
+    <section class="section section-platform" id="platform">
+      <div class="container">
+        <div class="platform-intro">
+          <span class="eyebrow anim-fade-up">DLC Today</span>
+          <h2 class="anim-fade-up delay-1">More than ownership. <br><em>A platform built to operate.</em></h2>
+          <p class="anim-fade-up delay-2">
+          <em>Over 35 years,</em><br> DLC expanded thoughtfully, building an integrated platform designed to move quickly, solve problems internally, and create long-term value across every stage of the retail lifecycle.
+          </p>
+          <p class="anim-fade-up delay-3">
+            <b>DLC believed in open-air retail before the market fully understood its durability.</b>
+          </p>
+        </div>
+
+        <div class="platform-grid">
+
+          <!-- Pillar 1: DLC Management -->
+          <div class="pillar-card brand-blue anim-fade-up delay-1">
+            <div class="pillar-card-image pillar-card-image--logo">
+              <img src="/wp-content/uploads/2026/05/DLC-Logo_primary_full-color.png" alt="DLC Management">
+            </div>
+            <div class="pillar-card-content">
+              <div class="platform-card-kicker">DLC Management</div>
+              <h3 class="platform-card-title">Owner-Operator Platform</h3>
+              <p class="platform-card-tagline">Owned. Operated. Outperforming.</p>
+              <p class="platform-card-body">
+                The core management core. Vertically integrated acquisition, institutional leasing, proactive management,
+                and property development across major open-air retail spaces.
+              </p>
+              <ul class="platform-card-proofs">
+                <li>80+ properties nationwide</li>
+                <li>National anchor leasing (Walmart, Target, Costco)</li>
+                <li>$429M DRA portfolio acquisition (Dec 2025)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Renovo Construction -->
+          <div class="pillar-card brand-green anim-fade-up delay-2">
+            <div class="pillar-card-image pillar-card-image--logo">
+              <img src="/wp-content/uploads/2026/05/RENOVO-logo-full-color.png" alt="Renovo Construction">
+            </div>
+            <div class="pillar-card-content">
+              <div class="platform-card-kicker">Renovo Construction</div>
+              <h3 class="platform-card-title">Built to Open. Anywhere.</h3>
+              <p class="platform-card-tagline">General contracting built for retail speed.</p>
+              <p class="platform-card-body">
+                Eliminating the costly delays between lease signature and store opening. Dedicated in-house general
+                contracting and construction team delivering spaces on or ahead of schedule.
+              </p>
+              <ul class="platform-card-proofs">
+                <li>Direct coordination with leasing and acquisition pipelines</li>
+                <li>Specialty in complex open-air retail re-tenanting</li>
+                <li>Drastically reduced time-to-open for anchors</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Pillar 3: NWS Architects -->
+          <div class="pillar-card brand-gold anim-fade-up delay-3">
+            <div class="pillar-card-image pillar-card-image--logo">
+              <img src="/wp-content/uploads/2026/05/NWS-logo-full-color.png" alt="NWS Architects">
+            </div>
+            <div class="pillar-card-content">
+              <div class="platform-card-kicker">NWS Architects</div>
+              <h3 class="platform-card-title">Designed to Move Faster.</h3>
+              <p class="platform-card-tagline">Architecture aligned with deal velocity.</p>
+              <p class="platform-card-body">
+                Architectural planning and permitting integrated directly into our leasing cycle. High-speed drawing sets,
+                structural reviews, and municipal permit filings keeping plans moving.
+              </p>
+              <ul class="platform-card-proofs">
+                <li>Integrated design-to-permit workflow</li>
+                <li>Strict alignment with national retailer specs</li>
+                <li>Zero reliance on third-party architect lag</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="section-transition-divider"></div>
+
+    <!-- ── SECTION 08 — WHAT'S NEXT ── -->
+    <section class="section section-next" id="next">
+      <div class="container">
+        <div class="next-grid">
+          <div class="next-content">
+            <span class="eyebrow anim-fade-up">What's Next</span>
+            <h2 class="anim-fade-up delay-1">This Is Just<br><em>The Beginning.</em></h2>
+            <p class="next-lead anim-fade-up delay-2">
+              The same entrepreneurial mindset that built the company 35 years ago continues to drive how we acquire, operate, build, and grow today.
+As retail enters its next chapter, DLC is positioned to continue doing what it has always done best: adapt quickly, operate intelligently, and move the market forward.
+
+            </p>
+
+            <div class="next-list anim-fade-up delay-3">
+
+              <div class="next-item">
+                <div class="next-item-dot"></div>
+                <div class="next-item-text">Capitalizing on structural pricing cycles in open-air retail</div>
+              </div>
+
+              <div class="next-item">
+                <div class="next-item-dot"></div>
+                <div class="next-item-text">Scaling grocery-anchored asset acquisition in major sub-markets</div>
+              </div>
+
+              <div class="next-item">
+                <div class="next-item-dot"></div>
+                <div class="next-item-text">Expanding NWS Architects &amp; Renovo third-party builder pipelines</div>
+              </div>
+
+              <div class="next-item">
+                <div class="next-item-dot"></div>
+                <div class="next-item-text">Pioneering data-driven Enterprise Intelligence systems at property level
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <!-- ── SECTION 09 — FINAL CTA ── -->
+    <section class="section section-cta" id="cta">
+      <div class="container">
+        <div class="cta-content">
+          <span class="eyebrow anim-fade-up">Connect</span>
+          <h2 class="anim-fade-up delay-1">Ready to move?</h2>
+          <p class="anim-fade-up delay-2">
+           Whether you are a retailer, investor, partner, or future teammate, DLC was built to move with the market and help shape where it goes next.
+          </p>
+          <div class="cta-actions anim-fade-up delay-3">
+            <a href="https://www.dlcmgmt.com/properties/" target="_blank" class="btn-primary">Explore Our Properties</a>
+            <a href="https://www.dlcmgmt.com/contact/" target="_blank" class="btn-outline">Connect with Our Team</a>
+          </div>
+
+          <div class="cta-divider-line anim-fade-up"></div>
+
+          <a href="https://www.linkedin.com/company/dlc-management-corp/" target="_blank"
+            class="cta-social-link anim-fade-up">
+            <div class="social-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+              </svg>
+            </div>
+            Follow DLC on LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Lightbox Modal -->
+    <div class="dlc-modal" id="photoModal" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+      <div class="dlc-modal-overlay" id="photoModalOverlay"></div>
+      <div class="dlc-photo-modal-content" id="photoModalContent">
+        <button class="dlc-modal-close" id="photoModalClose" aria-label="Close">&times;</button>
+        <img id="photoModalImg" src="" alt="" style="display:block;width:100%;height:100%;object-fit:contain;">
+      </div>
+    </div>
+
+    <!-- Custom Lightbox Video Modal Window -->
+    <div class="dlc-modal" id="videoModal">
+      <div class="dlc-modal-overlay" id="modalOverlay"></div>
+      <div class="dlc-modal-content">
+        <button class="dlc-modal-close" id="modalClose">&times;</button>
+        <div class="dlc-modal-video-wrapper">
+          <iframe id="modalIframe" src="" allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+    /* ── HERO IMAGE SLIDESHOW ENGINE ── */
+    (function () {
+      const slideshow = document.querySelector('.hero-frame-slideshow');
+      if (!slideshow) return;
+
+      // Shuffle slides into a random order on every load
+      const slideEls = Array.from(slideshow.querySelectorAll('.hero-frame-slide'));
+      for (let i = slideEls.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        slideshow.insertBefore(slideEls[j], slideshow.children[i + 1] || null);
+        [slideEls[i], slideEls[j]] = [slideEls[j], slideEls[i]];
+      }
+
+      const slides = Array.from(slideshow.querySelectorAll('.hero-frame-slide'));
+      slides.forEach(s => s.classList.remove('is-active'));
+      slides[0].classList.add('is-active');
+
+      let current = 0;
+      const INTERVAL = 5800;
+
+      function advance() {
+        slides[current].classList.remove('is-active');
+        current = (current + 1) % slides.length;
+        slides[current].classList.add('is-active');
+      }
+
+      setInterval(advance, INTERVAL);
+    })();
+
+    /* ── INTERACTIVE TIMELINE DATA & ENGINE ── */
+    const timelineEras = [
+      {
+        eraRange: '1991–2005',
+        eraTitle: 'Foundation',
+        visualStat: '14',
+        visualUnit: 'properties',
+        visualDesc: 'Establishing our necessity-based investment thesis and building a foundation for entrepreneurial deal-making.',
+        milestones: [
+          '<strong>1991</strong> — DLC Management Corp founded by Adam Ifshin and his father Steve Ifshin as a small operation.',
+          '<strong>Northeast Portfolio</strong> — Acquired and repositioned first suburban open-air shopping assets.',
+          '<strong>2003</strong> — Founder Adam Ifshin completes Harvard University’s "Running a Real Estate Company" executive program.',
+          '<strong>Vertical Integration</strong> — Assembled dedicated internal leasing and operations teams from day one.'
+        ]
+      },
+      {
+        eraRange: '2006–2015',
+        eraTitle: 'Scaling',
+        visualStat: '40+',
+        visualUnit: 'properties',
+        visualDesc: 'Deepening geographic footprint into Mid-Atlantic and Southeast regions while gaining national industry recognition.',
+        milestones: [
+          '<strong>Sub-Market Expansion</strong> — Entered key secondary and tertiary growth markets.',
+          '<strong>2010 & 2014</strong> — Adam Ifshin recognized as a finalist in the Ernst & Young Entrepreneur of the Year Program.',
+          '<strong>Anchor Deepening</strong> — Solidified leasing relations with major national off-price leaders.',
+          '<strong>Operational Systems</strong> — Upgraded internal asset management and billing systems for institutional load.'
+        ]
+      },
+      {
+        eraRange: '2016–2020',
+        eraTitle: 'Institutional Growth',
+        visualStat: '60+',
+        visualUnit: 'properties',
+        visualDesc: 'Forming major joint-ventures with institutional capital partners and celebrating our 25th anniversary with record-breaking acquisitions.',
+        milestones: [
+          '<strong>2016 Landmark Acquisition</strong> — Partnered with DRA Advisors on a 16-property portfolio, adding 4.85M sq ft.',
+          '<strong>$2.7 Billion Milestone</strong> — Portfolio value crossed a major threshold during our 25th anniversary year.',
+          '<strong>Buffalo Expansion</strong> — Opened a new regional satellite office in Buffalo, NY to support the growing footprint.',
+          '<strong>In-House Capabilities</strong> — Further developed our in-house affiliate general contractor business, Renovo Construction.'
+        ]
+      },
+      {
+        eraRange: '2021–2026',
+        eraTitle: 'Acceleration',
+        visualStat: '$2.3B',
+        visualUnit: 'buying power',
+        visualDesc: 'Securing massive strategic capital commitments and continuing to earn national recognition for our company culture.',
+        milestones: [
+          '<strong>2021 Recognition</strong> — Named a "Best Place to Work" in real estate by GlobeSt.com.',
+          '<strong>2026 Strategic Capital</strong> — Secured new commitment from Temerity Strategic Partners, expanding buying power to $2.3 billion.',
+          '<strong>Great Place to Work</strong> — Maintained consistent national certification based on overwhelming positive employee feedback.',
+          '<strong>National Presence</strong> — Expanded regional offices across Atlanta, Buffalo, Chicago, Dallas, and Washington, D.C.'
+        ]
+      }
+    ];
+
+    function switchTimelineEra(index, buttonElement) {
+      // Toggle Nav Active states
+      document.querySelectorAll('.dlc-era-tab').forEach(btn => btn.classList.remove('is-active'));
+      buttonElement.classList.add('is-active');
+
+      const era = timelineEras[index];
+
+      // Fade content container out, update values, fade back in
+      const body = document.querySelector('.timeline-body');
+      body.style.opacity = 0.2;
+      body.style.transform = 'translateY(10px)';
+      body.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+
+      setTimeout(() => {
+        // Build milestones
+        const milestonesContainer = document.getElementById('timelineMilestones');
+        milestonesContainer.innerHTML = era.milestones.map((m, idx) => {
+          const sep = m.indexOf(' — ');
+          const headline = sep !== -1 ? m.slice(0, sep) : m;
+          const body = sep !== -1 ? m.slice(sep + 3) : '';
+          return `
+          <div class="timeline-milestone-item" style="animation-delay: ${idx * 60}ms">
+            <div class="timeline-milestone-dot"></div>
+            <div class="timeline-milestone-text">
+              <div class="milestone-headline">${headline}</div>
+              ${body ? `<div class="milestone-body">${body}</div>` : ''}
+            </div>
+          </div>`;
+        }).join('');
+
+        // Build visual panel
+        const visualContainer = document.getElementById('timelineVisual');
+        visualContainer.innerHTML = `
+          <div class="timeline-visual-label">${era.eraRange} &nbsp;·&nbsp; ${era.eraTitle}</div>
+          <div class="timeline-visual-stat">${era.visualStat}<span>${era.visualUnit}</span></div>
+          <div class="timeline-visual-desc">${era.visualDesc}</div>
+        `;
+
+        body.style.opacity = 1;
+        body.style.transform = 'translateY(0)';
+      }, 250);
+    }
+
+    // Initialize first timeline era
+    document.addEventListener('DOMContentLoaded', () => {
+      const firstTab = document.querySelector('.dlc-era-tab');
+      if (firstTab) switchTimelineEra(0, firstTab);
+
+      // Build mobile accordion from timelineEras data
+      const accordionEl = document.getElementById('timelineAccordion');
+      if (accordionEl) {
+        accordionEl.innerHTML = timelineEras.map((era, idx) => `
+          <div class="timeline-accordion-item${idx === 0 ? ' is-open' : ''}" data-index="${idx}">
+            <button class="dlc-acc-hdr" aria-expanded="${idx === 0}" onclick="toggleTimelineAccordion(this)">
+              <span class="accordion-era">${era.eraRange}</span>
+              <span class="accordion-title">${era.eraTitle}</span>
+              <svg class="accordion-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="timeline-accordion-body">
+              <ul class="accordion-milestones">
+                ${era.milestones.map(m => {
+                  const sep = m.indexOf(' — ');
+                  const headline = sep !== -1 ? m.slice(0, sep) : m;
+                  const body = sep !== -1 ? m.slice(sep + 3) : '';
+                  return `<li><div class="milestone-text-block"><div class="milestone-headline">${headline}</div>${body ? `<div class="milestone-body">${body}</div>` : ''}</div></li>`;
+                }).join('')}
+              </ul>
+              <div class="accordion-visual-panel">
+                <div class="accordion-visual-label">${era.eraRange} &nbsp;·&nbsp; ${era.eraTitle}</div>
+                <div class="accordion-visual-stat">${era.visualStat}<span>${era.visualUnit}</span></div>
+                <div class="accordion-visual-desc">${era.visualDesc}</div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+    });
+
+    function toggleTimelineAccordion(btn) {
+      const item = btn.closest('.timeline-accordion-item');
+      const isOpen = item.classList.contains('is-open');
+      // Close all items
+      document.querySelectorAll('.timeline-accordion-item').forEach(el => {
+        el.classList.remove('is-open');
+        el.querySelector('.dlc-acc-hdr').setAttribute('aria-expanded', 'false');
+      });
+      // Open clicked item if it was closed
+      if (!isOpen) {
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+    /* ── CUSTOM YOUTUBE LIGHTBOX MODAL ── */
+    const modal = document.getElementById('videoModal');
+    const modalIframe = document.getElementById('modalIframe');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(videoId) {
+      modalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&rel=0&modestbranding=1&enablejsapi=1`;
+      modal.classList.add('is-active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-active');
+      document.body.style.overflow = '';
+      setTimeout(() => { modalIframe.src = ''; }, 350);
+    }
+
+    modalOverlay.addEventListener('click', closeModal);
+    modalClose.addEventListener('click', closeModal);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-active')) closeModal();
+    });
+
+    /* ── PHOTO COLLAGE LIGHTBOX ── */
+    (function () {
+      const photoModal    = document.getElementById('photoModal');
+      const photoImg      = document.getElementById('photoModalImg');
+      const photoOverlay  = document.getElementById('photoModalOverlay');
+      const photoClose    = document.getElementById('photoModalClose');
+      const photoContent  = document.getElementById('photoModalContent');
+
+      function openPhoto(src, alt) {
+        photoImg.src = src;
+        photoImg.alt = alt || '';
+        photoModal.classList.add('is-active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePhoto() {
+        photoModal.classList.remove('is-active');
+        document.body.style.overflow = '';
+        setTimeout(() => { photoImg.src = ''; }, 350);
+      }
+
+      // Wire up each collage item
+      document.querySelectorAll('.collage-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          if (img) openPhoto(img.src, img.alt);
+        });
+      });
+
+      // Close on overlay, X button, clicking the image itself
+      photoOverlay.addEventListener('click', closePhoto);
+      photoClose.addEventListener('click', closePhoto);
+      photoContent.addEventListener('click', closePhoto);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && photoModal.classList.contains('is-active')) closePhoto();
+      });
+    })();
+
+    /* ── SCROLL-DRIVEN ENTRY ANIMATIONS (INTERSECTION OBSERVER) ── */
+    const observerOptions = {
+      threshold: 0.18,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+
+          // If stats grid is in view, trigger count-up counters
+          if (entry.target.id === 'statsGrid') {
+            triggerCountUp();
+          }
+
+          scrollObserver.unobserve(entry.target); // Trigger once only
+        }
+      });
+    }, observerOptions);
+
+    // Observe animated elements
+    document.querySelectorAll('.anim-fade-up, .anim-fade-left, .anim-fade-right, .anim-scale').forEach(el => {
+      scrollObserver.observe(el);
+    });
+
+    // Specifically observe stats grid to trigger counters at threshold
+    const statsGrid = document.getElementById('statsGrid');
+    if (statsGrid) scrollObserver.observe(statsGrid);
+
+    /* ── CAROUSEL DRAG-TO-SCROLL + CARD CLICK ENGINE ── */
+    (function () {
+      const track = document.querySelector('.carousel-track');
+      if (!track) return;
+
+      let isDown = false;
+      let startX = 0;
+      let downClientX = 0;
+      let scrollLeft = 0;
+      let isDragging = false;
+
+      track.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'mouse') {
+          if (e.button !== 0) return;
+          isDown = true;
+          isDragging = false;
+          startX = e.pageX - track.offsetLeft;
+          downClientX = e.clientX;
+          scrollLeft = track.scrollLeft;
+          track.setPointerCapture(e.pointerId);
+          track.style.cursor = 'grabbing';
+          track.style.scrollSnapType = 'none';
+          track.style.scrollBehavior = 'auto';
+        }
+      });
+
+      track.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        const x = e.pageX - track.offsetLeft;
+        if (Math.abs(e.clientX - downClientX) > 10) {
+          isDragging = true;
+        }
+        track.scrollLeft = scrollLeft - (x - startX) * 1.5;
+      });
+
+      const endDrag = () => {
+        if (!isDown) return;
+        isDown = false;
+        track.style.cursor = '';
+        track.style.scrollSnapType = '';
+        track.style.scrollBehavior = '';
+      };
+
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+      track.addEventListener('pointerleave', endDrag);
+
+      track.addEventListener('click', (e) => {
+        if (isDragging) return;
+
+        // If pointer capture causes the event target to be the track,
+        // look up the actual card under the click coordinates.
+        let card = e.target.closest('.carousel-card');
+        if (!card) {
+          const hit = document.elementFromPoint(e.clientX, e.clientY);
+          card = hit ? hit.closest('.carousel-card') : null;
+        }
+        if (!card) return;
+
+        const videoId = card.dataset.videoId;
+        if (videoId) openModal(videoId);
+      });
+    })();
+
+    /* ── CAROUSEL DOT INDICATOR + ARROW NAVIGATION ── */
+    (function () {
+      const track = document.querySelector('.carousel-track');
+      if (!track) return;
+
+      const indicator = document.getElementById('carouselIndicator');
+      const prevBtn = document.getElementById('carouselPrev');
+      const nextBtn = document.getElementById('carouselNext');
+      const cards = Array.from(track.querySelectorAll('.carousel-card'));
+
+      /* Dots */
+      if (indicator) {
+        function renderDots() {
+          indicator.innerHTML = '';
+          cards.forEach((c, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'carousel-indicator-dot';
+            btn.setAttribute('aria-label', `Card ${i + 1}`);
+            btn.addEventListener('click', () => {
+              const padLeft = parseInt(getComputedStyle(track).paddingLeft, 10) || 0;
+              track.scrollTo({ left: Math.max(0, c.offsetLeft - padLeft), behavior: 'smooth' });
+            });
+            indicator.appendChild(btn);
+          });
+          updateActive();
+        }
+
+        function updateActive() {
+          const center = track.scrollLeft + track.clientWidth / 2;
+          let closest = 0;
+          let closestDist = Infinity;
+          cards.forEach((c, i) => {
+            const cCenter = c.offsetLeft + c.clientWidth / 2;
+            const dist = Math.abs(center - cCenter);
+            if (dist < closestDist) { closestDist = dist; closest = i; }
+          });
+          Array.from(indicator.children).forEach((d, idx) => d.classList.toggle('is-active', idx === closest));
+        }
+
+        let raf = null;
+        track.addEventListener('scroll', () => {
+          if (raf) cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => { updateActive(); raf = null; });
+        }, { passive: true });
+
+        renderDots();
+        window.addEventListener('resize', renderDots);
+      }
+
+      /* Arrows */
+      function scrollByCard(dir) {
+        const card = cards[0];
+        if (!card) return;
+        const gap = parseInt(getComputedStyle(track).gap, 10) || 24;
+        track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => scrollByCard(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => scrollByCard(1));
+    })();
+
+    /* ── PHOTO COLLAGE — SCROLL-TRIGGERED STAGGER ── */
+    (function () {
+      const grid = document.getElementById('collageGrid');
+      if (!grid) return;
+
+      const items = Array.from(grid.querySelectorAll('.collage-item'));
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            /* Trigger all items — CSS nth-child delays handle stagger */
+            items.forEach(item => item.classList.add('is-visible'));
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      io.observe(grid);
+    })();
+
+    /* ── COUNT-UP ANIMATION ENGINE (easeOutQuart Easing) ── */
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    let countersTriggered = false;
+    function triggerCountUp() {
+      if (countersTriggered) return;
+      countersTriggered = true;
+
+      const duration = 1800; // Counter animation length in ms
+
+      document.querySelectorAll('.stat-block-value').forEach(stat => {
+        const targetValue = parseFloat(stat.getAttribute('data-target'));
+        const prefix = stat.getAttribute('data-prefix') || '';
+        const suffix = stat.getAttribute('data-suffix') || '';
+        const hasDecimals = stat.getAttribute('data-decimals') === 'true';
+
+        let startTime = null;
+
+        function animateCounter(currentTime) {
+          if (!startTime) startTime = currentTime;
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+          const easedProgress = easeOutQuart(progress);
+          const currentValue = easedProgress * targetValue;
+
+          // Format value string
+          let formattedValue = '';
+          if (hasDecimals) {
+            formattedValue = currentValue.toFixed(1);
+          } else {
+            formattedValue = Math.floor(currentValue).toString();
+          }
+
+          // Build layout block with dynamic small suffix
+          if (suffix.includes('+') || suffix.includes('M') || suffix.includes('SF') || suffix.includes('Yrs')) {
+            stat.innerHTML = `${prefix}${formattedValue}<span class="small-suffix">${suffix}</span>`;
+          } else {
+            stat.innerHTML = `${prefix}${formattedValue}${suffix}`;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(animateCounter);
+          }
+        }
+
+        requestAnimationFrame(animateCounter);
+      });
+    }
+  </script>
+
+
+
+
