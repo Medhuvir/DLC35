@@ -946,6 +946,24 @@
       font-weight: 700;
       color: var(--text-primary);
       margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .carousel-since-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+      background: #0a1f44;
+      padding: 3px 10px 3px 9px;
+      border-radius: 3px 0 0 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-left: auto;
+      margin-right: -20px;
     }
 
     .carousel-role {
@@ -2237,6 +2255,10 @@
         font-size: 14px;
       }
 
+      .carousel-since-badge {
+        margin-right: -12px;
+      }
+
       .carousel-role {
         font-size: 10px;
       }
@@ -2478,8 +2500,10 @@
           <div class="hero-split-copy">
             <h2 class="anim-fade-up"><span class="h2-highlight">35 years taught us<span class="desktop-br"><br></span> how to win through<span class="desktop-br"><br></span> every cycle.</span></h2>
             <p class="hero-lead anim-fade-up delay-1">
-              Retail never stands still, and neither do we. For 35 years, DLC has stayed committed to open-air retail through every cycle. Built to adapt. Built to execute. Built for what’s next.
-            </p>
+             Open-air retail has been our business from day one.
+We've stayed close to our properties, our tenants, and our communities through every market shift.
+That's how you build a company that lasts.
+</p>
             <div class="anim-fade-up delay-2">
               <a href="#video" class="hero-watch-link">
                 <svg width="13" height="14" viewBox="0 0 13 14" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
@@ -2560,9 +2584,9 @@
             <span class="eyebrow anim-fade-up">The Full Story</span>
             <h2 class="anim-fade-up delay-1">What built DLC still <br><em>drives us today.</em></h2>
             <p class="anim-fade-up delay-2">
-              Thirty-five years is a long time for any company, especially in retail real estate.
-DLC has navigated changing consumer behavior, financial crises, e-commerce disruption, and a global pandemic while continuing to evolve, grow, and invest in open-air retail.
-Through every chapter, one thing remained consistent: we stayed close to the business, close to our properties, and close to the people who drive performance every day.
+              Less than 5% of companies that are founder led make it to 35 years.<br>
+We’ve navigated changing consumer behavior, financial crises, e-commerce disruption, and a global pandemic while continuing to evolve, grow, and invest in open-air retail.
+What began as a belief in open-air retail evolved into a platform that continues to shape communities, create opportunities, and move the market forward.
 
             </p>
           </div>
@@ -2612,7 +2636,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                   </div>
                 </div>
                 <div class="carousel-card-body">
-                  <div class="carousel-name">Adam Ifshin</div>
+                  <div class="carousel-name">Adam Ifshin <span class="carousel-since-badge">Since 1991</span></div>
                   <div class="carousel-role">Chief Executive Officer</div>
                   <div class="carousel-takeaway-drawer">
                     "Execution has always been our structural edge. We lead by doing."
@@ -2635,7 +2659,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                   </div>
                 </div>
                 <div class="carousel-card-body">
-                  <div class="carousel-name">Anya Wolf</div>
+                  <div class="carousel-name">Anya Wolf <span class="carousel-since-badge">Since 2017</span></div>
                   <div class="carousel-role">Leadership Evolution</div>
                   <div class="carousel-takeaway-drawer">
                     "Adapting to shifts early is how we protect and unlock client value."
@@ -2658,7 +2682,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                   </div>
                 </div>
                 <div class="carousel-card-body">
-                  <div class="carousel-name">Vinay Kaushik</div>
+                  <div class="carousel-name">Vinay Kaushik <span class="carousel-since-badge">Since 2019</span></div>
                   <div class="carousel-role">Capital Markets</div>
                   <div class="carousel-takeaway-drawer">
                     "Capital markets reward deep operational integration and execution."
@@ -2681,7 +2705,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                   </div>
                 </div>
                 <div class="carousel-card-body">
-                  <div class="carousel-name">Blay Bradley</div>
+                  <div class="carousel-name">Blay Bradley <span class="carousel-since-badge">Since 2018</span></div>
                   <div class="carousel-role">Execution &amp; Platform</div>
                   <div class="carousel-takeaway-drawer">
                     "A platform means everything runs right, down to the last tenant detail."
@@ -2704,7 +2728,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                   </div>
                 </div>
                 <div class="carousel-card-body">
-                  <div class="carousel-name">Julia Grismore</div>
+                  <div class="carousel-name">Julia Grismore <span class="carousel-since-badge">Since 2022</span></div>
                   <div class="carousel-role">Retail Innovation</div>
                   <div class="carousel-takeaway-drawer">
                     "Real retail innovation is about solving property obstacles faster."
@@ -2727,7 +2751,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                   </div>
                 </div>
                 <div class="carousel-card-body">
-                  <div class="carousel-name">Jillian Klein</div>
+                  <div class="carousel-name">Jillian Klein <span class="carousel-since-badge">Since 2017</span></div>
                   <div class="carousel-role">People &amp; Culture</div>
                   <div class="carousel-takeaway-drawer">
                     "Our supportive culture is the absolute core of our performance."
@@ -2750,7 +2774,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                   </div>
                 </div>
                 <div class="carousel-card-body">
-                  <div class="carousel-name">Mark Bradshaw</div>
+                  <div class="carousel-name">Mark Bradshaw <span class="carousel-since-badge">Since 2022</span></div>
                   <div class="carousel-role">Properties &amp; Architecture</div>
                   <div class="carousel-takeaway-drawer">
                     "Portfolio scale only works when every individual design is sound."
@@ -2758,7 +2782,53 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                 </div>
               </div>
 
-              <!-- Card 8: Basil Donnelly -->
+              <!-- Card 8: Chris Ressa -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=300&q=80"
+                    alt="Chris Ressa">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Chris Ressa <span class="carousel-since-badge">Since 2007</span></div>
+                  <div class="carousel-role">Chief Operating Officer</div>
+                  <div class="carousel-takeaway-drawer">
+                    "Operational discipline is what turns a great strategy into a great business."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 9: Julia Lindert -->
+              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+                <div class="carousel-thumb-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1598550874175-4d0ef436c909?auto=format&fit=crop&w=300&q=80"
+                    alt="Julia Lindert">
+                  <div class="carousel-play-overlay">
+                    <div class="carousel-play-btn">
+                      <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-card-body">
+                  <div class="carousel-name">Julia Lindert <span class="carousel-since-badge">Since 2015</span></div>
+                  <div class="carousel-role">Leasing &amp; Strategy</div>
+                  <div class="carousel-takeaway-drawer">
+                    "The best deals come from understanding what tenants need before they ask."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 10: Basil Donnelly -->
               <div class="carousel-card" data-video-id="mJpNmYeooQE">
                 <div class="carousel-thumb-container">
                   <img
@@ -2773,7 +2843,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                   </div>
                 </div>
                 <div class="carousel-card-body">
-                  <div class="carousel-name">Basil Donnelly</div>
+                  <div class="carousel-name">Basil Donnelly <span class="carousel-since-badge">Since 2010</span></div>
                   <div class="carousel-role">Operational History</div>
                   <div class="carousel-takeaway-drawer">
                     "You build a legacy by playing the long game with operational integrity."
@@ -2958,7 +3028,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
 
           <div class="why-editorial">
             <span class="eyebrow anim-fade-up">Why Now</span>
-            <h2 class="anim-fade-up delay-1">Why <em>retail.</em> &nbsp;Why <em>now.</em></h2>
+            <h2 class="anim-fade-up delay-1">Why <em>retail.</em><br>Why <em>now.</em></h2>
             <p class="anim-fade-up delay-2">
               Suburban retail fundamentals have shifted permanently. Physical occupancy is constrained, construction
               costs have limited new supply, and necessity-driven open-air spaces are in record demand.
@@ -3066,7 +3136,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
       <div class="container">
         <div class="platform-intro">
           <span class="eyebrow anim-fade-up">DLC Today</span>
-          <h2 class="anim-fade-up delay-1">More than ownership. <br><em>A platform built to operate.</em></h2>
+          <h2 class="anim-fade-up delay-1">What started with <br>open-air retail<br><em>became something bigger.</em></h2>
           <p class="anim-fade-up delay-2">
           <em>Over 35 years,</em><br> DLC expanded thoughtfully, building an integrated platform designed to move quickly, solve problems internally, and create long-term value across every stage of the retail lifecycle.
           </p>
