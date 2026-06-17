@@ -1943,12 +1943,12 @@
     .dlc-photo-modal-content {
       position: relative;
       max-width: min(92vw, 1100px);
-      max-height: 90vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       border-radius: 6px;
-      overflow: hidden;
+      overflow: visible;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65), 0 0 32px rgba(22, 143, 190, 0.18);
       cursor: zoom-out;
       z-index: 10;
@@ -1956,11 +1956,23 @@
 
     .dlc-photo-modal-content img {
       max-width: min(92vw, 1100px);
-      max-height: 90vh;
+      max-height: 80vh;
       width: auto;
       height: auto;
       object-fit: contain;
       display: block;
+      border-radius: 6px;
+    }
+
+    .dlc-photo-modal-caption {
+      margin: 12px 0 0;
+      max-width: 520px;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.72);
+      pointer-events: none;
     }
 
     @media (max-width: 900px) {
@@ -2303,9 +2315,11 @@
       position: relative;
       overflow: hidden;
       cursor: zoom-in;
-      
+      display: flex;
+      flex-direction: column;
+
       background: #fff;
-      padding: 10px 10px 38px;
+      padding: 10px 10px 0;
       box-shadow:
         0 4px 6px rgba(28, 50, 68, 0.10),
         0 12px 28px rgba(28, 50, 68, 0.14),
@@ -2375,14 +2389,31 @@
       filter: grayscale(0%) sepia(0%) contrast(102%) brightness(100%);
     }
 
+    .collage-thumb-caption {
+      margin: 0;
+      padding: 0 6px;
+      height: 42px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 400;
+      line-height: 1.4;
+      text-align: center;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+      overflow: hidden;
+    }
+
     @media (max-width: 900px) {
       .collage-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .collage-item  { padding: 8px 8px 30px; }
+      .collage-item  { padding: 8px 8px 0; }
     }
 
     @media (max-width: 540px) {
       .collage-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-      .collage-item  { padding: 6px 6px 26px; }
+      .collage-item  { padding: 6px 6px 0; }
     }
 
     
@@ -2622,9 +2653,8 @@ What began as a belief in open-air retail evolved into a platform that continues
         <div class="carousel-track">
 
               <!-- Card 1: Adam Ifshin -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="" style="display:none">
                 <div class="carousel-thumb-container">
-                  <!-- Looping 10-second GIF placeholder (Professional stock avatar styled in CSS) -->
                   <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80"
                     alt="Adam Ifshin">
                   <div class="carousel-play-overlay">
@@ -2645,10 +2675,10 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 2: Anya Wolf -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="qTxETWLfp-8">
                 <div class="carousel-thumb-container">
                   <img
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80"
+                    src="/wp-content/uploads/2026/06/voice-anya.png"
                     alt="Anya Wolf">
                   <div class="carousel-play-overlay">
                     <div class="carousel-play-btn">
@@ -2668,10 +2698,10 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 3: Vinay Kaushik -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="xpWgc-rFQok">
                 <div class="carousel-thumb-container">
                   <img
-                    src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80"
+                    src="/wp-content/uploads/2026/06/voice-vinay.png"
                     alt="Vinay Kaushik">
                   <div class="carousel-play-overlay">
                     <div class="carousel-play-btn">
@@ -2691,10 +2721,10 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 4: Blay Bradley -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="LcOU4ppoP8A">
                 <div class="carousel-thumb-container">
                   <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80"
+                    src="/wp-content/uploads/2026/06/voice-blay.png"
                     alt="Blay Bradley">
                   <div class="carousel-play-overlay">
                     <div class="carousel-play-btn">
@@ -2714,10 +2744,10 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 5: Julia Grismore -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="FF0q6dX_7W0">
                 <div class="carousel-thumb-container">
                   <img
-                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80"
+                    src="/wp-content/uploads/2026/06/voice-julia.png"
                     alt="Julia Grismore">
                   <div class="carousel-play-overlay">
                     <div class="carousel-play-btn">
@@ -2737,7 +2767,7 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 6: Jillian Klein -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="" style="display:none">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80"
@@ -2760,10 +2790,10 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 7: Mark Bradshaw -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="IeRjH26WSSU">
                 <div class="carousel-thumb-container">
                   <img
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80"
+                    src="/wp-content/uploads/2026/06/voice-mark.png"
                     alt="Mark Bradshaw">
                   <div class="carousel-play-overlay">
                     <div class="carousel-play-btn">
@@ -2783,7 +2813,7 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 8: Chris Ressa -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="" style="display:none">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=300&q=80"
@@ -2806,7 +2836,7 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 9: Julia Lindert -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="LzaRkRM6XhA" style="display:none">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1598550874175-4d0ef436c909?auto=format&fit=crop&w=300&q=80"
@@ -2829,7 +2859,7 @@ What began as a belief in open-air retail evolved into a platform that continues
               </div>
 
               <!-- Card 10: Basil Donnelly -->
-              <div class="carousel-card" data-video-id="mJpNmYeooQE">
+              <div class="carousel-card" data-video-id="" style="display:none">
                 <div class="carousel-thumb-container">
                   <img
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=300&q=80"
@@ -2900,64 +2930,88 @@ What began as a belief in open-air retail evolved into a platform that continues
       </div>
       <div class="collage-grid" id="collageGrid">
 
-        <div class="collage-item">
-          <img src="/wp-content/uploads/2026/05/collage-1.jpg"
+        <div class="collage-item"
+             data-modal-caption="Ifshin Hall Dedication, UVM 2018">
+          <img src="/wp-content/uploads/2026/05/Ifshin-hall-1.jpg"
             alt="DLC team photo" loading="lazy">
+          <p class="collage-thumb-caption">Ifshin Hall Dedication, UVM 2018</p>
         </div>
 
-        <div class="collage-item">
+        <div class="collage-item"
+             data-modal-caption="Adam G., DLC since '11">
           <img src="/wp-content/uploads/2026/05/adam-magazine.png"
             alt="Adam — magazine feature" loading="lazy">
+          <p class="collage-thumb-caption">Adam G., DLC since '11</p>
         </div>
 
-        <div class="collage-item">
+        <div class="collage-item"
+             data-modal-caption="Jen O., DLC since '11">
           <img src="/wp-content/uploads/2026/05/jen-magazine.png"
             alt="Jen — magazine feature" loading="lazy">
+          <p class="collage-thumb-caption">Jen O., DLC since '11</p>
         </div>
 
-        <div class="collage-item">
+        <div class="collage-item"
+             data-modal-caption="Carolyn W., DLC since '14">
           <img src="/wp-content/uploads/2026/05/carolyn-magazine.png"
             alt="Carolyn — magazine feature" loading="lazy">
+          <p class="collage-thumb-caption">Carolyn W., DLC since '14</p>
         </div>
 
-        <div class="collage-item">
+        <div class="collage-item"
+             data-modal-caption="Stephen Ifshin on the cover of National Real Estate Investor, 2008">
           <img src="/wp-content/uploads/2026/05/steve-magazine-cover.png"
             alt="Steve — magazine cover" loading="lazy">
+          <p class="collage-thumb-caption">National Real Estate Investor 2008</p>
         </div>
 
-        <div class="collage-item">
-          <img src="/wp-content/uploads/2026/05/Photo-May-11-2026-1-30-45-PM.jpg"
+        <div class="collage-item"
+             data-modal-caption="Anya with her grandfather Stephen Ifshin, 1998">
+          <img src="/wp-content/uploads/2026/05/Photo-May-11-2026-1-30-45-PM-e1781190316127.jpg"
             alt="DLC team" loading="lazy">
+          <p class="collage-thumb-caption">Anya W., DLC since '17, circa 1998</p>
         </div>
 
-        <div class="collage-item">
-          <img src="/wp-content/uploads/2026/05/Photo-May-26-2026-12-36-00-PM.jpg"
+        <div class="collage-item"
+             data-modal-caption="Making Deals at ICSC Vegas 2013: Adam Ifshin, DLC Founder; Michael Weinstock, M&T Banks; Jonathan W., DLC since ‘02">
+          <img src="/wp-content/uploads/2026/06/Jonathan-Wigser-and-Adam-Ifshin-.jpg"
             alt="DLC event" loading="lazy">
+          <p class="collage-thumb-caption">Making deals at ICSC Vegas 2013</p>
         </div>
 
-        <div class="collage-item">
+        <div class="collage-item"
+             data-modal-caption="Westchester County Bus. Journal 2006">
           <img src="/wp-content/uploads/2026/05/Photo-May-26-2026-12-36-33-PM.jpg"
             alt="DLC event" loading="lazy">
+          <p class="collage-thumb-caption">Westchester County Bus. Journal 2006</p>
         </div>
 
-        <div class="collage-item">
-          <img src="/wp-content/uploads/2026/05/Ifshin-hall-1.jpg"
-            alt="Ifshin Hall" loading="lazy">
+        <div class="collage-item"
+             data-modal-caption="Chris R. getting new equipment for Retail Retold, DLC since '07, circa 2020">
+          <img src="/wp-content/uploads/2026/06/2020chris.png"
+            alt="Chris R." loading="lazy">
+          <p class="collage-thumb-caption">Chris R., DLC since '07, circa 2020</p>
         </div>
 
-        <div class="collage-item">
-          <img src="/wp-content/uploads/2026/05/Ifshin-Hall-2.jpg"
-            alt="Ifshin Hall" loading="lazy">
+        <div class="collage-item"
+             data-modal-caption="Lauren P. '14; Julia L. '15; Jen O. '11">
+          <img src="/wp-content/uploads/2026/06/SnapInsta.to_628426302_18396415819179919_7146258222909320001_n.jpg"
+            alt="Lauren, Julia, and Jen" loading="lazy">
+          <p class="collage-thumb-caption">Lauren P. '14; Julia L. '15; Jen O. '11</p>
         </div>
 
-        <div class="collage-item">
-          <img src="/wp-content/uploads/2026/05/Ifshin-Hall-3.jpg"
-            alt="Ifshin Hall" loading="lazy">
+        <div class="collage-item"
+             data-modal-caption="Fairfield | Westchester Bus. Jrnl 2005">
+          <img src="/wp-content/uploads/2026/05/Photo-May-26-2026-12-36-00-PM.jpg"
+            alt="Fairfield Westchester Business Journal 2005" loading="lazy">
+          <p class="collage-thumb-caption">Fairfield | Westchester Bus. Jrnl 2005</p>
         </div>
 
-        <div class="collage-item">
-          <img src="/wp-content/uploads/2026/05/adam-ifhin-hall.webp"
-            alt="Adam at Ifshin Hall" loading="lazy">
+        <div class="collage-item"
+             data-modal-caption="Adam Ifshin and grandson, Bring Your Child to Work Day at DLC 2025">
+          <img src="/wp-content/uploads/2026/06/SnapInsta.to_491425414_18354908884195556_4622529387833994029_n.jpg"
+            alt="Adam Ifshin and grandson" loading="lazy">
+          <p class="collage-thumb-caption">Bring Your Child to Work Day 2025</p>
         </div>
 
       </div>
@@ -3294,6 +3348,7 @@ As retail enters its next chapter, DLC is positioned to continue doing what it h
       <div class="dlc-photo-modal-content" id="photoModalContent">
         <button class="dlc-modal-close" id="photoModalClose" aria-label="Close">&times;</button>
         <img id="photoModalImg" src="" alt="" style="display:block;width:100%;height:100%;object-fit:contain;">
+        <p id="photoModalCaption" class="dlc-photo-modal-caption"></p>
       </div>
     </div>
 
@@ -3520,13 +3575,15 @@ As retail enters its next chapter, DLC is positioned to continue doing what it h
     (function () {
       const photoModal    = document.getElementById('photoModal');
       const photoImg      = document.getElementById('photoModalImg');
+      const photoCaption  = document.getElementById('photoModalCaption');
       const photoOverlay  = document.getElementById('photoModalOverlay');
       const photoClose    = document.getElementById('photoModalClose');
       const photoContent  = document.getElementById('photoModalContent');
 
-      function openPhoto(src, alt) {
+      function openPhoto(src, alt, caption) {
         photoImg.src = src;
         photoImg.alt = alt || '';
+        photoCaption.textContent = caption || '';
         photoModal.classList.add('is-active');
         document.body.style.overflow = 'hidden';
       }
@@ -3534,14 +3591,14 @@ As retail enters its next chapter, DLC is positioned to continue doing what it h
       function closePhoto() {
         photoModal.classList.remove('is-active');
         document.body.style.overflow = '';
-        setTimeout(() => { photoImg.src = ''; }, 350);
+        setTimeout(() => { photoImg.src = ''; photoCaption.textContent = ''; }, 350);
       }
 
       // Wire up each collage item
       document.querySelectorAll('.collage-item').forEach(item => {
         item.addEventListener('click', () => {
           const img = item.querySelector('img');
-          if (img) openPhoto(img.src, img.alt);
+          if (img) openPhoto(img.src, img.alt, item.dataset.modalCaption || '');
         });
       });
 
