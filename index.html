@@ -138,7 +138,7 @@
       --size-hero: clamp(30px, 5vw, 55px);
       --size-h2: clamp(28px, 3.8vw, 48px);
       --size-lead: clamp(16px, 1.4vw, 20px);
-      --size-body: clamp(14px, 1.1vw, 16px);
+      --size-body: clamp(16px, 1.2vw, 18px);
       --size-kicker: 11px;
 
       /* Spacing Tokens */
@@ -704,7 +704,7 @@
       font-size: var(--size-body);
       color: var(--text-secondary);
       margin-top: 16px;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .video-player-frame {
@@ -839,11 +839,11 @@
     }
 
     .gptw-body {
-      font-size: clamp(14px, 1.2vw, 16px);
+      font-size: clamp(16px, 1.2vw, 18px);
       color: var(--text-secondary);
       line-height: 1.6;
       margin: 0;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .gptw-cta {
@@ -1310,10 +1310,10 @@
     }
 
     .timeline-milestone-text {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.6;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .timeline-milestone-text strong {
@@ -1393,9 +1393,9 @@
     }
 
     .timeline-visual-desc {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-secondary);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
     }
 
@@ -1423,7 +1423,7 @@
       font-size: var(--size-lead);
       color: var(--text-secondary);
       margin-top: 16px;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .platform-grid {
@@ -1588,7 +1588,7 @@
     }
 
     .platform-card-body {
-      font-size: 13.5px;
+      font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 24px;
@@ -1636,6 +1636,17 @@
       background: var(--dlc-gold);
     }
 
+    .platform-card-cta {
+      margin-top: 1rem;
+    }
+
+    .pillar-card-link {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: 8px;
+    }
+
     /* ============================================================
      SECTION 06 — WHY NOW (WHY RETAIL. WHY NOW.)
      ============================================================ */
@@ -1681,7 +1692,7 @@
       color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 40px;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .why-editorial-badge {
@@ -1752,7 +1763,7 @@
       font-size: var(--size-body);
       color: var(--text-secondary);
       margin-top: 12px;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     /* Custom high-fidelity stats-grid */
@@ -1826,6 +1837,23 @@
      ============================================================ */
     .dlc-lp .section-next {
       background: linear-gradient(180deg, #1a2e3d 0%, #1a303f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dlc-lp .section-next::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://www.dlcmgmt.com/wp-content/uploads/2026/05/54-Legacy-Place-RF.jpg') center/cover no-repeat;
+      opacity: 0.10;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dlc-lp .section-next > .container {
+      position: relative;
+      z-index: 1;
     }
 
     .next-grid {
@@ -1844,7 +1872,7 @@
       max-width: 600px;
       font-size: var(--size-lead);
       color: var(--text-secondary);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
       margin-bottom: 40px;
     }
@@ -1917,7 +1945,7 @@
       font-size: var(--size-lead);
       color: var(--text-secondary);
       margin-bottom: 44px;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
     }
 
@@ -3014,7 +3042,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
               over 28%. We drive execution through a collaborative, people-first culture that fosters long-term growth
               and success.
             </p>
-            <a href="https://www.dlcmgmt.com/careers/" target="_blank" class="gptw-cta">
+            <a href="https://www.dlcmgmt.com/career-openings/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" class="gptw-cta">
               Explore Open Roles &rarr;
             </a>
           </div>
@@ -3136,6 +3164,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                 <li>Drastically reduced time-to-open for anchors</li>
               </ul>
             </div>
+            <a href="https://renovobuilds.com/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="pillar-card-link" aria-label="Visit Renovo Construction website"></a>
           </div>
 
           <!-- Pillar 3: NWS Architects -->
@@ -3157,6 +3186,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
                 <li>Zero reliance on third-party architect lag</li>
               </ul>
             </div>
+            <a href="https://nwsarchitects.com/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="pillar-card-link" aria-label="Visit NWS Architects website"></a>
           </div>
 
         </div>
@@ -3178,7 +3208,7 @@ Through every chapter, one thing remained consistent: we stayed close to the bus
               costs have limited new supply, and necessity-driven open-air spaces are in record demand.
             </p>
             <div class="anim-fade-up delay-3">
-              <a href="https://www.dlcmgmt.com/therentisnext/" target="_blank" class="btn-primary">The Rent Is Next
+              <a href="https://www.dlcmgmt.com/therentisnext/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" class="btn-primary">The Rent Is Next
                 &rarr;</a>
               <span class="why-editorial-badge">Explore our 2026 Thought Leadership Campaign</span>
             </div>
@@ -3398,8 +3428,8 @@ As retail enters its next chapter, DLC is positioned to continue doing what it h
            Whether you are a retailer, investor, partner, or future teammate, DLC was built to move with the market and help shape where it goes next.
           </p>
           <div class="cta-actions anim-fade-up delay-3">
-            <a href="https://www.dlcmgmt.com/properties/" target="_blank" class="btn-primary">Explore Our Properties</a>
-            <a href="https://www.dlcmgmt.com/contact/" target="_blank" class="btn-outline">Connect with Our Team</a>
+            <a href="https://www.dlcmgmt.com/properties/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="btn-primary">Explore Our Properties</a>
+            <a href="https://www.dlcmgmt.com/contact/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="btn-outline">Connect with Our Team</a>
           </div>
 
           <div class="cta-divider-line anim-fade-up"></div>

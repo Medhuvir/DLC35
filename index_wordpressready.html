@@ -39,7 +39,7 @@
       --size-hero: clamp(30px, 5vw, 55px);
       --size-h2: clamp(28px, 3.8vw, 48px);
       --size-lead: clamp(16px, 1.4vw, 20px);
-      --size-body: clamp(14px, 1.1vw, 16px);
+      --size-body: clamp(16px, 1.2vw, 18px);
       --size-kicker: 11px;
 
       --section-pad: clamp(80px, 9vw, 120px);
@@ -273,30 +273,26 @@
           var(--bg) 100%
         ),
         var(--bg);
-      padding: clamp(64px, 9vw, 112px) 0 clamp(80px, 10vw, 128px);
+      padding: clamp(28px, 3vw, 48px) 0 clamp(48px, 6vw, 80px);
       position: relative;
       overflow: visible;
     }
 
-    .hero-split-inner {
-      display: grid;
-      grid-template-columns: 0.82fr 1.18fr;
-      gap: clamp(40px, 5vw, 72px);
-      align-items: center;
-    }
-
-    .hero-split-copy {
+    .hero-stack-inner {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+      gap: clamp(16px, 2vw, 28px);
+      text-align: left;
     }
 
     .dlc-lp .hero h2 {
       font-size: clamp(26px, 6vw, 43px);
       font-weight: 900;
-      line-height: 1.65;
+      line-height: calc(1em + 50px);
       color: var(--dlc-blue);
       letter-spacing: -1px;
-      margin-bottom: 20px;
+      margin-bottom: 0;
     }
 
     .dlc-lp .hero h2 .h2-highlight {
@@ -326,9 +322,9 @@
     .dlc-lp .hero-lead {
       font-size: var(--size-lead);
       color: var(--text-secondary);
-      max-width: 480px;
+      max-width: 860px;
       line-height: 1.7;
-      margin-bottom: 42px;
+      margin-bottom: 0;
       font-weight: 500;
     }
 
@@ -354,10 +350,11 @@
       color: var(--dlc-blue);
     }
 
-    .hero-frame-wrapper {
-      position: relative;
-      
-      padding: 20px 28px 20px 52px;
+    .hero-video-wrapper {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 48px rgba(28, 50, 68, 0.20);
     }
 
     .hero-frame-stack {
@@ -566,7 +563,7 @@
       font-size: var(--size-body);
       color: var(--text-secondary);
       margin-top: 16px;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .video-player-frame {
@@ -694,11 +691,11 @@
     }
 
     .gptw-body {
-      font-size: clamp(14px, 1.2vw, 16px);
+      font-size: clamp(16px, 1.2vw, 18px);
       color: var(--text-secondary);
       line-height: 1.6;
       margin: 0;
-      font-weight: 500;
+      font-weight: 400;
     }
 
     .gptw-cta {
@@ -1219,10 +1216,10 @@
     }
 
     .timeline-milestone-text {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.6;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .timeline-milestone-text strong {
@@ -1301,9 +1298,9 @@
     }
 
     .timeline-visual-desc {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-secondary);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
     }
 
@@ -1327,7 +1324,7 @@
       font-size: var(--size-lead);
       color: var(--text-secondary);
       margin-top: 16px;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .platform-grid {
@@ -1486,7 +1483,7 @@
     }
 
     .platform-card-body {
-      font-size: 13.5px;
+      font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 24px;
@@ -1534,6 +1531,17 @@
       background: var(--dlc-gold);
     }
 
+    .platform-card-cta {
+      margin-top: 1rem;
+    }
+
+    .pillar-card-link {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      border-radius: 8px;
+    }
+
     .dlc-lp .section-why {
       background: var(--bg);
       position: relative;
@@ -1576,7 +1584,7 @@
       color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 40px;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .why-editorial-badge {
@@ -1644,7 +1652,7 @@
       font-size: var(--size-body);
       color: var(--text-secondary);
       margin-top: 12px;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     .stats-grid {
@@ -1713,6 +1721,23 @@
 
     .dlc-lp .section-next {
       background: linear-gradient(180deg, #1a2e3d 0%, #1a303f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dlc-lp .section-next::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://www.dlcmgmt.com/wp-content/uploads/2026/05/54-Legacy-Place-RF.jpg') center/cover no-repeat;
+      opacity: 0.10;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dlc-lp .section-next > .container {
+      position: relative;
+      z-index: 1;
     }
 
     .next-grid {
@@ -1731,7 +1756,7 @@
       max-width: 600px;
       font-size: var(--size-lead);
       color: var(--text-secondary);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
       margin-bottom: 40px;
     }
@@ -1801,7 +1826,7 @@
       font-size: var(--size-lead);
       color: var(--text-secondary);
       margin-bottom: 44px;
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
     }
 
@@ -2016,62 +2041,18 @@
     }
 
     @media (max-width: 768px) {
-      .hero-split-inner {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .hero-frame-wrapper {
-        order: -1;
-        max-width: 300px;
-        width: 100%;
-        margin: 0 auto 20px;
-        
-        padding: 8px 8px 6px 28px;
-      }
-
-      .hero-frame-stack {
-        transform: none;
-        margin-bottom: 0;
-      }
-
-      .hero-frame {
-        padding-bottom: 29px;
-      }
-
-      .hero-frame-badge {
-        padding-top: 8px;
-      }
-
-      .hero-frame-badge img {
-        height: 28px;
-      }
-
       .dlc-lp .hero {
         padding: 28px 0 44px;
-      }
-
-      .dlc-lp .hero h2 {
-        margin-bottom: 10px;
       }
 
       .dlc-lp .hero-lead {
         font-size: 14px;
         line-height: 1.6;
-        margin-bottom: 20px;
-        max-width: 100%;
-      }
-
-      .dlc-lp .hero h2,
-      .hero-split-copy .anim-fade-up {
-        width: 100%;
-        max-width: 100%;
       }
 
       .dlc-lp .hero h2 .desktop-br {
         display: none;
       }
-
     }
 
     @media (max-width: 600px) {
@@ -2525,113 +2506,36 @@
     <!-- ── SECTION 01 — HERO (3-IMAGE FADE + PAN SLIDESHOW) ── -->
     <section class="hero" id="hero">
       <div class="container">
-        <div class="hero-split-inner">
+        <div class="hero-stack-inner">
 
-          <!-- Copy column — left on desktop, bottom on mobile -->
-          <div class="hero-split-copy">
-            <h2 class="anim-fade-up"><span class="h2-highlight">35 years taught us<span class="desktop-br"><br></span> how to win through<span class="desktop-br"><br></span> every cycle.</span></h2>
-            <p class="hero-lead anim-fade-up delay-1">
-             Open-air retail has been our business from day one.
-We've stayed close to our properties, our tenants, and our communities through every market shift.
-That's how you build a company that lasts.
-</p>
-            <div class="anim-fade-up delay-2">
-              <a href="#video" class="hero-watch-link">
-                <svg width="13" height="14" viewBox="0 0 13 14" fill="currentColor" aria-hidden="true" style="flex-shrink:0;">
-                  <path d="M1.5 1.2L12 7L1.5 12.8V1.2Z"/>
-                </svg>
-                Watch Our Story
-              </a>
+          <h2 class="anim-fade-up"><span class="h2-highlight">35 years taught us how to win<span class="desktop-br"><br></span>through every cycle.</span></h2>
+
+          <!-- The Story video — full width, centered -->
+          <div class="hero-video-wrapper anim-scale delay-1">
+            <div class="video-aspect-wrapper">
+              <iframe src="https://www.youtube.com/embed/zsaGbmckKbA?rel=0&modestbranding=1"
+                title="The DLC Story"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
             </div>
           </div>
 
-          <!-- Image frame — right on desktop, top on mobile -->
-          <div class="hero-frame-wrapper anim-fade-right delay-1">
-            <div class="hero-frame-stack">
-              <!-- Ghost polaroids — deepest to shallowest -->
-              <div class="hero-polaroid-ghost ghost-3"></div>
-              <div class="hero-polaroid-ghost ghost-2"></div>
-              <div class="hero-polaroid-ghost ghost-1"></div>
-              <!-- Active polaroid with crossfade slider -->
-              <div class="hero-frame">
-                <div class="hero-frame-slideshow">
-                  <div class="hero-frame-slide is-active">
-                    <img src="/wp-content/uploads/2026/05/dlc35hero1.jpg" alt="Open-air retail shopping center">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/dlc35hero2.jpg" alt="DLC leadership team">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/dlc35hero3.jpg" alt="Retail real estate portfolio">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/dlc35hero4.jpg" alt="DLC retail property">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/dlc35hero5.jpg" alt="DLC retail property">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/dlc35hero6.jpg" alt="DLC retail property">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/Ifshin-Hall-2.jpg" alt="Ifshin Hall">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/Photo-May-11-2026-1-30-45-PM.jpg" alt="DLC team">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/Photo-May-26-2026-12-36-33-PM.jpg" alt="DLC event">
-                  </div>
-                  <div class="hero-frame-slide">
-                    <img src="/wp-content/uploads/2026/05/adam-magazine.png" alt="Adam — magazine feature">
-                  </div>
-                </div>
-                <div class="hero-frame-badge">
-                  <img src="/wp-content/uploads/2026/05/DLC35.png" alt="DLC 35th Anniversary">
-                </div>
-              </div>
-            </div>
-          </div>
+          <p class="hero-lead anim-fade-up delay-2">
+            Less than 5% of founder-led companies make it to 35 years. We're proud to be one of them.
+            Since day one, open-air retail has been our business. Through every financial crisis, e-commerce disruption, and a global pandemic, we've stayed true to our conviction, continued to invest, and never lost sight of what matters most.
+            What began as an entrepreneurial vision has grown into one of the nation's leading owner-operators of open-air shopping centers. As we celebrate 35 years, we're grateful for the people, partners, and communities who have been part of the journey.
+          </p>
 
         </div>
       </div>
 
       <!-- Scroll-down chevron -->
-      <a href="#video" class="hero-scroll-chevron" aria-label="Scroll to next section">
+      <a href="#carousel" class="hero-scroll-chevron" aria-label="Scroll to next section">
         <svg viewBox="0 0 44 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="44" height="24">
           <path d="M4 4 L22 20 L40 4"/>
         </svg>
       </a>
 
-    </section>
-
-    <div class="section-transition-divider"></div>
-
-    <!-- ── SECTION 02 — THE STORY (PLAYABLE EMBED) ── -->
-    <section class="section section-video" id="video">
-      <div class="container">
-        <div class="video-grid">
-          <div class="video-intro">
-            <span class="eyebrow anim-fade-up">The Full Story</span>
-            <h2 class="anim-fade-up delay-1">What built DLC still <br><em>drives us today.</em></h2>
-            <p class="anim-fade-up delay-2">
-              Less than 5% of companies that are founder led make it to 35 years.<br>
-We’ve navigated changing consumer behavior, financial crises, e-commerce disruption, and a global pandemic while continuing to evolve, grow, and invest in open-air retail.
-What began as a belief in open-air retail evolved into a platform that continues to shape communities, create opportunities, and move the market forward.
-
-            </p>
-          </div>
-
-          <div class="video-player-frame anim-scale delay-3">
-            <div class="video-aspect-wrapper">
-              <!-- High-fidelity playable YouTube Embed -->
-              <iframe src="https://www.youtube.com/embed/zsaGbmckKbA?rel=0&modestbranding=1"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <div class="section-transition-divider"></div>
@@ -2914,7 +2818,7 @@ What began as a belief in open-air retail evolved into a platform that continues
               over 28%. We drive execution through a collaborative, people-first culture that fosters long-term growth
               and success.
             </p>
-            <a href="https://www.dlcmgmt.com/careers/" target="_blank" class="btn-primary">
+            <a href="https://www.dlcmgmt.com/career-openings/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="btn-primary">
               Explore Open Roles &rarr;
             </a>
           </div>
@@ -3088,7 +2992,7 @@ What began as a belief in open-air retail evolved into a platform that continues
               costs have limited new supply, and necessity-driven open-air spaces are in record demand.
             </p>
             <div class="anim-fade-up delay-3">
-              <a href="https://www.dlcmgmt.com/therentisnext/" target="_blank" class="btn-primary">The Rent Is Next
+              <a href="https://www.dlcmgmt.com/therentisnext/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="btn-primary">The Rent Is Next
                 &rarr;</a>
               <span class="why-editorial-badge">Explore our 2026 Thought Leadership Campaign</span>
             </div>
@@ -3241,6 +3145,7 @@ What began as a belief in open-air retail evolved into a platform that continues
                 <li>Drastically reduced time-to-open for anchors</li>
               </ul>
             </div>
+            <a href="https://renovobuilds.com/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="pillar-card-link" aria-label="Visit Renovo Construction website"></a>
           </div>
 
           <!-- Pillar 3: NWS Architects -->
@@ -3262,6 +3167,7 @@ What began as a belief in open-air retail evolved into a platform that continues
                 <li>Zero reliance on third-party architect lag</li>
               </ul>
             </div>
+            <a href="https://nwsarchitects.com/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="pillar-card-link" aria-label="Visit NWS Architects website"></a>
           </div>
 
         </div>
@@ -3322,8 +3228,8 @@ As retail enters its next chapter, DLC is positioned to continue doing what it h
            Whether you are a retailer, investor, partner, or future teammate, DLC was built to move with the market and help shape where it goes next.
           </p>
           <div class="cta-actions anim-fade-up delay-3">
-            <a href="https://www.dlcmgmt.com/properties/" target="_blank" class="btn-primary">Explore Our Properties</a>
-            <a href="https://www.dlcmgmt.com/contact/" target="_blank" class="btn-outline">Connect with Our Team</a>
+            <a href="https://www.dlcmgmt.com/properties/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="btn-primary">Explore Our Properties</a>
+            <a href="https://www.dlcmgmt.com/contact/?utm_source=website&utm_medium=backlink&utm_campaign=35_anniversary&utm_content=link" target="_blank" rel="noopener" class="btn-outline">Connect with Our Team</a>
           </div>
 
           <div class="cta-divider-line anim-fade-up"></div>
